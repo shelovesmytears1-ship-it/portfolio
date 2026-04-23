@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header id="header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        overflow<span>.</span>
+      </a>
+      <div class="lang-switcher">
+        <button data-lang="pl" class="active">PL</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ru">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="fade-up">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="badge-icon">/</span> overflow</div>
+        <h1 data-i18n="hero.name"></h1>
+        <p class="subtitle" data-i18n="hero.subtitle"></p>
+        <div class="typewriter-container">
+          <span id="typewriter"></span><span class="cursor">|</span>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" id="btn-cta" data-i18n="hero.cta" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})"></button>
+        </div>
+      </div>
+      
+      <div class="hero-bottom-left">
+        <div class="status-indicator">
+          <div class="pulse-dot"></div>
+          <span data-i18n="hero.status"></span>
+        </div>
+        <div class="local-time" id="local-time">Kyiv, UA • 00:00</div>
+      </div>
+
+      <div class="hero-bottom-right">
+        <span class="scroll-text" data-i18n="hero.scroll"></span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <div class="tech-marquee" dir="ltr">
+      <div class="tech-marquee-inner">
+        <span>HTML</span><span class="dot">•</span>
+        <span>CSS / SASS</span><span class="dot">•</span>
+        <span>JavaScript</span><span class="dot">•</span>
+        <span>React</span><span class="dot">•</span>
+        <span>HTML</span><span class="dot">•</span>
+        <span>CSS / SASS</span><span class="dot">•</span>
+        <span>JavaScript</span><span class="dot">•</span>
+        <span>React</span><span class="dot">•</span>
+        <span>HTML</span><span class="dot">•</span>
+        <span>CSS / SASS</span><span class="dot">•</span>
+        <span>JavaScript</span><span class="dot">•</span>
+        <span>React</span><span class="dot">•</span>
+        <span>HTML</span><span class="dot">•</span>
+        <span>CSS / SASS</span><span class="dot">•</span>
+        <span>JavaScript</span><span class="dot">•</span>
+        <span>React</span><span class="dot">•</span>
+      </div>
+    </div>
+
+    <section id="about" class="fade-up">
+      <h2 data-i18n="about.title" class="section-title"></h2>
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="images/about me.png" alt="Daniil Menshov">
+        </div>
+        <div class="about-content">
+          <div class="about-text" data-i18n="about.text"></div>
+          <div class="about-stats" id="stats-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="fade-up">
+      <h2 data-i18n="services.title" class="section-title"></h2>
+      <div class="services-grid" id="services-container"></div>
+    </section>
+
+    <section id="portfolio" class="fade-up">
+      <h2 data-i18n="portfolio.title" class="section-title"></h2>
+      <div class="filters" id="filters-container"></div>
+      <div class="portfolio-grid" id="portfolio-container"></div>
+    </section>
+
+    <section id="process" class="fade-up">
+      <h2 data-i18n="process.title" class="section-title"></h2>
+      <div class="process-steps" id="process-container"></div>
+    </section>
+
+    <section id="tech-stack" class="fade-up">
+      <h2 data-i18n="tech.title" class="section-title"></h2>
+      <div class="tech-grid" id="tech-container"></div>
+    </section>
+
+    <section id="landing-anatomy" class="fade-up">
+      <h2 data-i18n="anatomy.title" class="section-title"></h2>
+      <div class="anatomy-container">
+        <div class="anatomy-wireframe">
+          <div class="wf-header"></div>
+          <div class="wf-hero">
+            <div class="wf-title"></div>
+            <div class="wf-subtitle"></div>
+            <div class="wf-btn"></div>
+          </div>
+          <div class="wf-blocks">
+            <div class="wf-block"></div>
+            <div class="wf-block"></div>
+            <div class="wf-block"></div>
+          </div>
+          
+          <div class="hotspot hs-speed">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-content">
+              <h4 data-i18n="anatomy.speed.title"></h4>
+              <p data-i18n="anatomy.speed.desc"></p>
+            </div>
+          </div>
+          
+          <div class="hotspot hs-ui">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-content">
+              <h4 data-i18n="anatomy.ui.title"></h4>
+              <p data-i18n="anatomy.ui.desc"></p>
+            </div>
+          </div>
+          
+          <div class="hotspot hs-conv">
+            <div class="hotspot-dot"></div>
+            <div class="hotspot-content">
+              <h4 data-i18n="anatomy.conv.title"></h4>
+              <p data-i18n="anatomy.conv.desc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="landing-features" class="fade-up">
+      <h2 data-i18n="features.title" class="section-title"></h2>
+      <div class="features-wrapper">
+        <div class="features-list" id="features-container"></div>
+        <div class="features-visual">
+          <div class="visual-bg" id="feature-visual-bg"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="fade-up">
+      <h2 data-i18n="reviews.title" class="section-title"></h2>
+      <div class="reviews-grid" id="reviews-container"></div>
+    </section>
+
+    
+    <section id="faq" class="fade-up">
+      <h2 data-i18n="faq.title" class="section-title"></h2>
+      <div class="faq-container" id="faq-container"></div>
+    </section>
+  
+    <section id="contact" class="fade-up">
+      <div class="giant-cta">
+        <h1 class="cta-title" data-i18n="cta.title"></h1>
+        <p class="cta-subtitle" data-i18n="cta.subtitle"></p>
+        <a href="https://t.me/your_telegram" target="_blank" class="cta-btn" data-i18n="cta.btn"></a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
