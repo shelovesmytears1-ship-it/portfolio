@@ -23,7 +23,7 @@ let js = fs.readFileSync('script.js', 'utf8');
 const links = [
   'https://shelovesmytears1-ship-it.github.io/apartment-renovation/',
   'https://shelovesmytears1-ship-it.github.io/cleaning/',
-  'https://shelovesmytears1-ship-it.github.io/lawyer-website/',
+  'https://shelovesmytears1-ship-it.github.io/lawyer/',
   'https://shelovesmytears1-ship-it.github.io/modular-houses/',
   'https://shelovesmytears1-ship-it.github.io/smm/',
   'https://shelovesmytears1-ship-it.github.io/spa/',
