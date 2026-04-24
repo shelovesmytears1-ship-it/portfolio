@@ -254,6 +254,7 @@ h1, h2, h3, h4 {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 2.5rem;
+  will-change: transform;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 .card:hover {
@@ -316,6 +317,7 @@ h1, h2, h3, h4 {
   text-decoration: none;
   display: block;
   color: var(--text-main);
+  will-change: transform;
   transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .portfolio-card:hover {
@@ -521,6 +523,7 @@ h1, h2, h3, h4 {
   border-radius: 50%;
   background: var(--accent);
   animation: pulseDot 2s infinite;
+  will-change: transform, opacity;
 }
 @keyframes pulseDot {
   0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
@@ -691,6 +694,7 @@ h1, h2, h3, h4 {
 .fade-up {
   opacity: 0;
   transform: translateY(24px);
+  will-change: opacity, transform;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -705,6 +709,13 @@ h1, h2, h3, h4 {
   section { padding: 100px 5%; }
   .header-inner { flex-direction: column; gap: 1rem; }
   header { padding: 16px 5%; }
+  .cta-btn, .btn-primary { 
+    width: 100%; 
+    display: block; 
+    padding: 16px 24px; 
+    font-size: 1.1rem; 
+    text-align: center;
+  }
 }
 
 
@@ -727,13 +738,14 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
   letter-spacing: 1.5px;
   animation: scrollText 20s linear infinite;
+  will-change: transform;
 }
 .tech-marquee-inner .dot {
   color: var(--accent);
 }
 @keyframes scrollText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 
