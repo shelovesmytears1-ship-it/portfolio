@@ -956,3 +956,35 @@ translations.en.features = { title: "What's included?", items: [{ title: "1. Ana
     outline.style.opacity = '1';
   });
 })();
+
+// Mobile Hotspot Logic for Anatomy section
+(function initMobileHotspots() {
+  const hotspots = document.querySelectorAll('.hotspot');
+  
+  hotspots.forEach(spot => {
+    spot.addEventListener('click', (e) => {
+      // Only apply this logic on mobile view
+      if (window.innerWidth > 768) return;
+      
+      e.stopPropagation();
+      
+      const isActive = spot.classList.contains('active');
+      
+      // Close all other active hotspots
+      hotspots.forEach(h => h.classList.remove('active'));
+      
+      // Toggle current
+      if (!isActive) {
+        spot.classList.add('active');
+      }
+    });
+  });
+
+  // Close hotspots when clicking outside
+  document.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      hotspots.forEach(h => h.classList.remove('active'));
+    }
+  });
+})();
+

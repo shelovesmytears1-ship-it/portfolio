@@ -575,11 +575,47 @@ h1, h2, h3, h4 {
 
 /* Mobile Hotspots */
 @media(max-width: 768px) {
-  .anatomy-container { padding: 2rem 1rem; }
-  .anatomy-wireframe { width: 220px; height: 300px; }
-  .hotspot { position: static; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 1.5rem; }
-  .hs-speed, .hs-ui, .hs-conv { left: auto; right: auto; top: auto; bottom: auto; }
-  .hotspot-content { width: 100%; }
+  .anatomy-container { padding: 2rem 1rem; position: relative; }
+  .anatomy-wireframe { width: 220px; height: 300px; margin: 0 auto; }
+  
+  /* Re-enable absolute positioning for mobile diagram */
+  .hotspot { position: absolute; flex-direction: column; align-items: center; gap: 0; margin-top: 0; cursor: pointer; z-index: 10; }
+  .hotspot-dot { width: 24px; height: 24px; } /* Larger touch target */
+  
+  /* Adjust coordinates for 220x300 wireframe */
+  .hs-speed { top: 10px; left: -15px; }
+  .hs-ui { top: 90px; right: -15px; }
+  .hs-conv { bottom: 40px; left: -15px; }
+  
+  /* Turn content into a bottom-sheet popup */
+  .hotspot-content { 
+    position: fixed;
+    bottom: 24px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    background: rgba(20, 20, 24, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    border: 1px solid var(--accent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .hotspot-content h4 { font-size: 1.1rem; color: var(--accent); }
+  .hotspot-content p { font-size: 0.95rem; margin-top: 6px; }
+
+  /* Active class toggled by JS */
+  .hotspot.active .hotspot-content {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
 }
 
 /* Features Unpacking */
