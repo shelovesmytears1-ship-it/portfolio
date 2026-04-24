@@ -686,9 +686,7 @@ const TECH_ITEMS = [
   { name: "React", badge: "Re", color: "#61DAFB" },
   { name: "GSAP", badge: "GS", color: "#8AC640" },
   { name: "Tailwind", badge: "TW", color: "#38BDF8" },
-  { name: "Node.js", badge: "No", color: "#68A063" },
-  { name: "Figma", badge: "Fi", color: "#F24E1E" },
-  { name: "Webflow", badge: "Wf", color: "#4353FF" }
+  { name: "Node.js", badge: "No", color: "#68A063" }
 ];
 translations.ru.tech = { title: "Стек технологий", items: TECH_ITEMS };
 translations.pl.tech = { title: "Technologie", items: TECH_ITEMS };
