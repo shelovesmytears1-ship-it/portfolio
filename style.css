@@ -5,11 +5,21 @@
   --surface-hover: #18181d;
   --text-main: #ededed;
   --text-muted: #8a8a93;
-  --accent: #8b9cb6; /* Soft dusty grey-blue */
+  --accent: #8b9cb6;
   --border: rgba(255, 255, 255, 0.06);
   --border-hover: rgba(255, 255, 255, 0.15);
   --font: 'Manrope', sans-serif;
   --space-section: 110px;
+}
+
+/* Force dark theme on all browsers including Safari iOS */
+:root, html {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0a0a0c;
 }
 
 * {
@@ -26,6 +36,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Prevent white flash on iOS Safari */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Header & Nav */
@@ -1189,21 +1201,26 @@ footer {
   box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
 }
 
-/* Modal Case Study */
+/* Modal Case Study — iOS Safari safe */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Solid fallback for browsers that don't support backdrop-filter */
+  background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
   padding: 20px;
+  /* Hardware-accelerate the overlay to fix iOS stacking bug */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: opacity;
 }
 .modal-overlay.active {
   opacity: 1;
@@ -1218,12 +1235,20 @@ footer {
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  transform: translateY(30px) scale(0.95);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  /* translateZ forces GPU layer so iOS renders it above the overlay */
+  -webkit-transform: translateY(30px) translateZ(0) scale(0.95);
+  transform: translateY(30px) translateZ(0) scale(0.95);
+  transition: -webkit-transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  will-change: transform;
+  /* Safari fix: prevent bleed-through */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .modal-overlay.active .modal-content {
-  transform: translateY(0) scale(1);
+  -webkit-transform: translateY(0) translateZ(0) scale(1);
+  transform: translateY(0) translateZ(0) scale(1);
 }
 .modal-close {
   position: absolute;
@@ -1344,4 +1369,55 @@ footer {
     padding: 30px 20px 20px;
   }
   .modal-header h3 { font-size: 1.8rem; }
+}
+
+/* Custom Cursor — desktop only */
+.cursor-dot,
+.cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  border-radius: 50%;
+  z-index: 99999;
+  display: none; /* hidden on mobile by default */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-main);
+  top: -3px;
+  left: -3px;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+}
+.cursor-outline {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  top: -16px;
+  left: -16px;
+  transition: width 0.3s ease, height 0.3s ease,
+              border-color 0.3s ease, opacity 0.3s ease;
+}
+.cursor-dot.cursor-grow {
+  width: 10px;
+  height: 10px;
+}
+.cursor-outline.cursor-grow {
+  width: 48px;
+  height: 48px;
+  border-color: rgba(255,255,255,0.6);
+}
+
+/* Show cursor elements only on real pointer devices (mouse) */
+@media (pointer: fine) {
+  .cursor-dot,
+  .cursor-outline {
+    display: block;
+  }
+  /* Hide native cursor site-wide only when JS custom cursor is active */
+  body.custom-cursor * {
+    cursor: none !important;
+  }
 }

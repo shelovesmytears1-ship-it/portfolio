@@ -20,7 +20,7 @@ const translations = {
       stats: {
         projects: { value: 100, label: "terminowość projektów", suffix: "%" },
         delivery: { value: 5, label: "dni na wdrożenie", prefix: "3–" },
-        languages: { value: 3, label: "obsługiwane języki", suffix: "" }
+        code: { value: 0, label: "kreatorów w stacku", suffix: "" }
       }
     },
     services: {
@@ -133,7 +133,7 @@ const translations = {
       stats: {
         projects: { value: 100, label: "on-time delivery", suffix: "%" },
         delivery: { value: 5, label: "days delivery", prefix: "3–" },
-        languages: { value: 3, label: "supported languages", suffix: "" }
+        code: { value: 0, label: "page builders used", suffix: "" }
       }
     },
     services: {
@@ -240,7 +240,7 @@ const translations = {
       stats: {
         projects: { value: 100, label: "соблюдение дедлайнов", suffix: "%" },
         delivery: { value: 5, label: "дней на разработку", prefix: "3–" },
-        languages: { value: 3, label: "языка поддержки", suffix: "" }
+        code: { value: 0, label: "конструкторов в стеке", suffix: "" }
       }
     },
     services: {
@@ -326,6 +326,45 @@ const translations = {
       },
       altText: "Или напиши мне напрямую:"
     }
+  }
+};
+
+// Solution texts per project (keyed by link, language-independent since they're in UI language)
+const projectSolutions = {
+  'https://shelovesmytears1-ship-it.github.io/apartment-renovation/': {
+    pl: 'Zaprojektowałem strukturę landinga opartą na dowodach społecznych: galeria realizacji z filtrowaniem, sekcja z etapami pracy i formularz wyceny. Zaimplementowałem kompresjS zdjęć i lazy loading.',
+    en: 'Designed a social-proof-first layout: filterable gallery, a step-by-step process section, and a quote form. Implemented image compression and lazy loading for fast delivery.',
+    ru: 'Разработал структуру на соцдоказательстве: фильтруемая галерея работ, блок процесса и форма расчёта. Сжатие изображений и lazy loading для быстрой загрузки.'
+  },
+  'https://shelovesmytears1-ship-it.github.io/cleaning/': {
+    pl: 'Stworzyłem interaktywny kalkulator wyceny czyszczenia oparty na metrażu i rodzaju pomieszczeń. Kalkulator działa bez przeładowania i natychmiast pokazuje szacowaną cenę.',
+    en: 'Built an interactive cleaning price calculator based on room type and area. Works client-side, giving instant price estimates without any page reloads.',
+    ru: 'Создал интерактивный калькулятор стоимости уборки по типу помещения и метражу. Работает на стороне клиента и мгновенно выдаёт примерную цену.'
+  },
+  'https://shelovesmytears1-ship-it.github.io/lawyer-website/': {
+    pl: 'Skupiłem się na budowaniu zaufania: surowa typografia, stonowane kolory i konkretne dane (lata praktyki, liczba spraw). Minimalizm celowo komunikuje profesjonalizm premium.',
+    en: 'Trust-building was the focus: strict typography, muted palette, and concrete credentials. The minimalist design intentionally signals premium legal expertise.',
+    ru: 'Ставка на доверие: строгая типографика, сдержанная палитра и конкретные данные (годы практики, выигранные дела). Минимализм здесь намеренно сигнализирует премиальную экспертизу.'
+  },
+  'https://shelovesmytears1-ship-it.github.io/modular-houses/': {
+    pl: 'Zaprojektowałem system konfiguracji domów z dynamicznym formularzem leadów. Wizualizacje ładują się progresywnie, co zapewnia szybkość mimo dużych plików graficznych.',
+    en: 'Designed a home configuration system with a dynamic lead-gen form. Visuals are progressively loaded to maintain speed despite large asset sizes.',
+    ru: 'Разработал систему конфигурации домов с динамичной формой сбора заявок. Визуализации загружаются прогрессивно, чтобы не жертвовать скоростью.'
+  },
+  'https://shelovesmytears1-ship-it.github.io/smm/': {
+    pl: 'Postawiłem na dynamikę: animowane wejścia sekcji, efekty hover na kartach i biegnący pasek usług. UX sprawia, że strona “żyje” i zatrzymuje uwagę.',
+    en: 'Prioritized motion: animated section entries, card hover effects, and a services ticker strip. The UX makes the page feel alive and keeps visitors engaged.',
+    ru: 'Ставка на динамику: анимированные входы, эффекты hover на карточках и бегущая строка услуг. UX заставляет страницу «жить» и удерживает внимание.'
+  },
+  'https://shelovesmytears1-ship-it.github.io/spa/': {
+    pl: 'Zintegrowałem formularz rezerwacji z walidacją daty i czasu. Projekt odzwierciedla estetykę salonu — miękkie tło, delikatna typografia i animacje oparte na opacity.',
+    en: 'Integrated an appointment booking form with date/time validation. The design mirrors the salon aesthetics — soft tones, delicate typography, and opacity-based animations.',
+    ru: 'Встроил форму онлайн-записи с валидацией даты и времени. Дизайн отражает эстетику салона — мягкие тона, деликатная типографика и анимации на opacity.'
+  },
+  'https://shelovesmytears1-ship-it.github.io/tire-service/': {
+    pl: 'Priorytetem była mobilna wersja — klienci dzwonią z drogi. Skompresowałem obrazy do WebP, uprościłem nawigację i dodałem stały przycisk „Zadzwoń” widoczny przez cały czas.',
+    en: 'Mobile-first was critical — customers call from the road. Converted all images to WebP, simplified navigation, and added a persistent ‘Call Now’ button always on screen.',
+    ru: 'Главное — мобильная версия: клиенты звонят с дороги. Все изображения перевёл в WebP, упростил навигацию и добавил постоянную кнопку «Позвонить».'
   }
 };
 
@@ -525,13 +564,19 @@ function openModal(title, desc, link, iconHtml, task, conv, speed) {
   const modal = document.getElementById('case-study-modal');
   if(!modal) return;
   document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-solution').textContent = desc;
   document.getElementById('modal-visual').innerHTML = iconHtml;
   document.getElementById('modal-task').textContent = task;
   document.getElementById('modal-res-1').textContent = conv;
   document.getElementById('modal-res-2').textContent = speed;
   document.getElementById('modal-link').href = link;
-  
+
+  // Look up solution text for current language, fallback to card desc
+  const solutionEl = document.getElementById('modal-solution');
+  const solutions = projectSolutions[link];
+  solutionEl.textContent = (solutions && solutions[currentLang])
+    ? solutions[currentLang]
+    : desc;
+
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -854,3 +899,60 @@ translations.ru.features = { title: "Что входит в работу?", item
 translations.pl.features = { title: "Co obejmuje praca?", items: [{ title: "1. Analiza i struktura", desc: "Badam biznes i konkurencję. Tworzę logiczny prototyp." }, { title: "2. Copywriting", desc: "Piszę teksty, które sprzedają usługę." }, { title: "3. Design Premium", desc: "Rysuję nowoczesny interfejs z naciskiem na typografię." }, { title: "4. Płynne animacje", desc: "Dodaję mikrointerakcje dla efektu WOW." }, { title: "5. Wdrożenie", desc: "Konfiguruję hosting, domenę i formularze." }] };
 translations.en.features = { title: "What's included?", items: [{ title: "1. Analysis & Structure", desc: "Business and competitor research. Logical prototyping." }, { title: "2. Copywriting", desc: "Writing copy that actually sells your service." }, { title: "3. Premium Design", desc: "Modern interface focusing on typography and composition." }, { title: "4. Smooth Animations", desc: "Micro-interactions and GSAP animations for the WOW effect." }, { title: "5. Deployment", desc: "Hosting setup, domain configuration, and form integration." }] };
 
+// Custom Cursor — only on desktop (pointer: fine)
+(function initCustomCursor() {
+  // Only run if the device has a precise pointer (mouse), not touch
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  const dot = document.getElementById('cursor-dot');
+  const outline = document.getElementById('cursor-outline');
+  if (!dot || !outline) return;
+
+  // Add class so CSS can hide native cursor
+  document.body.classList.add('custom-cursor');
+
+  let mouseX = 0, mouseY = 0;
+  let outlineX = 0, outlineY = 0;
+  let rafId;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Dot follows instantly
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+  });
+
+  // Outline follows with smooth lerp
+  function animateOutline() {
+    outlineX += (mouseX - outlineX) * 0.12;
+    outlineY += (mouseY - outlineY) * 0.12;
+    outline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+    rafId = requestAnimationFrame(animateOutline);
+  }
+  animateOutline();
+
+  // Grow on interactive elements
+  const hoverTargets = 'a, button, .portfolio-card, .filter-btn, .submit-btn, .alt-btn, .modal-close';
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(hoverTargets)) {
+      dot.classList.add('cursor-grow');
+      outline.classList.add('cursor-grow');
+    }
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(hoverTargets)) {
+      dot.classList.remove('cursor-grow');
+      outline.classList.remove('cursor-grow');
+    }
+  });
+
+  // Hide cursor when it leaves the window
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity = '0';
+    outline.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity = '1';
+    outline.style.opacity = '1';
+  });
+})();
