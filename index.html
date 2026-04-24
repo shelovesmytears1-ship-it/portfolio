@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="grain-overlay"></div>
   
   <header id="header">
     <div class="header-inner">
@@ -24,6 +25,12 @@
         </svg>
         overflow<span>.</span>
       </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about" data-i18n-nav="about">О мне</a>
+        <a href="#portfolio" data-i18n-nav="portfolio">Работы</a>
+        <a href="#services" data-i18n-nav="services">Услуги</a>
+        <a href="#contact" data-i18n-nav="contact">Контакт</a>
+      </nav>
       <div class="lang-switcher">
         <button data-lang="pl" class="active">PL</button>
         <button data-lang="en">EN</button>
@@ -187,6 +194,23 @@
       </div>
     </section>
   </main>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a href="#" class="logo" style="font-size:1rem;">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          overflow<span>.</span>
+        </a>
+        <p class="footer-copy">© 2025 Daniil Menshov. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://t.me/your_telegram" target="_blank">Telegram</a>
+        <a href="https://github.com/shelovesmytears1-ship-it" target="_blank">GitHub</a>
+        <a href="mailto:your@email.com">Email</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>

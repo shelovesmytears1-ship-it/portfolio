@@ -363,8 +363,8 @@ function renderStats(stats) {
 
 function renderServices(items) {
   const container = document.getElementById('services-container');
-  container.innerHTML = items.map(item => `
-    <div class="card">
+  container.innerHTML = items.map((item, i) => `
+    <div class="card" style="animation: fadeUp 0.5s ease forwards ${i * 0.12}s; opacity:0; transform:translateY(20px);">
       <div class="service-icon">${item.icon}</div>
       <h3>${item.title}</h3>
       <p>${item.desc}</p>
@@ -475,11 +475,13 @@ function initProcessObserver() {
 function renderTech(items) {
   const container = document.getElementById('tech-container');
   if(!container) return;
-  container.innerHTML = items.map((item, i) => `
-    <div class="tech-item" style="animation: fadeUp 0.5s ease forwards ${i * 0.1}s; opacity:0; transform:translateY(20px);">
-      ${item}
-    </div>
-  `).join('');
+  container.innerHTML = items.map((item, i) => {
+    const name = typeof item === 'string' ? item : item.name;
+    const badge = typeof item === 'object' && item.badge
+      ? `<span class="tech-badge" style="--badge-color: ${item.color}">${item.badge}</span>`
+      : '';
+    return `<div class="tech-item" style="animation: fadeUp 0.5s ease forwards ${i * 0.05}s; opacity:0; transform:translateY(20px);">${badge}${name}</div>`;
+  }).join('');
 }
 
 function renderFeatures(items) {
@@ -678,9 +680,19 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // Inject translations
-translations.ru.tech = { title: "Стек технологий", items: ["HTML / CSS", "JavaScript", "React", "GSAP", "Tailwind", "Node.js", "Figma", "Webflow"] };
-translations.pl.tech = { title: "Technologie", items: ["HTML / CSS", "JavaScript", "React", "GSAP", "Tailwind", "Node.js", "Figma", "Webflow"] };
-translations.en.tech = { title: "Tech Stack", items: ["HTML / CSS", "JavaScript", "React", "GSAP", "Tailwind", "Node.js", "Figma", "Webflow"] };
+const TECH_ITEMS = [
+  { name: "HTML / CSS", badge: "HT", color: "#E44D26" },
+  { name: "JavaScript", badge: "JS", color: "#F7DF1E" },
+  { name: "React", badge: "Re", color: "#61DAFB" },
+  { name: "GSAP", badge: "GS", color: "#8AC640" },
+  { name: "Tailwind", badge: "TW", color: "#38BDF8" },
+  { name: "Node.js", badge: "No", color: "#68A063" },
+  { name: "Figma", badge: "Fi", color: "#F24E1E" },
+  { name: "Webflow", badge: "Wf", color: "#4353FF" }
+];
+translations.ru.tech = { title: "Стек технологий", items: TECH_ITEMS };
+translations.pl.tech = { title: "Technologie", items: TECH_ITEMS };
+translations.en.tech = { title: "Tech Stack", items: TECH_ITEMS };
 
 translations.ru.anatomy = { title: "Анатомия идеального лендинга", speed: { title: "Скорость загрузки", desc: "Оптимизация изображений и кода для загрузки < 1 сек." }, ui: { title: "Уникальный UI", desc: "Никаких шаблонов. Дизайн, который запоминается." }, conv: { title: "Продуманная конверсия", desc: "Правильные акценты и призывы к действию." } };
 translations.pl.anatomy = { title: "Anatomia idealnego landing page", speed: { title: "Szybkość ładowania", desc: "Optymalizacja dla ładowania < 1 sek." }, ui: { title: "Unikalny UI", desc: "Bez szablonów. Design, który zapada w pamięć." }, conv: { title: "Wysoka konwersja", desc: "Właściwe akcenty i wezwania do działania." } };
