@@ -337,6 +337,11 @@ function setLanguage(lang) {
     if (value) el.textContent = value;
   });
 
+  document.querySelectorAll('[data-i18n-nav]').forEach(el => {
+    const key = el.dataset.i18nNav;
+    if (t.nav && t.nav[key]) el.textContent = t.nav[key];
+  });
+
   // Render Dynamic Sections
   startTypewriter(t.hero.phrases);
   renderStats(t.about.stats);
@@ -691,6 +696,10 @@ const TECH_ITEMS = [
 translations.ru.tech = { title: "Стек технологий", items: TECH_ITEMS };
 translations.pl.tech = { title: "Technologie", items: TECH_ITEMS };
 translations.en.tech = { title: "Tech Stack", items: TECH_ITEMS };
+
+translations.pl.nav = { about: "O mnie", portfolio: "Prace", services: "Usługi", contact: "Kontakt" };
+translations.en.nav = { about: "About me", portfolio: "Works", services: "Services", contact: "Contact" };
+translations.ru.nav = { about: "Обо мне", portfolio: "Работы", services: "Услуги", contact: "Контакт" };
 
 translations.ru.anatomy = { title: "Анатомия идеального лендинга", speed: { title: "Скорость загрузки", desc: "Оптимизация изображений и кода для загрузки < 1 сек." }, ui: { title: "Уникальный UI", desc: "Никаких шаблонов. Дизайн, который запоминается." }, conv: { title: "Продуманная конверсия", desc: "Правильные акценты и призывы к действию." } };
 translations.pl.anatomy = { title: "Anatomia idealnego landing page", speed: { title: "Szybkość ładowania", desc: "Optymalizacja dla ładowania < 1 sek." }, ui: { title: "Unikalny UI", desc: "Bez szablonów. Design, który zapada w pamięć." }, conv: { title: "Wysoka konwersja", desc: "Właściwe akcenty i wezwania do działania." } };
