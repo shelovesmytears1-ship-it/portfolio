@@ -16,7 +16,7 @@ const translations = {
     },
     about: {
       title: "O mnie",
-      text: "Niezależny developer z Ukrainy. Tworzę strony dla biznesu pod klucz — od przemyślanego, czystego designu po szybki i responsywny kod. Skupiam się na minimalizmie i konwersji.",
+      text: "Developer pochodzący z Ukrainy, specjalizujący się w tworzeniu landing page'y dla biznesu. Główna zasada pracy to ścisła dyscyplina w terminach i nacisk na wyniki. Nie tworzę stron, które „tylko ładnie wyglądają”, ale nie generują zapytań. Zamiast tego głęboko wnikam w niszę klienta i stawiam na techniczną doskonałość. Szczególną uwagę zwracam na optymalizację: moje strony ładują się w 0.5 sekundy, ponieważ w biznesie każda sekunda oczekiwania to straceni klienci.",
       stats: {
         projects: { value: 100, label: "terminowość projektów", suffix: "%" },
         delivery: { value: 5, label: "dni na wdrożenie", prefix: "3–" },
@@ -53,13 +53,13 @@ const translations = {
         realestate: "Nieruchomości"
       },
       projects: [
-        { title: "Remonty mieszkań", niche: "Usługi", filter: "services", desc: "Nowoczesny landing page dla firmy remontowej z galerią realizacji.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Firma sprzątająca", niche: "Usługi", filter: "services", desc: "Strona z kalkulatorem usług sprzątania.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Usługi prawne", niche: "Usługi", filter: "services", desc: "Minimalistyczna wizytówka dla kancelarii adwokackiej.", link: "https://shelovesmytears1-ship-it.github.io/lawyer-website/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Domy modułowe", niche: "Nieruchomości", filter: "realestate", desc: "Prezentacja domów z systemem konfiguracji i wyceny.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Agencja SMM", niche: "Usługi", filter: "services", desc: "Kreatywny landing page dla agencji marketingowej.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Salon SPA", niche: "Uroda", filter: "beauty", desc: "Elegancka strona z możliwością rezerwacji wizyt online.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Serwis opon", niche: "Motoryzacja", filter: "auto", desc: "Serwis wulkanizacyjny z cennikiem i formularzem zgłoszeniowym.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` }
+        { title: "Remonty mieszkań", niche: "Usługi", filter: "services", desc: "Nowoczesny landing page dla firmy remontowej z galerią realizacji.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Budowa zaufania i prezentacja portfolio usług budowlanych.", conv: "+18%", speed: "0.6s" },
+        { title: "Firma sprzątająca", niche: "Usługi", filter: "services", desc: "Strona z kalkulatorem usług sprzątania.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Wdrożenie interaktywnego kalkulatora cen dla klientów.", conv: "+32%", speed: "0.5s" },
+        { title: "Usługi prawne", niche: "Usługi", filter: "services", desc: "Minimalistyczna wizytówka dla kancelarii adwokackiej.", link: "https://shelovesmytears1-ship-it.github.io/lawyer-website/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Stworzenie surowego, profesjonalnego wizerunku premium.", conv: "+15%", speed: "0.4s" },
+        { title: "Domy modułowe", niche: "Nieruchomości", filter: "realestate", desc: "Prezentacja domów z systemem konfiguracji i wyceny.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Wizualizacja modeli domów i system generowania leadów.", conv: "+22%", speed: "0.8s" },
+        { title: "Agencja SMM", niche: "Usługi", filter: "services", desc: "Kreatywny landing page dla agencji marketingowej.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Zaprojektowanie dynamicznego UX, który zatrzymuje uwagę.", conv: "+28%", speed: "0.6s" },
+        { title: "Salon SPA", niche: "Uroda", filter: "beauty", desc: "Elegancka strona z możliwością rezerwacji wizyt online.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Integracja z systemem rezerwacji w eleganckim UI.", conv: "+40%", speed: "0.7s" },
+        { title: "Serwis opon", niche: "Motoryzacja", filter: "auto", desc: "Serwis wulkanizacyjny z cennikiem i formularzem zgłoszeniowym.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Optymalizacja pod urządzenia mobilne i szybkość działania.", conv: "+35%", speed: "0.5s" }
       ],
       viewBtn: "Zobacz"
     },
@@ -98,9 +98,19 @@ const translations = {
     },
     contact: {
       title: "Rozpocznijmy projekt",
-      subtitle: "Napisz do mnie, a przygotuję wycenę w ciągu 2 godzin.",
-      form: { name: "Twoje imię", contactInfo: "Telefon lub Email", message: "Krótki opis projektu", submit: "Wyślij zapytanie" },
-      links: { telegram: "Telegram", whatsapp: "WhatsApp" }
+      subtitle: "Wypełnij formularz poniżej, a ja skontaktuję się z Tobą w celu omówienia szczegółów.",
+      form: {
+        nameLabel: "Twoje imię",
+        contactTypeLabel: "Jak się skontaktować?",
+        contactTypeOptions: { tg: "Telegram", email: "Email", inst: "Instagram" },
+        contactLabel: "Dane kontaktowe",
+        budgetLabel: "Budżet",
+        budgetOptions: { b1: "Do $300", b2: "$300 - $800", b3: "Powyżej $800" },
+        linkLabel: "Link do strony (jeśli istnieje)",
+        descLabel: "Opis projektu",
+        submit: "Wyślij zapytanie"
+      },
+      altText: "Lub napisz do mnie bezpośrednio:"
     }
   },
 
@@ -119,7 +129,7 @@ const translations = {
     },
     about: {
       title: "About me",
-      text: "Independent developer from Ukraine. I build turnkey business websites — from thoughtful, clean design to fast and responsive code. Focused on minimalism and conversion.",
+      text: "A developer originally from Ukraine, specializing in building landing pages for businesses. My core principle is strict adherence to deadlines and a focus on results. I don't build sites that 'just look pretty' but fail to generate leads. Instead, I dive deep into the client's niche and prioritize technical excellence. I pay special attention to optimization: my sites load in 0.5 seconds, because in business, every second of delay costs you clients.",
       stats: {
         projects: { value: 100, label: "on-time delivery", suffix: "%" },
         delivery: { value: 5, label: "days delivery", prefix: "3–" },
@@ -150,13 +160,13 @@ const translations = {
       title: "Selected Works",
       filters: { all: "All", services: "Services", beauty: "Beauty", auto: "Auto", realestate: "Real Estate" },
       projects: [
-        { title: "Apartment Renovation", niche: "Services", filter: "services", desc: "Modern landing page for a renovation company with a portfolio gallery.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Cleaning Company", niche: "Services", filter: "services", desc: "Service site with a dynamic pricing calculator.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Legal Services", niche: "Services", filter: "services", desc: "Minimalist digital presence for a law firm.", link: "https://shelovesmytears1-ship-it.github.io/lawyer-website/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Modular Houses", niche: "Real Estate", filter: "realestate", desc: "Housing presentation with configuration and pricing tools.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "SMM Agency", niche: "Services", filter: "services", desc: "Creative landing page for a digital marketing agency.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "SPA Salon", niche: "Beauty", filter: "beauty", desc: "Elegant website with online appointment booking.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Tire Service", niche: "Auto", filter: "auto", desc: "Automotive service landing page with request forms.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` }
+        { title: "Apartment Renovation", niche: "Services", filter: "services", desc: "Modern landing page for a renovation company with a portfolio gallery.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Building trust and showcasing construction portfolios.", conv: "+18%", speed: "0.6s" },
+        { title: "Cleaning Company", niche: "Services", filter: "services", desc: "Service site with a dynamic pricing calculator.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Implementing an interactive price calculator for clients.", conv: "+32%", speed: "0.5s" },
+        { title: "Legal Services", niche: "Services", filter: "services", desc: "Minimalist digital presence for a law firm.", link: "https://shelovesmytears1-ship-it.github.io/lawyer-website/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Creating a strict, professional premium identity.", conv: "+15%", speed: "0.4s" },
+        { title: "Modular Houses", niche: "Real Estate", filter: "realestate", desc: "Housing presentation with configuration and pricing tools.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Visualizing home models with a lead generation system.", conv: "+22%", speed: "0.8s" },
+        { title: "SMM Agency", niche: "Services", filter: "services", desc: "Creative landing page for a digital marketing agency.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Designing a dynamic UX that captures attention.", conv: "+28%", speed: "0.6s" },
+        { title: "SPA Salon", niche: "Beauty", filter: "beauty", desc: "Elegant website with online appointment booking.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Integration with a booking system in an elegant UI.", conv: "+40%", speed: "0.7s" },
+        { title: "Tire Service", niche: "Auto", filter: "auto", desc: "Automotive service landing page with request forms.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Mobile optimization and fast loading speeds.", conv: "+35%", speed: "0.5s" }
       ],
       viewBtn: "View"
     },
@@ -195,9 +205,19 @@ const translations = {
     },
     contact: {
       title: "Let's start your project",
-      subtitle: "Drop me a message, and I'll prepare an estimate within 2 hours.",
-      form: { name: "Your name", contactInfo: "Phone or Email", message: "Project description", submit: "Send request" },
-      links: { telegram: "Telegram", whatsapp: "WhatsApp" }
+      subtitle: "Fill out the form below and I will contact you to discuss the details.",
+      form: {
+        nameLabel: "Your name",
+        contactTypeLabel: "How to contact you?",
+        contactTypeOptions: { tg: "Telegram", email: "Email", inst: "Instagram" },
+        contactLabel: "Contact details",
+        budgetLabel: "Budget",
+        budgetOptions: { b1: "Under $300", b2: "$300 - $800", b3: "$800+" },
+        linkLabel: "Current website URL (optional)",
+        descLabel: "Project description",
+        submit: "Send request"
+      },
+      altText: "Or write to me directly:"
     }
   },
 
@@ -216,7 +236,7 @@ const translations = {
     },
     about: {
       title: "Обо мне",
-      text: "Фрилансер из Украины. Делаю лендинги для бизнеса под ключ — от чистого минималистичного дизайна до быстрого кода. Фокус на эстетике и конверсии.",
+      text: "Разработчик родом из Украины, специализируюсь на создании лендингов для бизнеса. Главный принцип работы — строгая дисциплина в сроках и упор на результат. Я не делаю сайты, которые «просто красиво выглядят», но не приносят заявок. Вместо этого я глубоко вникаю в нишу клиента и делаю ставку на техническое совершенство. Особое внимание уделяю оптимизации: мои сайты грузятся за 0.5 секунд, потому что в бизнесе каждая секунда ожидания стоит потерянных клиентов.",
       stats: {
         projects: { value: 100, label: "соблюдение дедлайнов", suffix: "%" },
         delivery: { value: 5, label: "дней на разработку", prefix: "3–" },
@@ -247,13 +267,13 @@ const translations = {
       title: "Портфолио",
       filters: { all: "Все", services: "Услуги", beauty: "Красота", auto: "Авто", realestate: "Недвижимость" },
       projects: [
-        { title: "Ремонт квартир", niche: "Услуги", filter: "services", desc: "Стильный лендинг строительной компании с галереей работ.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Клининговая компания", niche: "Услуги", filter: "services", desc: "Сайт услуг с калькулятором стоимости уборки.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Юридические услуги", niche: "Услуги", filter: "services", desc: "Строгая минималистичная визитка для адвокатского бюро.", link: "https://shelovesmytears1-ship-it.github.io/lawyer-website/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Модульные дома", niche: "Недвижимость", filter: "realestate", desc: "Презентация домов с функционалом подбора комплектации.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "SMM Агентство", niche: "Услуги", filter: "services", desc: "Креативный лендинг для агентства интернет-маркетинга.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "SPA Салон", niche: "Красота", filter: "beauty", desc: "Элегантный сайт с возможностью онлайн-записи.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` },
-        { title: "Шиномонтаж", niche: "Авто", filter: "auto", desc: "Лендинг автосервиса с прайсом и формой заявки.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">` }
+        { title: "Ремонт квартир", niche: "Услуги", filter: "services", desc: "Стильный лендинг строительной компании с галереей работ.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Упаковка сложной ниши и презентация портфолио работ.", conv: "+18%", speed: "0.6s" },
+        { title: "Клининговая компания", niche: "Услуги", filter: "services", desc: "Сайт услуг с калькулятором стоимости уборки.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Внедрение интерактивного калькулятора расчета стоимости.", conv: "+32%", speed: "0.5s" },
+        { title: "Юридические услуги", niche: "Услуги", filter: "services", desc: "Строгая минималистичная визитка для адвокатского бюро.", link: "https://shelovesmytears1-ship-it.github.io/lawyer-website/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Создание строгого премиального имиджа для B2B сегмента.", conv: "+15%", speed: "0.4s" },
+        { title: "Модульные дома", niche: "Недвижимость", filter: "realestate", desc: "Презентация домов с функционалом подбора комплектации.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Визуализация домов и система сбора заявок на расчет.", conv: "+22%", speed: "0.8s" },
+        { title: "SMM Агентство", niche: "Услуги", filter: "services", desc: "Креативный лендинг для агентства интернет-маркетинга.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Разработка сочного и динамичного дизайна для захвата внимания.", conv: "+28%", speed: "0.6s" },
+        { title: "SPA Салон", niche: "Красота", filter: "beauty", desc: "Элегантный сайт с возможностью онлайн-записи.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Интеграция с системой бронирования и удержание эстетики.", conv: "+40%", speed: "0.7s" },
+        { title: "Шиномонтаж", niche: "Авто", filter: "auto", desc: "Лендинг автосервиса с прайсом и формой заявки.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Максимальная оптимизация под мобайл для экстренных вызовов.", conv: "+35%", speed: "0.5s" }
       ],
       viewBtn: "Смотреть"
     },
@@ -291,10 +311,20 @@ const translations = {
       ]
     },
     contact: {
-      title: "Начать проект",
-      subtitle: "Напиши мне, и я подготовлю точную смету в течение 2 часов.",
-      form: { name: "Твоё имя", contactInfo: "Телефон или Email", message: "Краткое описание задачи", submit: "Отправить заявку" },
-      links: { telegram: "Telegram", whatsapp: "WhatsApp" }
+      title: "ЕСТЬ ИДЕЯ ПРОЕКТА?",
+      subtitle: "Заполни форму ниже, и я свяжусь с тобой для обсуждения деталей.",
+      form: {
+        nameLabel: "Твоё имя",
+        contactTypeLabel: "Как с тобой связаться?",
+        contactTypeOptions: { tg: "Telegram", email: "Email", inst: "Instagram" },
+        contactLabel: "Контактные данные",
+        budgetLabel: "Бюджет",
+        budgetOptions: { b1: "До $300", b2: "$300 - $800", b3: "От $800" },
+        linkLabel: "Ссылка на сайт (если есть)",
+        descLabel: "Описание задачи",
+        submit: "Отправить заявку"
+      },
+      altText: "Или напиши мне напрямую:"
     }
   }
 };
@@ -321,6 +351,70 @@ document.addEventListener('DOMContentLoaded', () => {
       setLanguage(e.target.dataset.lang);
     });
   });
+
+  // Handle Form Submission to Telegram Bot
+  const form = document.getElementById('contact-form');
+  if(form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // === ТВОИ ДАННЫЕ TELEGRAM ===
+      const BOT_TOKEN = '8245844398:AAFFFFA3L17q1sUPKJNN7U7zXESjNAe83QE';
+      const CHAT_ID = '1327146718';
+      // ============================
+
+      const btnSpan = form.querySelector('.submit-btn span');
+      const origText = btnSpan.textContent;
+      btnSpan.textContent = 'Отправка...';
+      
+      // Собираем данные
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Формируем красивое сообщение
+      const text = `
+🔥 <b>Новая заявка с портфолио!</b>
+
+👤 <b>Имя:</b> ${data.name}
+📞 <b>Связь (${data.contactType}):</b> ${data.contact}
+💰 <b>Бюджет:</b> ${data.budget}
+🌐 <b>Сайт:</b> ${data.link ? data.link : 'Нет'}
+
+📝 <b>Задача:</b>
+${data.desc}
+      `;
+
+      try {
+        if (BOT_TOKEN === 'ТВОЙ_ТОКЕН_ОТ_BOTFATHER') {
+          alert('Бро, ты забыл вставить токен и chat_id в script.js!');
+          btnSpan.textContent = origText;
+          return;
+        }
+
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text,
+            parse_mode: 'HTML'
+          })
+        });
+
+        if (response.ok) {
+          alert('Заявка успешно отправлена! Я свяжусь с вами в ближайшее время.');
+          form.reset();
+        } else {
+          alert('Ошибка при отправке. Пожалуйста, напишите мне напрямую в Telegram.');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Сетевая ошибка. Попробуйте еще раз или напишите напрямую.');
+      } finally {
+        btnSpan.textContent = origText;
+      }
+    });
+  }
 });
 
 // Set Language
@@ -389,7 +483,7 @@ function renderPortfolio(portfolio) {
     : portfolio.projects.filter(p => p.filter === currentFilter);
 
   grid.innerHTML = filteredProjects.map((p, i) => `
-    <a href="${p.link}" target="_blank" class="portfolio-card" style="animation: fadeUp 0.5s ease forwards ${i * 0.1}s; opacity:0; transform:translateY(20px);">
+    <div class="portfolio-card" style="animation: fadeUp 0.5s ease forwards ${i * 0.1}s; opacity:0; transform:translateY(20px);" data-link="${p.link}" data-title="${p.title}" data-desc="${p.desc}" data-icon='${p.icon}' data-task="${p.task}" data-conv="${p.conv}" data-speed="${p.speed}">
       <div class="portfolio-visual">
         ${p.icon}
       </div>
@@ -397,9 +491,9 @@ function renderPortfolio(portfolio) {
         <p>${p.niche}</p>
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
-        <span class="view-link">${portfolio.viewBtn} &rarr;</span>
+        <span class="view-link">Case Study &rarr;</span>
       </div>
-    </a>
+    </div>
   `).join('');
 
   document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -408,7 +502,48 @@ function renderPortfolio(portfolio) {
       renderPortfolio(portfolio);
     });
   });
+
+  // Modal logic attachment
+  document.querySelectorAll('.portfolio-card').forEach(card => {
+    card.addEventListener('click', () => {
+      openModal(card.dataset.title, card.dataset.desc, card.dataset.link, card.dataset.icon, card.dataset.task, card.dataset.conv, card.dataset.speed);
+    });
+  });
 }
+
+function openModal(title, desc, link, iconHtml, task, conv, speed) {
+  const modal = document.getElementById('case-study-modal');
+  if(!modal) return;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-solution').textContent = desc;
+  document.getElementById('modal-visual').innerHTML = iconHtml;
+  document.getElementById('modal-task').textContent = task;
+  document.getElementById('modal-res-1').textContent = conv;
+  document.getElementById('modal-res-2').textContent = speed;
+  document.getElementById('modal-link').href = link;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function initModal() {
+  const modal = document.getElementById('case-study-modal');
+  const closeBtn = document.getElementById('modal-close');
+  if(!modal || !closeBtn) return;
+
+  closeBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', initModal);
 
 let processObserver;
 function renderProcess(steps) {
@@ -677,9 +812,9 @@ function updateClock() {
   const timeEl = document.getElementById('local-time');
   if(!timeEl) return;
   const now = new Date();
-  const options = { timeZone: 'Europe/Kyiv', hour: '2-digit', minute: '2-digit', hour12: true };
+  const options = { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit', hour12: true };
   const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
-  timeEl.textContent = `Kyiv, UA • ${timeString}`;
+  timeEl.textContent = `Warsaw, PL • ${timeString}`;
 }
 setInterval(updateClock, 1000);
 updateClock();
@@ -708,8 +843,4 @@ translations.en.anatomy = { title: "Anatomy of a Perfect Landing", speed: { titl
 translations.ru.features = { title: "Что входит в работу?", items: [{ title: "1. Анализ и структура", desc: "Изучаю ваш бизнес и конкурентов. Создаю логичный прототип." }, { title: "2. Копирайтинг", desc: "Пишу тексты, которые продают вашу услугу, а не просто занимают место." }, { title: "3. Премиальный дизайн", desc: "Рисую современный интерфейс с акцентом на типографику и композицию." }, { title: "4. Плавные анимации", desc: "Добавляю микро-взаимодействия и GSAP анимации для вау-эффекта." }, { title: "5. Запуск", desc: "Сажаю сайт на хостинг, подключаю домен и формы заявок." }] };
 translations.pl.features = { title: "Co obejmuje praca?", items: [{ title: "1. Analiza i struktura", desc: "Badam biznes i konkurencję. Tworzę logiczny prototyp." }, { title: "2. Copywriting", desc: "Piszę teksty, które sprzedają usługę." }, { title: "3. Design Premium", desc: "Rysuję nowoczesny interfejs z naciskiem na typografię." }, { title: "4. Płynne animacje", desc: "Dodaję mikrointerakcje dla efektu WOW." }, { title: "5. Wdrożenie", desc: "Konfiguruję hosting, domenę i formularze." }] };
 translations.en.features = { title: "What's included?", items: [{ title: "1. Analysis & Structure", desc: "Business and competitor research. Logical prototyping." }, { title: "2. Copywriting", desc: "Writing copy that actually sells your service." }, { title: "3. Premium Design", desc: "Modern interface focusing on typography and composition." }, { title: "4. Smooth Animations", desc: "Micro-interactions and GSAP animations for the WOW effect." }, { title: "5. Deployment", desc: "Hosting setup, domain configuration, and form integration." }] };
-
-translations.ru.cta = { title: "ЕСТЬ ИДЕЯ ПРОЕКТА?", subtitle: "Давайте обсудим детали и запустим что-то крутое.", btn: "Написать в Telegram" };
-translations.pl.cta = { title: "MASZ POMYSŁ NA PROJEKT?", subtitle: "Omówmy szczegóły i stwórzmy coś świetnego.", btn: "Napisz na Telegramie" };
-translations.en.cta = { title: "HAVE A PROJECT IDEA?", subtitle: "Let's discuss the details and build something great.", btn: "Message on Telegram" };
 

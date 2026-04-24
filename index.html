@@ -187,10 +187,62 @@
     </section>
   
     <section id="contact" class="fade-up">
-      <div class="giant-cta">
-        <h2 class="cta-title" data-i18n="cta.title"></h2>
-        <p class="cta-subtitle" data-i18n="cta.subtitle"></p>
-        <a href="https://t.me/zzxvaracaa" target="_blank" class="cta-btn" data-i18n="cta.btn"></a>
+      <div class="contact-wrapper">
+        <div class="contact-text">
+          <h2 class="cta-title" data-i18n="contact.title"></h2>
+          <p class="cta-subtitle" data-i18n="contact.subtitle"></p>
+        </div>
+        
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="f-name" data-i18n="contact.form.nameLabel"></label>
+            <input type="text" id="f-name" name="name" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-contact-type" data-i18n="contact.form.contactTypeLabel"></label>
+              <select id="f-contact-type" name="contactType">
+                <option value="telegram" data-i18n="contact.form.contactTypeOptions.tg"></option>
+                <option value="email" data-i18n="contact.form.contactTypeOptions.email"></option>
+                <option value="instagram" data-i18n="contact.form.contactTypeOptions.inst"></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-contact" data-i18n="contact.form.contactLabel"></label>
+              <input type="text" id="f-contact" name="contact" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-budget" data-i18n="contact.form.budgetLabel"></label>
+              <select id="f-budget" name="budget">
+                <option value="<300" data-i18n="contact.form.budgetOptions.b1"></option>
+                <option value="300-800" data-i18n="contact.form.budgetOptions.b2"></option>
+                <option value="800+" data-i18n="contact.form.budgetOptions.b3"></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-link" data-i18n="contact.form.linkLabel"></label>
+              <input type="url" id="f-link" name="link">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-desc" data-i18n="contact.form.descLabel"></label>
+            <textarea id="f-desc" name="desc" rows="4" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span data-i18n="contact.form.submit"></span>
+          </button>
+        </form>
+
+        <div class="contact-alt">
+          <p data-i18n="contact.altText"></p>
+          <a href="https://t.me/zzxvaracaa" target="_blank" class="alt-btn">Telegram &rarr;</a>
+        </div>
       </div>
     </section>
   </main>
@@ -211,6 +263,37 @@
       </div>
     </div>
   </footer>
+
+  <div class="modal-overlay" id="case-study-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-header">
+        <span class="modal-badge">Case Study</span>
+        <h3 id="modal-title">Project</h3>
+      </div>
+      <div class="modal-body">
+        <div class="modal-visual" id="modal-visual"></div>
+        <div class="modal-info">
+          <h4>Задача / Task</h4>
+          <p id="modal-task">Создание лендинга с высокой конверсией, интеграция сложных форм и настройка аналитики.</p>
+          <h4>Решение / Solution</h4>
+          <p id="modal-solution">Описание решения...</p>
+          <h4>Результат / Result</h4>
+          <div class="modal-results">
+            <div class="m-stat">
+              <span class="m-val" id="modal-res-1">+42%</span>
+              <span class="m-label">Конверсия</span>
+            </div>
+            <div class="m-stat">
+              <span class="m-val" id="modal-res-2">0.5s</span>
+              <span class="m-label">Загрузка</span>
+            </div>
+          </div>
+          <a href="#" target="_blank" class="modal-btn" id="modal-link">Перейти на сайт &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
