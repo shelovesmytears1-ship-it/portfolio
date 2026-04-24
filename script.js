@@ -371,17 +371,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
       
+      const escapeHTML = (str) => {
+        return (str || '').toString()
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      };
+      
       // Формируем красивое сообщение
       const text = `
 🔥 <b>Новая заявка с портфолио!</b>
 
-👤 <b>Имя:</b> ${data.name}
-📞 <b>Связь (${data.contactType}):</b> ${data.contact}
-💰 <b>Бюджет:</b> ${data.budget}
-🌐 <b>Сайт:</b> ${data.link ? data.link : 'Нет'}
+👤 <b>Имя:</b> ${escapeHTML(data.name)}
+📞 <b>Связь (${escapeHTML(data.contactType)}):</b> ${escapeHTML(data.contact)}
+💰 <b>Бюджет:</b> ${escapeHTML(data.budget)}
+🌐 <b>Сайт:</b> ${data.link ? escapeHTML(data.link) : 'Нет'}
 
 📝 <b>Задача:</b>
-${data.desc}
+${escapeHTML(data.desc)}
       `;
 
       try {
