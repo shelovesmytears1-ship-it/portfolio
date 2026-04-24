@@ -414,7 +414,8 @@ ${escapeHTML(data.desc)}
           alert('Заявка успешно отправлена! Я свяжусь с вами в ближайшее время.');
           form.reset();
         } else {
-          alert('Ошибка при отправке. Пожалуйста, напишите мне напрямую в Telegram.');
+          const errData = await response.text();
+          alert('Ошибка API: ' + errData);
         }
       } catch (error) {
         console.error(error);
