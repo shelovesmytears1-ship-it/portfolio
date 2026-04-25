@@ -130,44 +130,117 @@
 
     <section id="landing-anatomy" class="fade-up">
       <h2 data-i18n="anatomy.title" class="section-title"></h2>
-      <div class="anatomy-container">
-        <div class="anatomy-wireframe">
-          <div class="wf-header"></div>
-          <div class="wf-hero">
-            <div class="wf-title"></div>
-            <div class="wf-subtitle"></div>
-            <div class="wf-btn"></div>
-          </div>
-          <div class="wf-blocks">
-            <div class="wf-block"></div>
-            <div class="wf-block"></div>
-            <div class="wf-block"></div>
-          </div>
-          
-          <div class="hotspot hs-speed">
-            <div class="hotspot-dot"></div>
-            <div class="hotspot-content">
-              <h4 data-i18n="anatomy.speed.title"></h4>
-              <p data-i18n="anatomy.speed.desc"></p>
-            </div>
-          </div>
-          
-          <div class="hotspot hs-ui">
-            <div class="hotspot-dot"></div>
-            <div class="hotspot-content">
-              <h4 data-i18n="anatomy.ui.title"></h4>
-              <p data-i18n="anatomy.ui.desc"></p>
-            </div>
-          </div>
-          
-          <div class="hotspot hs-conv">
-            <div class="hotspot-dot"></div>
-            <div class="hotspot-content">
-              <h4 data-i18n="anatomy.conv.title"></h4>
-              <p data-i18n="anatomy.conv.desc"></p>
+      <div class="anatomy-split">
+
+        <!-- LEFT: sticky wireframe -->
+        <div class="anatomy-left">
+          <div class="anatomy-wireframe-wrap">
+            <!-- SVG connector lines (drawn by JS) -->
+            <svg class="anatomy-connectors" id="anatomy-connectors" aria-hidden="true"></svg>
+
+            <div class="anatomy-wf" id="anatomy-wf">
+              <!-- Zone 1: Navigation bar -->
+              <div class="wf-zone wf-nav" data-zone="0">
+                <div class="wf-nav-logo"></div>
+                <div class="wf-nav-links">
+                  <div class="wf-nav-link"></div>
+                  <div class="wf-nav-link"></div>
+                  <div class="wf-nav-link"></div>
+                </div>
+                <div class="wf-zone-label">①</div>
+              </div>
+
+              <!-- Zone 2: Hero -->
+              <div class="wf-zone wf-hero" data-zone="1">
+                <div class="wf-hero-inner">
+                  <div class="wf-h-badge"></div>
+                  <div class="wf-h-title"></div>
+                  <div class="wf-h-subtitle"></div>
+                </div>
+                <div class="wf-zone-label">②</div>
+              </div>
+
+              <!-- Zone 3: CTA button row -->
+              <div class="wf-zone wf-cta-row" data-zone="2">
+                <div class="wf-h-btn"></div>
+                <div class="wf-zone-label">③</div>
+              </div>
+
+              <!-- Zone 4: Social proof row -->
+              <div class="wf-zone wf-social" data-zone="3">
+                <div class="wf-social-avatars">
+                  <div class="wf-avatar"></div>
+                  <div class="wf-avatar"></div>
+                  <div class="wf-avatar"></div>
+                </div>
+                <div class="wf-social-stars"></div>
+                <div class="wf-social-text"></div>
+                <div class="wf-zone-label">④</div>
+              </div>
+
+
+              <!-- Zone 5: Feature blocks -->
+              <div class="wf-zone wf-features" data-zone="4">
+                <div class="wf-feat-block">
+                  <div class="wf-feat-icon"></div>
+                  <div class="wf-feat-text"></div>
+                </div>
+                <div class="wf-feat-block">
+                  <div class="wf-feat-icon"></div>
+                  <div class="wf-feat-text"></div>
+                </div>
+                <div class="wf-feat-block">
+                  <div class="wf-feat-icon"></div>
+                  <div class="wf-feat-text"></div>
+                </div>
+                <div class="wf-zone-label">⑤</div>
+              </div>
+
+              <!-- Zone 6: Mobile indicator row -->
+              <div class="wf-zone wf-mobile-row" data-zone="5">
+                <div class="wf-mobile-device">
+                  <div class="wf-mobile-screen">
+                    <div class="wf-mob-line"></div>
+                    <div class="wf-mob-line short"></div>
+                    <div class="wf-mob-btn"></div>
+                  </div>
+                </div>
+                <div class="wf-mobile-label-block">
+                  <div class="wf-mob-text-line"></div>
+                  <div class="wf-mob-text-line short"></div>
+                </div>
+                <div class="wf-zone-label">⑥</div>
+              </div>
+
+              <!-- Zone 7: Speed bar -->
+              <div class="wf-zone wf-speed" data-zone="6">
+                <div class="wf-speed-bar">
+                  <div class="wf-speed-fill" id="wf-speed-fill"></div>
+                </div>
+                <div class="wf-speed-label"><span class="wf-speed-val">0.6s</span></div>
+                <div class="wf-zone-label">⑦</div>
+              </div>
+
+              <!-- Zone 8: Footer CTA -->
+              <div class="wf-zone wf-footer" data-zone="7">
+                <div class="wf-footer-line"></div>
+                <div class="wf-footer-cta"></div>
+                <div class="wf-footer-links">
+                  <div class="wf-footer-link"></div>
+                  <div class="wf-footer-link"></div>
+                  <div class="wf-footer-link"></div>
+                </div>
+                <div class="wf-zone-label">⑧</div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- RIGHT: scroll list -->
+        <div class="anatomy-right" id="anatomy-right">
+          <!-- Items injected by JS (renderAnatomy) -->
+        </div>
+
       </div>
     </section>
 

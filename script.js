@@ -493,6 +493,7 @@ function setLanguage(lang) {
   renderProcess(t.process.steps);
   if(t.tech) renderTech(t.tech.items);
   if(t.features) renderFeatures(t.features.items);
+  if(t.anatomy) renderAnatomy(t.anatomy);
   renderFaq(t.faq.items);
   renderReviews(t.reviews.items);
 }
@@ -842,6 +843,324 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
+/* ── Anatomy Section ─────────────────────────────────────────── */
+let anatomyObserver = null;
+
+function renderAnatomy(anatomy) {
+  const right = document.getElementById('anatomy-right');
+  if (!right) return;
+
+  right.innerHTML = anatomy.items.map((item, i) => {
+    const color = ZONE_CSS_COLORS[item.zone] || 'var(--accent)';
+    return `
+      <div class="anatomy-item" 
+           data-zone="${item.zone}" 
+           style="--zone-color: ${color}; transition-delay: ${i * 0.07}s;">
+        <div class="anatomy-item-header">
+          <span class="anatomy-item-num">${item.num}</span>
+          <span class="anatomy-item-title">${item.title}</span>
+          <span class="anatomy-item-metric">${item.metric}</span>
+        </div>
+        <p class="anatomy-item-desc">${item.desc}</p>
+      </div>
+    `;
+  }).join('');
+
+  // Disconnect previous observer if language changed
+  if (anatomyObserver) {
+    anatomyObserver.disconnect();
+    anatomyObserver = null;
+  }
+
+  // Small delay so DOM is ready
+  setTimeout(initAnatomyObserver, 80);
+  setTimeout(initMobileAnatomySwipe, 120);
+}
+
+function initAnatomyObserver() {
+  const items    = document.querySelectorAll('.anatomy-item');
+  const zones    = document.querySelectorAll('.wf-zone');
+  const svgEl    = document.getElementById('anatomy-connectors');
+  const wfEl     = document.getElementById('anatomy-wf');
+  const speedFill = document.getElementById('wf-speed-fill');
+  let speedAnimated = false;
+
+  if (!items.length || !zones.length) return;
+
+  // ── Helper: draw one SVG connector line ───────────────────────
+  function drawConnector(zoneIndex, itemEl) {
+    if (!svgEl || !wfEl) return;
+    // Remove existing line for this zone
+    const old = svgEl.querySelector(`line[data-zone="${zoneIndex}"]`);
+    if (old) old.remove();
+
+    const zoneEl = wfEl.querySelector(`.wf-zone[data-zone="${zoneIndex}"]`);
+    if (!zoneEl || !itemEl) return;
+
+    const wfRect   = wfEl.getBoundingClientRect();
+    const zoneRect = zoneEl.getBoundingClientRect();
+    const itemRect = itemEl.getBoundingClientRect();
+
+    // Source: right edge center of zone (inside SVG coordinate space)
+    const x1 = zoneRect.right - wfRect.left;
+    const y1 = zoneRect.top - wfRect.top + zoneRect.height / 2;
+
+    // Destination: left edge center of item (relative to wf)
+    // items are in a different column, so relative to viewport then to wf
+    const x2 = itemRect.left - wfRect.left;
+    const y2 = itemRect.top - wfRect.top + itemRect.height / 2;
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', ZONE_COLORS_SOLID[zoneIndex] || 'rgba(255,255,255,0.3)');
+    line.setAttribute('data-zone', zoneIndex);
+    svgEl.appendChild(line);
+
+    // Trigger opacity transition
+    requestAnimationFrame(() => line.classList.add('visible'));
+    return line;
+  }
+
+  // ── Helper: remove a connector ─────────────────────────────────
+  function removeConnector(zoneIndex) {
+    if (!svgEl) return;
+    const line = svgEl.querySelector(`line[data-zone="${zoneIndex}"]`);
+    if (line) {
+      line.classList.remove('visible');
+      setTimeout(() => line.remove(), 450);
+    }
+  }
+
+  // ── Helper: activate zone + item ──────────────────────────────
+  function activateZone(zoneIndex, itemEl) {
+    // Deactivate all
+    zones.forEach(z => z.classList.remove('wf-active'));
+    items.forEach(it => it.classList.remove('active'));
+    if (svgEl) {
+      svgEl.querySelectorAll('line').forEach(l => {
+        l.classList.remove('visible');
+        setTimeout(() => l.remove(), 450);
+      });
+    }
+
+    // Activate current zone
+    const zoneEl = wfEl ? wfEl.querySelector(`.wf-zone[data-zone="${zoneIndex}"]`) : null;
+    if (zoneEl) {
+      zoneEl.classList.add('wf-active');
+      // Scroll wireframe zone into view within the sticky panel (mobile fallback)
+      zoneEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+    itemEl.classList.add('active');
+
+    // Draw connector (only on desktop where SVG is visible)
+    if (window.innerWidth > 900) {
+      drawConnector(zoneIndex, itemEl);
+    }
+
+    // Speed bar animation for zone 6
+    if (zoneIndex === 6 && speedFill && !speedAnimated) {
+      speedAnimated = true;
+      speedFill.style.width = '0%';
+      requestAnimationFrame(() => {
+        setTimeout(() => { speedFill.style.width = '18%'; }, 100);
+      });
+    }
+  }
+
+  // ── Entry animation observer (one-shot reveal) ────────────────
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(item => revealObserver.observe(item));
+
+  // ── Active zone observer (continuous, center of viewport) ─────
+  const activeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const zoneIndex = parseInt(entry.target.dataset.zone, 10);
+        activateZone(zoneIndex, entry.target);
+      }
+    });
+  }, {
+    rootMargin: '-35% 0px -45% 0px',
+    threshold: 0
+  });
+
+  items.forEach(item => activeObserver.observe(item));
+  anatomyObserver = activeObserver;
+
+  // Redraw connectors on resize (layout shift)
+  window.addEventListener('resize', () => {
+    const activeItem = document.querySelector('.anatomy-item.active');
+    if (activeItem && window.innerWidth > 900) {
+      const zoneIndex = parseInt(activeItem.dataset.zone, 10);
+      drawConnector(zoneIndex, activeItem);
+    } else if (svgEl) {
+      svgEl.querySelectorAll('line').forEach(l => l.remove());
+    }
+  }, { passive: true });
+}
+
+/* ── Mobile Swipe Carousel (Variant B) ─────────────────────── */
+let mobileSwipeCleanup = null;
+
+function initMobileAnatomySwipe() {
+  if (window.innerWidth > 900) return;
+
+  const right = document.getElementById('anatomy-right');
+  if (!right) return;
+
+  // Run cleanup from previous call (language switch)
+  if (mobileSwipeCleanup) { mobileSwipeCleanup(); mobileSwipeCleanup = null; }
+
+  const items = Array.from(right.querySelectorAll('.anatomy-item'));
+  if (!items.length) return;
+
+  // ── Build track wrapper ──────────────────────────────────────
+  const track = document.createElement('div');
+  track.className = 'anatomy-mobile-track';
+  items.forEach(item => track.appendChild(item));
+  right.appendChild(track);
+
+  // Make all items immediately visible (bypass desktop stagger)
+  items.forEach(item => {
+    item.classList.add('visible');
+    item.style.transitionDelay = '0s';
+  });
+
+  // ── Build nav row ─────────────────────────────────────────────
+  const nav = document.createElement('div');
+  nav.className = 'anatomy-mobile-nav';
+  nav.innerHTML = `
+    <button class="anatomy-mobile-btn" id="anat-prev" aria-label="Previous">&#8592;</button>
+    <div class="anatomy-mobile-dots" id="anat-dots"></div>
+    <button class="anatomy-mobile-btn" id="anat-next" aria-label="Next">&#8594;</button>
+  `;
+  right.appendChild(nav);
+
+  // ── Build dots ────────────────────────────────────────────────
+  const dotsContainer = document.getElementById('anat-dots');
+  items.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'anatomy-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = Array.from(dotsContainer.querySelectorAll('.anatomy-dot'));
+  const prevBtn = document.getElementById('anat-prev');
+  const nextBtn = document.getElementById('anat-next');
+  const zones = document.querySelectorAll('.wf-zone');
+  const wfEl = document.getElementById('anatomy-wf');
+  const speedFill = document.getElementById('wf-speed-fill');
+  let speedAnimated = false;
+  let current = 0;
+
+  // ── goTo: slide + highlight ───────────────────────────────────
+  function goTo(index) {
+    if (index < 0 || index >= items.length) return;
+    current = index;
+
+    // Slide track
+    track.style.transform = `translateX(-${current * 100}%)`;
+
+    // Dots
+    const zoneColor = ZONE_CSS_COLORS[parseInt(items[current].dataset.zone, 10)] || 'var(--accent)';
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+      if (i === current) dot.style.setProperty('--zone-color', zoneColor);
+    });
+
+    // Wireframe zone
+    const zoneIndex = parseInt(items[current].dataset.zone, 10);
+    zones.forEach(z => z.classList.remove('wf-active'));
+    items.forEach(it => it.classList.remove('active'));
+
+    const activeZone = wfEl ? wfEl.querySelector(`.wf-zone[data-zone="${zoneIndex}"]`) : null;
+    if (activeZone) {
+      activeZone.classList.add('wf-active');
+      // Scroll the wireframe so the active zone is visible
+      activeZone.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+    items[current].classList.add('active');
+
+    // Speed bar for zone 6
+    if (zoneIndex === 6 && speedFill && !speedAnimated) {
+      speedAnimated = true;
+      speedFill.style.width = '0%';
+      requestAnimationFrame(() => setTimeout(() => { speedFill.style.width = '18%'; }, 100));
+    }
+
+    // Button states
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === items.length - 1;
+  }
+
+  // ── Touch swipe detection ─────────────────────────────────────
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isSwiping = false;
+
+  function onTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    isSwiping = false;
+  }
+  function onTouchMove(e) {
+    const dx = Math.abs(e.touches[0].clientX - touchStartX);
+    const dy = Math.abs(e.touches[0].clientY - touchStartY);
+    // If horizontal swipe is dominant, mark as swiping
+    if (dx > dy && dx > 8) isSwiping = true;
+  }
+  function onTouchEnd(e) {
+    if (!isSwiping) return;
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 45) {
+      goTo(diff > 0 ? current + 1 : current - 1);
+    }
+    isSwiping = false;
+  }
+
+  track.addEventListener('touchstart', onTouchStart, { passive: true });
+  track.addEventListener('touchmove',  onTouchMove,  { passive: true });
+  track.addEventListener('touchend',   onTouchEnd,   { passive: true });
+
+  // ── Arrow buttons ─────────────────────────────────────────────
+  function onPrev() { goTo(current - 1); }
+  function onNext() { goTo(current + 1); }
+  prevBtn.addEventListener('click', onPrev);
+  nextBtn.addEventListener('click', onNext);
+
+  // ── Keyboard arrow support ────────────────────────────────────
+  function onKeyDown(e) {
+    if (!document.getElementById('anatomy-right')) return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+  }
+  document.addEventListener('keydown', onKeyDown);
+
+  // ── Init first slide ──────────────────────────────────────────
+  goTo(0);
+
+  // ── Cleanup function (called on language switch / re-render) ──
+  mobileSwipeCleanup = () => {
+    track.removeEventListener('touchstart', onTouchStart);
+    track.removeEventListener('touchmove',  onTouchMove);
+    track.removeEventListener('touchend',   onTouchEnd);
+    prevBtn.removeEventListener('click', onPrev);
+    nextBtn.removeEventListener('click', onNext);
+    document.removeEventListener('keydown', onKeyDown);
+  };
+}
+
 function renderFaq(items) {
   const container = document.getElementById('faq-container');
   if(!container) return;
@@ -891,9 +1210,68 @@ translations.pl.nav = { about: "O mnie", portfolio: "Prace", services: "Usługi"
 translations.en.nav = { about: "About me", portfolio: "Works", services: "Services", contact: "Contact" };
 translations.ru.nav = { about: "Обо мне", portfolio: "Работы", services: "Услуги", contact: "Контакт" };
 
-translations.ru.anatomy = { title: "Анатомия идеального лендинга", speed: { title: "Скорость загрузки", desc: "Оптимизация изображений и кода для загрузки < 1 сек." }, ui: { title: "Уникальный UI", desc: "Никаких шаблонов. Дизайн, который запоминается." }, conv: { title: "Продуманная конверсия", desc: "Правильные акценты и призывы к действию." } };
-translations.pl.anatomy = { title: "Anatomia idealnego landing page", speed: { title: "Szybkość ładowania", desc: "Optymalizacja dla ładowania < 1 sek." }, ui: { title: "Unikalny UI", desc: "Bez szablonów. Design, który zapada w pamięć." }, conv: { title: "Wysoka konwersja", desc: "Właściwe akcenty i wezwania do działania." } };
-translations.en.anatomy = { title: "Anatomy of a Perfect Landing", speed: { title: "Load Speed", desc: "Optimized for < 1 sec load time." }, ui: { title: "Unique UI", desc: "No templates. Memorable design." }, conv: { title: "High Conversion", desc: "Proper emphasis and calls to action." } };
+// Zone hex colors (solid versions for JS connector lines)
+const ZONE_COLORS_SOLID = [
+  'rgba(139,156,182,0.7)',   // 0 nav
+  'rgba(168,148,182,0.7)',   // 1 hero
+  'rgba(139,182,160,0.7)',   // 2 cta
+  'rgba(182,167,139,0.7)',   // 3 social
+  'rgba(139,170,182,0.7)',   // 4 features
+  'rgba(182,139,145,0.7)',   // 5 mobile
+  'rgba(182,175,139,0.7)',   // 6 speed
+  'rgba(152,139,182,0.7)'    // 7 footer
+];
+// CSS custom property values for --zone-color on list items
+const ZONE_CSS_COLORS = [
+  'rgba(139,156,182,0.9)',
+  'rgba(168,148,182,0.9)',
+  'rgba(139,182,160,0.9)',
+  'rgba(182,167,139,0.9)',
+  'rgba(139,170,182,0.9)',
+  'rgba(182,139,145,0.9)',
+  'rgba(182,175,139,0.9)',
+  'rgba(152,139,182,0.9)'
+];
+
+translations.ru.anatomy = {
+  title: "Анатомия идеального лендинга",
+  items: [
+    { zone: 0, num: "①", title: "Навигация",            metric: "sticky",   desc: "Минимум отвлечений. Один логотип, три-четыре ссылки. Sticky-хедер держит CTA в пределах досягаемости на любой прокрутке." },
+    { zone: 1, num: "②", title: "Первый экран",          metric: "3 сек.",   desc: "У посетителя 3 секунды, чтобы понять оффер. Сильный заголовок, чёткий подзаголовок и один следующий шаг — без лишнего шума." },
+    { zone: 2, num: "③", title: "CTA-кнопка",            metric: "контраст", desc: "Контрастная, с глаголом действия. Повторяется каждые 2–3 секции. Никакого «Узнать больше» — только конкретное действие." },
+    { zone: 3, num: "④", title: "Социальное доказательство", metric: "↑ доверие", desc: "Отзывы, логотипы клиентов и цифры — максимально близко к герою. Доверие строится до того, как пользователь дочитает лендинг." },
+    { zone: 4, num: "⑤", title: "Блоки преимуществ",    metric: "3–5 шт.",  desc: "Закрывают возражения. Каждый блок — одна идея: иконка, заголовок, одно предложение. Читается за секунду, убеждает надолго." },
+    { zone: 5, num: "⑥", title: "Мобильная адаптация",  metric: "60%+ трафика", desc: "Свыше 60% трафика — с телефонов. Отдельная верстка под мобайл: тапабельные зоны, читаемые шрифты, скорость без компромиссов." },
+    { zone: 6, num: "⑦", title: "Скорость загрузки",    metric: "< 1 сек.", desc: "Каждая лишняя секунда — минус 7% конверсии. WebP, lazy-loading, минифицированный код. Мои сайты грузятся за 0.5–0.8 сек." },
+    { zone: 7, num: "⑧", title: "Финальный призыв",     metric: "якорный CTA", desc: "Последний шанс конвертировать. Форма заявки или кнопка с якорем — без вариантов, без выбора. Один путь — одно действие." }
+  ]
+};
+translations.pl.anatomy = {
+  title: "Anatomia idealnego landing page",
+  items: [
+    { zone: 0, num: "①", title: "Nawigacja",             metric: "sticky",      desc: "Minimum rozproszenia. Logo, trzy–cztery linki. Sticky header trzyma CTA w zasięgu na każdym etapie scrollowania." },
+    { zone: 1, num: "②", title: "Pierwszy ekran",        metric: "3 sek.",      desc: "Odwiedzający ma 3 sekundy na zrozumienie oferty. Mocny nagłówek, konkretny podtytuł i jeden kolejny krok — bez zbędnego szumu." },
+    { zone: 2, num: "③", title: "Przycisk CTA",          metric: "kontrast",    desc: "Kontrastowy, z czasownikiem działania. Powtarza się co 2–3 sekcje. Żadnych 'Dowiedz się więcej' — tylko konkretne działanie." },
+    { zone: 3, num: "④", title: "Dowód społeczny",       metric: "↑ zaufanie",  desc: "Opinie, logotypy klientów i liczby — jak najbliżej hero. Zaufanie buduje się, zanim użytkownik doczyta landing do końca." },
+    { zone: 4, num: "⑤", title: "Bloki korzyści",        metric: "3–5 szt.",    desc: "Odpowiadają na obiekcje. Każdy blok — jedna idea: ikona, nagłówek, jedno zdanie. Czyta się w sekundę, przekonuje na długo." },
+    { zone: 5, num: "⑥", title: "Responsywność",         metric: "60%+ ruchu",  desc: "Ponad 60% ruchu pochodzi z telefonów. Osobny layout mobilny: strefy dotykowe, czytelne fonty, prędkość bez kompromisów." },
+    { zone: 6, num: "⑦", title: "Szybkość ładowania",   metric: "< 1 sek.",    desc: "Każda dodatkowa sekunda to minus 7% konwersji. WebP, lazy-loading, zminifikowany kod. Moje strony ładują się w 0,5–0,8 sek." },
+    { zone: 7, num: "⑧", title: "Końcowe wezwanie",      metric: "kotwica CTA", desc: "Ostatnia szansa na konwersję. Formularz lub przycisk z kotwicą — bez opcji, bez wyboru. Jedna ścieżka — jedna akcja." }
+  ]
+};
+translations.en.anatomy = {
+  title: "Anatomy of a Perfect Landing",
+  items: [
+    { zone: 0, num: "①", title: "Navigation",            metric: "sticky",      desc: "Minimum distraction. One logo, three–four links. A sticky header keeps the CTA reachable at any scroll depth." },
+    { zone: 1, num: "②", title: "Hero Section",          metric: "3 sec.",      desc: "Visitors decide in 3 seconds. A strong headline, a clear subline, and one next step — no noise, no clutter." },
+    { zone: 2, num: "③", title: "CTA Button",            metric: "contrast",    desc: "High-contrast, action verb. Repeated every 2–3 sections. No 'Learn more' — only a specific, inevitable action." },
+    { zone: 3, num: "④", title: "Social Proof",          metric: "↑ trust",     desc: "Reviews, client logos, and numbers — as close to the hero as possible. Trust is built before users finish reading." },
+    { zone: 4, num: "⑤", title: "Benefit Blocks",       metric: "3–5 items",   desc: "They close objections. Each block — one idea: icon, headline, one sentence. Read in a second, convincing for a lifetime." },
+    { zone: 5, num: "⑥", title: "Mobile Adaptation",    metric: "60%+ traffic", desc: "Over 60% of traffic is mobile. A dedicated mobile layout: tappable zones, readable fonts, speed without compromise." },
+    { zone: 6, num: "⑦", title: "Load Speed",           metric: "< 1 sec.",    desc: "Every extra second costs −7% conversion. WebP, lazy-loading, minified code. My sites load in 0.5–0.8 sec." },
+    { zone: 7, num: "⑧", title: "Final Call-to-Action", metric: "anchor CTA",  desc: "Last chance to convert. A form or anchored button — no alternatives, no choices. One path, one action." }
+  ]
+};
 
 translations.ru.features = { title: "Что входит в работу?", items: [{ title: "1. Анализ и структура", desc: "Изучаю ваш бизнес и конкурентов. Создаю логичный прототип." }, { title: "2. Копирайтинг", desc: "Пишу тексты, которые продают вашу услугу, а не просто занимают место." }, { title: "3. Премиальный дизайн", desc: "Рисую современный интерфейс с акцентом на типографику и композицию." }, { title: "4. Плавные анимации", desc: "Добавляю микро-взаимодействия и GSAP анимации для вау-эффекта." }, { title: "5. Запуск", desc: "Сажаю сайт на хостинг, подключаю домен и формы заявок." }] };
 translations.pl.features = { title: "Co obejmuje praca?", items: [{ title: "1. Analiza i struktura", desc: "Badam biznes i konkurencję. Tworzę logiczny prototyp." }, { title: "2. Copywriting", desc: "Piszę teksty, które sprzedają usługę." }, { title: "3. Design Premium", desc: "Rysuję nowoczesny interfejs z naciskiem na typografię." }, { title: "4. Płynne animacje", desc: "Dodaję mikrointerakcje dla efektu WOW." }, { title: "5. Wdrożenie", desc: "Konfiguruję hosting, domenę i formularze." }] };
@@ -957,34 +1335,6 @@ translations.en.features = { title: "What's included?", items: [{ title: "1. Ana
   });
 })();
 
-// Mobile Hotspot Logic for Anatomy section
-(function initMobileHotspots() {
-  const hotspots = document.querySelectorAll('.hotspot');
-  
-  hotspots.forEach(spot => {
-    spot.addEventListener('click', (e) => {
-      // Only apply this logic on mobile view
-      if (window.innerWidth > 768) return;
-      
-      e.stopPropagation();
-      
-      const isActive = spot.classList.contains('active');
-      
-      // Close all other active hotspots
-      hotspots.forEach(h => h.classList.remove('active'));
-      
-      // Toggle current
-      if (!isActive) {
-        spot.classList.add('active');
-      }
-    });
-  });
 
-  // Close hotspots when clicking outside
-  document.addEventListener('click', () => {
-    if (window.innerWidth <= 768) {
-      hotspots.forEach(h => h.classList.remove('active'));
-    }
-  });
-})();
+
 
