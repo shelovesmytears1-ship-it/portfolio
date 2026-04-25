@@ -2,6 +2,7 @@
 
 const translations = {
   pl: {
+    nav: { about: "O mnie", portfolio: "Portfolio", services: "Usługi", contact: "Kontakt", contactBtn: "Współpraca" },
     hero: {
       name: "Daniil Menshov",
       subtitle: "Tworzę landing page, które sprzedają.",
@@ -53,13 +54,13 @@ const translations = {
         realestate: "Nieruchomości"
       },
       projects: [
-        { title: "Remonty mieszkań", niche: "Usługi", filter: "services", desc: "Nowoczesny landing page dla firmy remontowej z galerią realizacji.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Budowa zaufania i prezentacja portfolio usług budowlanych.", conv: "+18%", speed: "0.6s" },
-        { title: "Firma sprzątająca", niche: "Usługi", filter: "services", desc: "Strona z kalkulatorem usług sprzątania.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Wdrożenie interaktywnego kalkulatora cen dla klientów.", conv: "+32%", speed: "0.5s" },
-        { title: "Usługi prawne", niche: "Usługi", filter: "services", desc: "Minimalistyczna wizytówka dla kancelarii adwokackiej.", link: "https://shelovesmytears1-ship-it.github.io/lawyer/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Stworzenie surowego, profesjonalnego wizerunku premium.", conv: "+15%", speed: "0.4s" },
-        { title: "Domy modułowe", niche: "Nieruchomości", filter: "realestate", desc: "Prezentacja domów z systemem konfiguracji i wyceny.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Wizualizacja modeli domów i system generowania leadów.", conv: "+22%", speed: "0.8s" },
-        { title: "Agencja SMM", niche: "Usługi", filter: "services", desc: "Kreatywny landing page dla agencji marketingowej.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Zaprojektowanie dynamicznego UX, który zatrzymuje uwagę.", conv: "+28%", speed: "0.6s" },
-        { title: "Salon SPA", niche: "Uroda", filter: "beauty", desc: "Elegancka strona z możliwością rezerwacji wizyt online.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Integracja z systemem rezerwacji w eleganckim UI.", conv: "+40%", speed: "0.7s" },
-        { title: "Serwis opon", niche: "Motoryzacja", filter: "auto", desc: "Serwis wulkanizacyjny z cennikiem i formularzem zgłoszeniowym.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Optymalizacja pod urządzenia mobilne i szybkość działania.", conv: "+35%", speed: "0.5s" }
+        { title: "Remonty mieszkań", niche: "Usługi", filter: "services", desc: "Nowoczesny landing page dla firmy remontowej z galerią realizacji.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Budowa zaufania i prezentacja portfolio usług budowlanych.", conv: "+18%", speed: "0.6s" },
+        { title: "Firma sprzątająca", niche: "Usługi", filter: "services", desc: "Strona z kalkulatorem usług sprzątania.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Wdrożenie interaktywnego kalkulatora cen dla klientów.", conv: "+32%", speed: "0.5s" },
+        { title: "Usługi prawne", niche: "Usługi", filter: "services", desc: "Minimalistyczna wizytówka dla kancelarii adwokackiej.", link: "https://shelovesmytears1-ship-it.github.io/lawyer/", icon: `<img src="img/lawyer website.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Stworzenie surowego, profesjonalnego wizerunku premium.", conv: "+15%", speed: "0.4s" },
+        { title: "Domy modułowe", niche: "Nieruchomości", filter: "realestate", desc: "Prezentacja domów z systemem konfiguracji i wyceny.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Wizualizacja modeli domów i system generowania leadów.", conv: "+22%", speed: "0.8s" },
+        { title: "Agencja SMM", niche: "Usługi", filter: "services", desc: "Kreatywny landing page dla agencji marketingowej.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Zaprojektowanie dynamicznego UX, który zatrzymuje uwagę.", conv: "+28%", speed: "0.6s" },
+        { title: "Salon SPA", niche: "Uroda", filter: "beauty", desc: "Elegancka strona z możliwością rezerwacji wizyt online.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Integracja z systemem rezerwacji w eleganckim UI.", conv: "+40%", speed: "0.7s" },
+        { title: "Serwis opon", niche: "Motoryzacja", filter: "auto", desc: "Serwis wulkanizacyjny z cennikiem i formularzem zgłoszeniowym.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Optymalizacja pod urządzenia mobilne i szybkość działania.", conv: "+35%", speed: "0.5s" }
       ],
       viewBtn: "Zobacz"
     },
@@ -91,9 +92,9 @@ const translations = {
     reviews: {
       title: "Opinie",
       items: [
-        { text: "Strona wygląda bardzo profesjonalnie. Klienci chwalą prostotę i wygodę. Polecam!", name: "Michał K.", company: "Firma budowlana" },
-        { text: "Szybka realizacja i świetny design. Konwersja z reklam wzrosła dwukrotnie.", name: "Anna S.", company: "Salon SPA" },
-        { text: "Czysty kod i pełne zrozumienie biznesu. Otrzymałem stronę dokładnie taką, jak chciałem.", name: "Tomasz W.", company: "Agencja reklamowa" }
+        { text: "Strona wygląda bardzo profesjonalnie. Klienci chwalą prostotę i wygodę. Polecam!", name: "Michał Kowalczyk", company: "Founder StroyPro" },
+        { text: "Szybka realizacja i świetny design. Konwersja z reklam wzrosła dwukrotnie.", name: "Anna Sokołowska", company: "Manager Estetica SPA" },
+        { text: "Czysty kod i pełne zrozumienie biznesu. Otrzymałem stronę dokładnie taką, jak chciałem.", name: "Tomasz Wiśniewski", company: "CEO AdCreative" }
       ]
     },
     contact: {
@@ -115,6 +116,7 @@ const translations = {
   },
 
   en: {
+    nav: { about: "About", portfolio: "Work", services: "Services", contact: "Contact", contactBtn: "Let's Talk" },
     hero: {
       name: "Daniil Menshov",
       subtitle: "Building high-converting landing pages.",
@@ -160,13 +162,13 @@ const translations = {
       title: "Selected Works",
       filters: { all: "All", services: "Services", beauty: "Beauty", auto: "Auto", realestate: "Real Estate" },
       projects: [
-        { title: "Apartment Renovation", niche: "Services", filter: "services", desc: "Modern landing page for a renovation company with a portfolio gallery.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Building trust and showcasing construction portfolios.", conv: "+18%", speed: "0.6s" },
-        { title: "Cleaning Company", niche: "Services", filter: "services", desc: "Service site with a dynamic pricing calculator.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Implementing an interactive price calculator for clients.", conv: "+32%", speed: "0.5s" },
-        { title: "Legal Services", niche: "Services", filter: "services", desc: "Minimalist digital presence for a law firm.", link: "https://shelovesmytears1-ship-it.github.io/lawyer/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Creating a strict, professional premium identity.", conv: "+15%", speed: "0.4s" },
-        { title: "Modular Houses", niche: "Real Estate", filter: "realestate", desc: "Housing presentation with configuration and pricing tools.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Visualizing home models with a lead generation system.", conv: "+22%", speed: "0.8s" },
-        { title: "SMM Agency", niche: "Services", filter: "services", desc: "Creative landing page for a digital marketing agency.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Designing a dynamic UX that captures attention.", conv: "+28%", speed: "0.6s" },
-        { title: "SPA Salon", niche: "Beauty", filter: "beauty", desc: "Elegant website with online appointment booking.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Integration with a booking system in an elegant UI.", conv: "+40%", speed: "0.7s" },
-        { title: "Tire Service", niche: "Auto", filter: "auto", desc: "Automotive service landing page with request forms.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Mobile optimization and fast loading speeds.", conv: "+35%", speed: "0.5s" }
+        { title: "Apartment Renovation", niche: "Services", filter: "services", desc: "Modern landing page for a renovation company with a portfolio gallery.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Building trust and showcasing construction portfolios.", conv: "+18%", speed: "0.6s" },
+        { title: "Cleaning Company", niche: "Services", filter: "services", desc: "Service site with a dynamic pricing calculator.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Implementing an interactive price calculator for clients.", conv: "+32%", speed: "0.5s" },
+        { title: "Legal Services", niche: "Services", filter: "services", desc: "Minimalist digital presence for a law firm.", link: "https://shelovesmytears1-ship-it.github.io/lawyer/", icon: `<img src="img/lawyer website.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Creating a strict, professional premium identity.", conv: "+15%", speed: "0.4s" },
+        { title: "Modular Houses", niche: "Real Estate", filter: "realestate", desc: "Housing presentation with configuration and pricing tools.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Visualizing home models with a lead generation system.", conv: "+22%", speed: "0.8s" },
+        { title: "SMM Agency", niche: "Services", filter: "services", desc: "Creative landing page for a digital marketing agency.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Designing a dynamic UX that captures attention.", conv: "+28%", speed: "0.6s" },
+        { title: "SPA Salon", niche: "Beauty", filter: "beauty", desc: "Elegant website with online appointment booking.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Integration with a booking system in an elegant UI.", conv: "+40%", speed: "0.7s" },
+        { title: "Tire Service", niche: "Auto", filter: "auto", desc: "Automotive service landing page with request forms.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Mobile optimization and fast loading speeds.", conv: "+35%", speed: "0.5s" }
       ],
       viewBtn: "View"
     },
@@ -198,9 +200,9 @@ const translations = {
     reviews: {
       title: "Reviews",
       items: [
-        { text: "The site looks incredibly professional. Clients praise its simplicity. Highly recommended!", name: "Michael K.", company: "Construction firm" },
-        { text: "Fast delivery and great design. Our ad conversion rate doubled.", name: "Anna S.", company: "SPA Salon" },
-        { text: "Clean code and deep understanding of business needs. Got exactly what I wanted.", name: "Thomas W.", company: "Ad Agency" }
+        { text: "The site looks incredibly professional. Clients praise its simplicity. Highly recommended!", name: "Michael Kowalczyk", company: "Founder StroyPro" },
+        { text: "Fast delivery and great design. Our ad conversion rate doubled.", name: "Anna Sokolowska", company: "Manager Estetica SPA" },
+        { text: "Clean code and deep understanding of business needs. Got exactly what I wanted.", name: "Thomas Wisniewski", company: "CEO AdCreative" }
       ]
     },
     contact: {
@@ -222,6 +224,7 @@ const translations = {
   },
 
   ru: {
+    nav: { about: "Обо мне", portfolio: "Работы", services: "Услуги", contact: "Контакты", contactBtn: "Обсудить проект" },
     hero: {
       name: "Daniil Menshov",
       subtitle: "Разработка продающих лендингов для бизнеса.",
@@ -267,13 +270,13 @@ const translations = {
       title: "Портфолио",
       filters: { all: "Все", services: "Услуги", beauty: "Красота", auto: "Авто", realestate: "Недвижимость" },
       projects: [
-        { title: "Ремонт квартир", niche: "Услуги", filter: "services", desc: "Стильный лендинг строительной компании с галереей работ.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Упаковка сложной ниши и презентация портфолио работ.", conv: "+18%", speed: "0.6s" },
-        { title: "Клининговая компания", niche: "Услуги", filter: "services", desc: "Сайт услуг с калькулятором стоимости уборки.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Внедрение интерактивного калькулятора расчета стоимости.", conv: "+32%", speed: "0.5s" },
-        { title: "Юридические услуги", niche: "Услуги", filter: "services", desc: "Строгая минималистичная визитка для адвокатского бюро.", link: "https://shelovesmytears1-ship-it.github.io/lawyer/", icon: `<img src="img/lawyer website.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Создание строгого премиального имиджа для B2B сегмента.", conv: "+15%", speed: "0.4s" },
-        { title: "Модульные дома", niche: "Недвижимость", filter: "realestate", desc: "Презентация домов с функционалом подбора комплектации.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Визуализация домов и система сбора заявок на расчет.", conv: "+22%", speed: "0.8s" },
-        { title: "SMM Агентство", niche: "Услуги", filter: "services", desc: "Креативный лендинг для агентства интернет-маркетинга.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Разработка сочного и динамичного дизайна для захвата внимания.", conv: "+28%", speed: "0.6s" },
-        { title: "SPA Салон", niche: "Красота", filter: "beauty", desc: "Элегантный сайт с возможностью онлайн-записи.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Интеграция с системой бронирования и удержание эстетики.", conv: "+40%", speed: "0.7s" },
-        { title: "Шиномонтаж", niche: "Авто", filter: "auto", desc: "Лендинг автосервиса с прайсом и формой заявки.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.png" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Максимальная оптимизация под мобайл для экстренных вызовов.", conv: "+35%", speed: "0.5s" }
+        { title: "Ремонт квартир", niche: "Услуги", filter: "services", desc: "Стильный лендинг строительной компании с галереей работ.", link: "https://shelovesmytears1-ship-it.github.io/apartment-renovation/", icon: `<img src="img/apartment renovation.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Упаковка сложной ниши и презентация портфолио работ.", conv: "+18%", speed: "0.6s" },
+        { title: "Клининговая компания", niche: "Услуги", filter: "services", desc: "Сайт услуг с калькулятором стоимости уборки.", link: "https://shelovesmytears1-ship-it.github.io/cleaning/", icon: `<img src="img/cleaning.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Внедрение интерактивного калькулятора расчета стоимости.", conv: "+32%", speed: "0.5s" },
+        { title: "Юридические услуги", niche: "Услуги", filter: "services", desc: "Строгая минималистичная визитка для адвокатского бюро.", link: "https://shelovesmytears1-ship-it.github.io/lawyer/", icon: `<img src="img/lawyer website.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Создание строгого премиального имиджа для B2B сегмента.", conv: "+15%", speed: "0.4s" },
+        { title: "Модульные дома", niche: "Недвижимость", filter: "realestate", desc: "Презентация домов с функционалом подбора комплектации.", link: "https://shelovesmytears1-ship-it.github.io/modular-houses/", icon: `<img src="img/modular houses.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Визуализация домов и система сбора заявок на расчет.", conv: "+22%", speed: "0.8s" },
+        { title: "SMM Агентство", niche: "Услуги", filter: "services", desc: "Креативный лендинг для агентства интернет-маркетинга.", link: "https://shelovesmytears1-ship-it.github.io/smm/", icon: `<img src="img/smm.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Разработка сочного и динамичного дизайна для захвата внимания.", conv: "+28%", speed: "0.6s" },
+        { title: "SPA Салон", niche: "Красота", filter: "beauty", desc: "Элегантный сайт с возможностью онлайн-записи.", link: "https://shelovesmytears1-ship-it.github.io/spa/", icon: `<img src="img/spa.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Интеграция с системой бронирования и удержание эстетики.", conv: "+40%", speed: "0.7s" },
+        { title: "Шиномонтаж", niche: "Авто", filter: "auto", desc: "Лендинг автосервиса с прайсом и формой заявки.", link: "https://shelovesmytears1-ship-it.github.io/tire-service/", icon: `<img src="img/tire-service.webp" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;" alt="Project" loading="lazy">`, task: "Максимальная оптимизация под мобайл для экстренных вызовов.", conv: "+35%", speed: "0.5s" }
       ],
       viewBtn: "Смотреть"
     },
@@ -305,9 +308,9 @@ const translations = {
     reviews: {
       title: "Отзывы",
       items: [
-        { text: "Сайт выглядит очень дорого. Клиентам легко пользоваться. Однозначно рекомендую!", name: "Михаил К.", company: "Строительная фирма" },
-        { text: "Сделано быстро и со вкусом. Конверсия с контекстной рекламы выросла в два раза.", name: "Анна С.", company: "SPA Салон" },
-        { text: "Идеально чистый код и полное погружение в бизнес. Получил ровно то, что хотел.", name: "Томаш В.", company: "Рекламное агентство" }
+        { text: "Сайт выглядит очень дорого. Клиентам легко пользоваться. Однозначно рекомендую!", name: "Михаил Ковальчук", company: "Основатель StroyPro" },
+        { text: "Сделано быстро и со вкусом. Конверсия с контекстной рекламы выросла в два раза.", name: "Анна Соколова", company: "Управляющая Estetica SPA" },
+        { text: "Идеально чистый код и полное погружение в бизнес. Получил ровно то, что хотел.", name: "Томаш Вишневский", company: "CEO AdCreative" }
       ]
     },
     contact: {
@@ -693,11 +696,11 @@ function renderFeatures(items) {
   `).join('');
 
   const images = [
-    'images/Prototyping.png',
-    'images/texts.png',
-    'images/design (UIUX).png',
-    'images/Dynamics.png',
-    'images/Code and deployment.png'
+    'images/Prototyping.webp',
+    'images/texts.webp',
+    'images/design (UIUX).webp',
+    'images/Dynamics.webp',
+    'images/Code and deployment.webp'
   ];
 
   visualBg.innerHTML = images.map((src, i) => `
@@ -723,7 +726,7 @@ function renderFeatures(items) {
 
 function renderReviews(reviews) {
   const container = document.getElementById('reviews-container');
-  const avatars = ['images/Michael.png', 'images/review.jpeg', 'images/Tomas.png'];
+  const avatars = ['images/Michael.webp', 'images/review.webp', 'images/Tomas.webp'];
   
   container.innerHTML = reviews.map((r, i) => `
     <div class="card review-card">
