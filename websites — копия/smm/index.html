@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMM Vanguard | Editorial Vision</title>
+  
+  <!-- Premium Typography: Outfit (Strict Geometric) + Instrument Serif (Elegant Italic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS & Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'serif'],
+          },
+          colors: {
+            brand: {
+              bg: '#F5F5F3',       // Warm Ivory
+              text: '#111111',     // Ink Black
+              border: '#DEDEDA',   // Architectural Grey Grid
+              accent: '#FF3314',   // Editorial Red
+              muted: '#7A7A75',
+            }
+          },
+          transitionTimingFunction: {
+            'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+            'in-out-expo': 'cubic-bezier(0.87, 0, 0.13, 1)',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* =========================================
+       SWISS EDITORIAL FOUNDATION
+       ========================================= */
+    html {
+      scroll-padding-top: 4rem; /* Offset for sticky nav causing anchor cutoff */
+    }
+
+    body {
+      background-color: theme('colors.brand.bg');
+      color: theme('colors.brand.text');
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    ::selection {
+      background: theme('colors.brand.text');
+      color: theme('colors.brand.bg');
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: theme('colors.brand.bg');
+      border-left: 1px solid theme('colors.brand.border');
+    }
+    ::-webkit-scrollbar-thumb {
+      background: theme('colors.brand.text');
+    }
+
+    /* Grid layout behaviors */
+    .border-grid {
+      border-color: theme('colors.brand.border');
+    }
+
+    /* Hover Inversions for Cards */
+    .hover-invert {
+      transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                  color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hover-invert:hover {
+      background-color: theme('colors.brand.text');
+      color: theme('colors.brand.bg');
+    }
+    .hover-invert:hover .text-brand-muted {
+      color: #A0A09C;
+    }
+    .hover-invert:hover svg {
+      color: theme('colors.brand.bg');
+    }
+    .hover-invert:hover .hover-invert-target {
+      color: theme('colors.brand.bg');
+    }
+
+    /* Form Slide-over */
+    #slide-container.panel-open {
+      pointer-events: auto !important;
+    }
+    #slide-panel {
+      transform: translateX(100%);
+      transition: transform 0.7s cubic-bezier(0.87, 0, 0.13, 1);
+    }
+    .panel-open #slide-panel {
+      transform: translateX(0);
+    }
+    #slide-backdrop {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .panel-open #slide-backdrop {
+      opacity: 1;
+    }
+
+    /* Magnetic micro-interactions */
+    .magnetic-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .magnetic-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 1px;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .magnetic-btn:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* GSAP Setup */
+    .reveal-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+    .reveal-line { display: inline-block; transform: translateY(110%); }
+
+    /* Infinite Marquee Engine */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+
+    /* FAQ Smooth Animation */
+    details[open] summary ~ * {
+      animation: sweep .4s ease-out;
+    }
+    @keyframes sweep {
+      0%    {opacity: 0; transform: translateY(-10px)}
+      100%  {opacity: 1; transform: translateY(0)}
+    }
+
+    /* FAQ Details Cleanup */
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+
+  <!-- GSAP Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+</head>
+
+<body class="w-full max-w-full bg-brand-bg text-brand-text">
+
+  <!-- TOP NAVIGATION (Flat, Bordered) -->
+  <nav class="fixed top-0 w-full z-40 bg-brand-bg/90 backdrop-blur-md border-b border-grid">
+    <div class="w-full max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="font-bold tracking-tight text-lg uppercase flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-accent"></span>
+        SMM_Vanguard
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-widest text-brand-muted">
+        <a href="#expert" class="magnetic-btn hover:text-brand-text">Экспертиза</a>
+        <a href="#curriculum" class="magnetic-btn hover:text-brand-text">Дисциплина</a>
+        <a href="#cases" class="magnetic-btn hover:text-brand-text">Кейсы</a>
+        <a href="#investment" class="magnetic-btn hover:text-brand-text">Инвестиции</a>
+        <a href="#faq" class="magnetic-btn hover:text-brand-text">Вопросы</a>
+      </div>
+      <button onclick="togglePanel('Консультация')" class="text-sm font-semibold uppercase tracking-widest hover:text-brand-accent transition-colors">
+        Оставить заявку ↗
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN WRAPPER RESTORED CONSTRAINED WIDTH -->
+  <main class="w-full max-w-[1440px] mx-auto min-h-screen pt-16">
+    
+    <!-- =========================================
+         1. EDITORIAL HERO
+         ========================================= -->
+    <section class="border-b border-grid grid grid-cols-1 lg:grid-cols-12 min-h-[85vh]">
+      <!-- Left massive text -->
+      <div class="lg:col-span-8 p-8 md:p-16 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-grid">
+        <div class="text-brand-muted text-sm font-mono uppercase tracking-widest mb-12 gs-reveal">Выпуск 02 / Искусство Конверсий</div>
+        <h1 class="text-[clamp(3.5rem,8vw,7.5rem)] font-bold tracking-tighter leading-[0.95] mb-8 uppercase gs-reveal">
+          Архитектура <br>
+          <span class="font-serif italic font-light text-brand-accent lowercase tracking-normal">цифрового</span> <br>
+          роста.
+        </h1>
+        <p class="text-xl text-brand-muted max-w-[45ch] leading-relaxed gs-reveal">
+          Масштабируй карьеру в SMM. От понимания ядра алгоритмов до заключения контрактов с премиальными брендами. Никакой воды, только строгая методология.
+        </p>
+      </div>
+      
+      <!-- Right editorial empty space / typography art -->
+      <div class="lg:col-span-4 p-8 md:p-16 flex flex-col justify-between bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0iI0RFREVEQSIvPjwvc3ZnPg==')]">
+        <div class="w-16 h-16 rounded-full border border-brand-text flex items-center justify-center gs-reveal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-brand-text">
+            <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mt-20 lg:mt-0 text-sm font-medium uppercase tracking-widest text-brand-muted max-w-[200px] leading-relaxed gs-reveal">
+          Прагматичный подход к современному маркетингу.
+        </div>
+      </div>
+    </section>
+
+    <!-- METRICS MARQUEE (BREAKOUT VIEWPORT TRICK) -->
+    <div class="w-screen relative left-1/2 -translate-x-1/2 border-b border-grid py-4 overflow-hidden flex bg-white whitespace-nowrap z-10">
+      <!-- To prevent cutting off on huge UW monitors, duplicate content heavily inside a max-content wrapper -->
+      <div class="animate-marquee flex items-center text-3xl md:text-4xl font-serif italic text-brand-text/30">
+        <!-- Set 1 -->
+        <span class="mx-8">• SMM КАК ТОЧНАЯ НАУКА</span><span class="mx-8">• 100K+ ОХВАТОВ</span><span class="mx-8">• АЛГОРИТМЫ ЛЕНТЫ</span><span class="mx-8">• ТРАФИК</span>
+        <span class="mx-8">• РОСТ МЕТРИК</span><span class="mx-8">• УДЕРЖАНИЕ ВНИМАНИЯ</span><span class="mx-8">• КОНТЕНТ-АРХИТЕКТУРА</span>
+        <!-- Set 2 -->
+        <span class="mx-8">• SMM КАК ТОЧНАЯ НАУКА</span><span class="mx-8">• 100K+ ОХВАТОВ</span><span class="mx-8">• АЛГОРИТМЫ ЛЕНТЫ</span><span class="mx-8">• ТРАФИК</span>
+        <span class="mx-8">• РОСТ МЕТРИК</span><span class="mx-8">• УДЕРЖАНИЕ ВНИМАНИЯ</span><span class="mx-8">• КОНТЕНТ-АРХИТЕКТУРА</span>
+        <!-- Set 3 -->
+        <span class="mx-8">• SMM КАК ТОЧНАЯ НАУКА</span><span class="mx-8">• 100K+ ОХВАТОВ</span><span class="mx-8">• АЛГОРИТМЫ ЛЕНТЫ</span><span class="mx-8">• ТРАФИК</span>
+        <span class="mx-8">• РОСТ МЕТРИК</span><span class="mx-8">• УДЕРЖАНИЕ ВНИМАНИЯ</span><span class="mx-8">• КОНТЕНТ-АРХИТЕКТУРА</span>
+        <!-- Set 4 (Duplicate for seamless loop) -->
+        <span class="mx-8">• SMM КАК ТОЧНАЯ НАУКА</span><span class="mx-8">• 100K+ ОХВАТОВ</span><span class="mx-8">• АЛГОРИТМЫ ЛЕНТЫ</span><span class="mx-8">• ТРАФИК</span>
+        <span class="mx-8">• РОСТ МЕТРИК</span><span class="mx-8">• УДЕРЖАНИЕ ВНИМАНИЯ</span><span class="mx-8">• КОНТЕНТ-АРХИТЕКТУРА</span>
+        <span class="mx-8">• SMM КАК ТОЧНАЯ НАУКА</span><span class="mx-8">• 100K+ ОХВАТОВ</span><span class="mx-8">• АЛГОРИТМЫ ЛЕНТЫ</span><span class="mx-8">• ТРАФИК</span>
+        <span class="mx-8">• РОСТ МЕТРИК</span><span class="mx-8">• УДЕРЖАНИЕ ВНИМАНИЯ</span><span class="mx-8">• КОНТЕНТ-АРХИТЕКТУРА</span>
+        <span class="mx-8">• SMM КАК ТОЧНАЯ НАУКА</span><span class="mx-8">• 100K+ ОХВАТОВ</span><span class="mx-8">• АЛГОРИТМЫ ЛЕНТЫ</span><span class="mx-8">• ТРАФИК</span>
+        <span class="mx-8">• РОСТ МЕТРИК</span><span class="mx-8">• УДЕРЖАНИЕ ВНИМАНИЯ</span><span class="mx-8">• КОНТЕНТ-АРХИТЕКТУРА</span>
+      </div>
+    </div>
+
+
+    <!-- =========================================
+         2. EXPERT DOSSIER (ADDED)
+         ========================================= -->
+    <section id="expert" class="border-b border-grid grid grid-cols-1 lg:grid-cols-12">
+      <!-- Photo Area -->
+      <div class="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-grid min-h-[500px] lg:min-h-[700px] flex flex-col justify-end p-8 md:p-12 relative overflow-hidden group">
+        <!-- Expert Generated Photo (Grayscale + Zoom effect) -->
+        <div class="absolute inset-0 bg-cover bg-center grayscale transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105" 
+             style="background-image: url('./.img/a_A_hyper-realistic_ed.jpeg');"></div>
+        
+        <!-- Name plate -->
+        <div class="bg-brand-bg/90 backdrop-blur pb-3 pt-4 px-6 inline-flex flex-col md:flex-row items-baseline max-w-max border border-grid relative z-10 gs-reveal-up">
+           <span class="font-bold uppercase tracking-widest text-2xl">ARTEM VANGUARD</span>
+        </div>
+      </div>
+      
+      <!-- Expert Identity & Math -->
+      <div class="lg:col-span-7 p-10 md:p-16 lg:p-24 flex flex-col justify-center">
+        <div class="text-sm font-mono uppercase tracking-widest mb-10 text-brand-accent flex items-center gap-2 gs-reveal-up">
+           <span class="w-1.5 h-1.5 bg-brand-accent rounded-full inline-block"></span>
+           Lead Architect
+        </div>
+        
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tighter mb-8 max-w-2xl gs-reveal-up">
+          Маркетинг — это <br>не творчество. <br>
+          <span class="font-serif italic font-light lowercase text-brand-muted">это холодная математика.</span>
+        </h2>
+        
+        <p class="text-brand-text/70 leading-relaxed max-w-2xl text-lg mb-16 gs-reveal-up">
+          Скучные, но точные цифры работают безотказно. За 5 лет практики я структурировал процессы создания контента для топ-сегмента и управлял рекламными активами, недоступными теоретикам. Моя задача на курсе — передать жесткий инженерный подход, который исключает выгорание и гарантирует стабильный чек.
+        </p>
+        
+        <!-- Stats block -->
+        <div class="grid grid-cols-2 gap-8 border-t border-grid pt-12 gs-reveal-up">
+           <div>
+               <div class="text-5xl font-serif italic mb-3 text-brand-text">$5.2M</div>
+               <div class="text-xs uppercase font-bold tracking-widest text-brand-muted">Управляемый бюджет клиента в 2025</div>
+           </div>
+           <div>
+               <div class="text-5xl font-serif italic mb-3 text-brand-text">48</div>
+               <div class="text-xs uppercase font-bold tracking-widest text-brand-muted">Закрытых Premium проектов</div>
+           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================
+         3. ADVANTAGES GRID (FLAT BENTO)
+         ========================================= -->
+    <section id="vision" class="grid grid-cols-1 md:grid-cols-3 border-b border-grid">
+      
+      <div class="p-10 md:p-14 border-b md:border-b-0 md:border-r border-grid flex flex-col justify-between gs-reveal-up">
+        <div class="text-6xl font-serif italic mb-16 text-brand-muted">01</div>
+        <div>
+          <h3 class="text-2xl font-bold uppercase tracking-tight mb-4">Скорость <br>внедрения</h3>
+          <p class="text-brand-muted leading-relaxed">Система построена на мгновенной практике. Разработка воронок и запуск лидогенерации происходит прямо во время модулей.</p>
+        </div>
+      </div>
+
+      <div class="p-10 md:p-14 border-b md:border-b-0 md:border-r border-grid flex flex-col justify-between gs-reveal-up" style="transition-delay: 100ms;">
+        <div class="text-6xl font-serif italic mb-16 text-brand-muted">02</div>
+        <div>
+          <h3 class="text-2xl font-bold uppercase tracking-tight mb-4">Безоговорочный <br>авторитет</h3>
+          <p class="text-brand-muted leading-relaxed">Методология выверена рынком. Мы передаем вам те самые скрипты и таблицы, с которыми работаем каждый день.</p>
+        </div>
+      </div>
+
+      <div class="p-10 md:p-14 flex flex-col justify-between gs-reveal-up" style="transition-delay: 200ms;">
+        <div class="text-6xl font-serif italic mb-16 text-brand-accent">03</div>
+        <div>
+          <h3 class="text-2xl font-bold uppercase tracking-tight mb-4">Железные <br>гарантии</h3>
+          <p class="text-brand-muted leading-relaxed">Предоставление клиентов для стажировки на старших тарифах. Вы не просто получаете сертификат, вы строите карьеру.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================
+         4. EDITORIAL PROGRAM LIST
+         ========================================= -->
+    <section id="curriculum" class="border-b border-grid grid grid-cols-1 lg:grid-cols-12 bg-white">
+      <div class="lg:col-span-4 p-10 md:p-16 border-b lg:border-b-0 lg:border-r border-grid">
+        <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-4 gs-reveal-up">Дисциплина.</h2>
+        <p class="text-brand-muted font-serif italic text-2xl gs-reveal-up">Конфликт теории и <br>практики разрешён.</p>
+      </div>
+      
+      <div class="lg:col-span-8 flex flex-col">
+        <!-- Module I -->
+        <div class="p-10 md:p-12 border-b border-grid flex flex-col md:flex-row gap-8 items-start hover:bg-brand-bg transition-colors gs-reveal-up">
+          <div class="w-16 font-mono text-sm text-brand-muted uppercase pt-1">Модуль I</div>
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4 flex flex-wrap items-center gap-4">
+              Контент-Инженерия
+              <span class="font-serif italic font-light text-brand-accent text-2xl lowercase tracking-normal">фундамент</span>
+            </h3>
+            <p class="text-brand-muted leading-relaxed max-w-[60ch]">Проектирование визуальной парадигмы. Копирайтинг без шаблонов, разработка сторителлинга и создание сложных цепочек удержания внимания.</p>
+          </div>
+        </div>
+        
+        <!-- Module II -->
+        <div class="p-10 md:p-12 border-b border-grid flex flex-col md:flex-row gap-8 items-start hover:bg-brand-bg transition-colors gs-reveal-up">
+          <div class="w-16 font-mono text-sm text-brand-muted uppercase pt-1">Модуль II</div>
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">Управление Трафиком</h3>
+            <p class="text-brand-muted leading-relaxed max-w-[60ch]">Хирургическая точность настройки. Парсинг, распределение бюджетов, создание сплит-тестов и строгая оптимизация юнит-экономики.</p>
+          </div>
+        </div>
+
+        <!-- Module III -->
+        <div class="p-10 md:p-12 flex flex-col md:flex-row gap-8 items-start hover:bg-brand-bg transition-colors gs-reveal-up">
+          <div class="w-16 font-mono text-sm text-brand-muted uppercase pt-1">Модуль III</div>
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">Переговоры & Аналитика</h3>
+            <p class="text-brand-muted leading-relaxed max-w-[60ch]">Расчет LTV/CAC, подготовка коммерческих предложений. Уверенное закрытие корпоративных заказчиков на чеки от 100,000₽.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================
+         5. CASES MATRIX (DATA-DRIVEN PROOF)
+         ========================================= -->
+    <section id="cases" class="border-b border-grid flex flex-col">
+      <div class="p-10 md:p-16 border-b border-grid flex flex-col md:flex-row justify-between items-baseline gap-8">
+        <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tighter gs-reveal-up">
+          Метрики. <br>
+          <span class="font-serif italic font-light text-brand-muted lowercase">никакой лирики.</span>
+        </h2>
+        <div class="text-sm font-mono uppercase tracking-widest text-brand-accent max-w-[300px] text-right hidden md:block">
+          Результаты применения архитектуры на реальных проектах.
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <!-- Case 1 -->
+        <div class="p-10 md:p-16 border-b lg:border-b-0 lg:border-r border-grid hover:bg-white transition-colors flex flex-col cursor-pointer gs-reveal-up">
+            <div class="flex flex-wrap justify-between items-start mb-16 gap-4">
+              <div class="text-sm font-mono uppercase tracking-widest text-brand-muted group-hover:text-white/60">Ниша: E-commerce</div>
+              <div class="text-xs font-bold uppercase tracking-widest border border-grid px-4 py-2 text-brand-accent bg-white group-hover:bg-transparent group-hover:border-white/20 transition-colors">
+                +450% ROMI
+              </div>
+            </div>
+            
+            <h3 class="text-3xl md:text-4xl font-bold uppercase tracking-tight mb-10 pr-8">
+              Масштабирование <br>бренда премиум-одежды
+            </h3>
+            
+            <div class="flex flex-col gap-5 mt-auto">
+              <div class="flex justify-between items-end border-b border-grid pb-2 group-hover:border-white/20">
+                  <span class="text-sm uppercase tracking-widest text-brand-muted group-hover:text-white/60">Срок работы</span> 
+                  <span class="font-medium text-lg">4 месяца</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-grid pb-2 group-hover:border-white/20">
+                  <span class="text-sm uppercase tracking-widest text-brand-muted group-hover:text-white/60">Вложения в трафик</span> 
+                  <span class="font-medium text-lg">500,000 ₽</span>
+              </div>
+              <div class="flex justify-between items-end pt-2">
+                  <span class="text-sm uppercase tracking-widest text-brand-muted group-hover:text-white/60">Итоговая выручка</span> 
+                  <span class="font-serif italic text-3xl font-bold text-brand-accent group-hover:text-brand-bg transition-colors">2,750,000 ₽</span>
+              </div>
+            </div>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="p-10 md:p-16 hover:bg-white transition-colors flex flex-col cursor-pointer gs-reveal-up" style="transition-delay: 100ms;">
+          <div class="flex flex-wrap justify-between items-start mb-16 gap-4">
+            <div class="text-sm font-mono uppercase tracking-widest text-brand-muted group-hover:text-white/60">Ниша: Real Estate Luxe</div>
+            <div class="text-xs font-bold uppercase tracking-widest border border-grid px-4 py-2 text-brand-accent bg-white group-hover:bg-transparent group-hover:border-white/20 transition-colors">
+              CPL снижен в 3 раза
+            </div>
+          </div>
+          
+          <h3 class="text-3xl md:text-4xl font-bold uppercase tracking-tight mb-10 pr-8">
+            Лидогенерация <br>на недвижимость в Дубае
+          </h3>
+          
+          <div class="flex flex-col gap-5 mt-auto">
+            <div class="flex justify-between items-end border-b border-grid pb-2 group-hover:border-white/20">
+                <span class="text-sm uppercase tracking-widest text-brand-muted group-hover:text-white/60">Получено Лидов</span> 
+                <span class="font-medium text-lg">48 квалифицированных</span>
+            </div>
+            <div class="flex justify-between items-end border-b border-grid pb-2 group-hover:border-white/20">
+                <span class="text-sm uppercase tracking-widest text-brand-muted group-hover:text-white/60">Цикл сделки</span> 
+                <span class="font-medium text-lg">45 дней</span>
+            </div>
+            <div class="flex justify-between items-end pt-2">
+                <span class="text-sm uppercase tracking-widest text-brand-muted group-hover:text-white/60">Объем сделок</span> 
+                <span class="font-serif italic text-3xl font-bold text-brand-accent group-hover:text-brand-bg transition-colors">$3.2M</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================
+         6. TARIFFS (HOVER INVERT ARCHITECTURE)
+         ========================================= -->
+    <section id="investment" class="border-b border-grid">
+      <div class="p-10 md:p-16 border-b border-grid text-center flex flex-col items-center">
+        <h2 class="text-[clamp(3.5rem,7vw,6rem)] font-bold uppercase tracking-tighter gs-reveal-up leading-none mb-4">
+          Стоимость
+        </h2>
+        <span class="text-[clamp(2.5rem,5vw,4.5rem)] font-serif italic text-brand-accent gs-reveal-up">инвестиций</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        <!-- Tariff 01 -->
+        <div class="p-10 md:p-12 lg:p-16 border-b md:border-b-0 md:border-r border-grid flex flex-col hover-invert cursor-pointer gs-reveal-up" onclick="togglePanel('Тариф: Теоретик')">
+          <div class="text-xs font-mono uppercase tracking-widest mb-12 text-brand-muted">Асимметрия / 01</div>
+          <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">Теоретик</h3>
+          <div class="text-4xl lg:text-5xl font-serif italic mb-12 tracking-tight">19,900₽</div>
+          <div class="flex-1 flex flex-col gap-4 text-brand-muted border-t border-grid py-6 group-hover:border-white/20">
+            <div class="flex items-start gap-3"><span class="text-brand-text/30 hover-invert-target">—</span> Доступ к материалам</div>
+            <div class="flex items-start gap-3"><span class="text-brand-text/30 hover-invert-target">—</span> Шаблоны договоров</div>
+            <div class="flex items-start gap-3"><span class="text-brand-text/30 hover-invert-target">—</span> Самостоятельная работа</div>
+          </div>
+          <div class="uppercase tracking-widest text-xs lg:text-sm font-bold flex items-center justify-between mt-8 border-t border-grid pt-6 group-hover:border-white/20">
+            Регистрация <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <!-- Tariff 02 -->
+        <div class="p-10 md:p-12 lg:p-16 border-b md:border-b-0 md:border-r border-grid flex flex-col bg-white hover-invert cursor-pointer gs-reveal-up" onclick="togglePanel('Тариф: Практик')" style="transition-delay: 50ms;">
+          <div class="text-xs font-mono uppercase tracking-widest mb-12 text-brand-accent">Симметрия / 02</div>
+          <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">Практик</h3>
+          <div class="text-4xl lg:text-5xl font-serif italic mb-12 tracking-tight text-brand-accent">29,900₽</div>
+          <div class="flex-1 flex flex-col gap-4 text-brand-muted border-t border-grid py-6 group-hover:border-white/20">
+            <div class="flex items-start gap-3"><span class="text-brand-accent/50 hover-invert-target">—</span> Проверка ДЗ кураторами</div>
+            <div class="flex items-start gap-3"><span class="text-brand-accent/50 hover-invert-target">—</span> Доступ в закрытый клуб</div>
+            <div class="flex items-start gap-3"><span class="text-brand-accent/50 hover-invert-target">—</span> Секретный ИИ модуль</div>
+          </div>
+          <div class="uppercase tracking-widest text-xs lg:text-sm font-bold flex items-center justify-between mt-8 border-t border-grid pt-6 group-hover:border-white/20">
+            Выбрать Стандарт <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <!-- Tariff 03 -->
+        <div class="p-10 md:p-12 lg:p-16 flex flex-col hover-invert cursor-pointer gs-reveal-up" onclick="togglePanel('Тариф: Архитектор')" style="transition-delay: 100ms;">
+          <div class="text-xs font-mono uppercase tracking-widest mb-12 text-brand-muted">Авангард / 03</div>
+          <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">Архитектор</h3>
+          <div class="text-4xl lg:text-5xl font-serif italic mb-12 tracking-tight">59,900₽</div>
+          <div class="flex-1 flex flex-col gap-4 text-brand-muted border-t border-grid py-6 group-hover:border-white/20">
+            <div class="flex items-start gap-3"><span class="text-brand-text/30 hover-invert-target">—</span> Личный трекинг экспертом</div>
+            <div class="flex items-start gap-3"><span class="text-brand-text/30 hover-invert-target">—</span> Гарантия трудоустройства</div>
+            <div class="flex items-start gap-3"><span class="text-brand-text/30 hover-invert-target">—</span> Разбор твоих проектов</div>
+          </div>
+          <div class="uppercase tracking-widest text-xs lg:text-sm font-bold flex items-center justify-between mt-8 border-t border-grid pt-6 group-hover:border-white/20">
+            Оформить VIP <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         7. EDITORIAL FAQ ACCORDION
+         ========================================= -->
+    <section id="faq" class="border-b border-grid grid grid-cols-1 lg:grid-cols-12 min-h-[60vh]">
+      <div class="lg:col-span-5 p-10 md:p-16 border-b lg:border-b-0 lg:border-r border-grid flex flex-col justify-between bg-brand-text text-brand-bg">
+        <div>
+          <h2 class="text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-4 gs-reveal-up">Детали.</h2>
+          <p class="font-serif italic text-2xl text-brand-accent gs-reveal-up">Для тех, кто сомневается.</p>
+        </div>
+        <div class="hidden lg:flex w-20 h-20 rounded-full border border-brand-bg/20 items-center justify-center gs-reveal-up">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="text-brand-accent">
+            <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="lg:col-span-7 flex flex-col">
+        <!-- FAQ 1 -->
+        <details class="group border-b border-grid p-10 md:p-14 cursor-pointer hover:bg-white transition-colors" name="faq">
+          <summary class="list-none flex justify-between items-center text-xl md:text-2xl font-bold uppercase tracking-tight focus:outline-none select-none">
+            Я полный "Ноль". Смогу ли я начать? 
+            <span class="text-brand-accent text-4xl font-light transform group-open:rotate-45 transition-transform duration-300 pointer-events-none">+</span>
+          </summary>
+          <div class="pt-8 text-brand-muted leading-relaxed text-lg max-w-[55ch]">
+            Программа выстроена линейно. Модуль I погружает вас в азы архитектуры контента, поэтапно подготавливая к сложному парсингу и закупке трафика. Вам не нужен первоначальный опыт, нужна только железная дисциплина.
+          </div>
+        </details>
+        
+        <!-- FAQ 2 -->
+        <details class="group border-b border-grid p-10 md:p-14 cursor-pointer hover:bg-white transition-colors" name="faq">
+          <summary class="list-none flex justify-between items-center text-xl md:text-2xl font-bold uppercase tracking-tight focus:outline-none select-none">
+            Нужен ли мне мощный компьютер?
+            <span class="text-brand-accent text-4xl font-light transform group-open:rotate-45 transition-transform duration-300 pointer-events-none">+</span>
+          </summary>
+          <div class="pt-8 text-brand-muted leading-relaxed text-lg max-w-[55ch]">
+            Абсолютно нет. Базового ноутбука, поддерживающего Excel и Google Chrome, достаточно для запуска аналитических таблиц и рекламного кабинета. 90% работы происходит в браузерных системах.
+          </div>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="group p-10 md:p-14 cursor-pointer hover:bg-white transition-colors" name="faq">
+          <summary class="list-none flex justify-between items-center text-xl md:text-2xl font-bold uppercase tracking-tight focus:outline-none select-none">
+            Как происходит гарантия трудоустройства?
+            <span class="text-brand-accent text-4xl font-light transform group-open:rotate-45 transition-transform duration-300 pointer-events-none">+</span>
+          </summary>
+          <div class="pt-8 text-brand-muted leading-relaxed text-lg max-w-[55ch]">
+            На тарифе «Архитектор» после успешной сдачи итогового проекта вы отправляетесь на боевую стажировку к нашим корпоративным партнёрам. Квалифицированные ученики получают первый контракт в первый месяц.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="p-8 md:p-16 flex flex-col md:flex-row items-center justify-between font-mono text-xs uppercase tracking-widest text-brand-muted">
+      <div class="flex items-center gap-2 text-brand-text">
+        <span class="w-2 h-2 rounded-full bg-brand-accent"></span> SMM Vanguard / 2026
+      </div>
+      <div class="mt-4 md:mt-0 opacity-50">Спроектировано строго по сетке.</div>
+    </footer>
+  </main>
+
+  <!-- =========================================
+       EDITORIAL SLIDE-OVER PANEL (Form)
+       ========================================= -->
+  <div id="slide-container" class="fixed inset-0 z-[100] pointer-events-none">
+    <div id="slide-backdrop" class="absolute inset-0 bg-brand-text/30 backdrop-blur-sm" onclick="togglePanel()"></div>
+    
+    <div id="slide-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-brand-bg border-l border-grid shadow-2xl flex flex-col z-10">
+      <div class="p-8 border-b border-grid flex items-center justify-between bg-brand-bg">
+        <div class="font-bold uppercase tracking-tighter text-2xl">Регистрация</div>
+        <button onclick="togglePanel()" class="w-10 h-10 rounded-full border border-grid flex items-center justify-center hover:bg-brand-text hover:text-white transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="p-8 flex-1 overflow-y-auto w-full">
+        <p class="font-serif italic text-2xl text-brand-muted mb-10" id="panel-subtitle">Оставьте данные для проверки свободных мест.</p>
+        
+        <form onsubmit="handleFormSubmit(event)" class="flex flex-col gap-8">
+          <input type="hidden" id="form-tariff" value="">
+          
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-mono uppercase tracking-widest text-brand-text">Полное имя</label>
+            <input type="text" required class="w-full bg-transparent border-b border-grid py-4 text-xl placeholder-brand-muted/40 focus:outline-none focus:border-brand-text transition-colors rounded-none" placeholder="Александр">
+          </div>
+          
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-mono uppercase tracking-widest text-brand-text">Электронная почта</label>
+            <input type="email" required class="w-full bg-transparent border-b border-grid py-4 text-xl placeholder-brand-muted/40 focus:outline-none focus:border-brand-text transition-colors rounded-none" placeholder="work@agency.com">
+          </div>
+
+          <button type="submit" class="w-full mt-8 bg-brand-text text-brand-bg py-5 text-sm font-bold uppercase tracking-widest hover:bg-brand-accent transition-colors flex items-center justify-center gap-4">
+            <span id="btn-text">Подтвердить</span>
+            <svg id="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-brand-bg"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- INTERACTIVITY & GSAP SCRIPTS -->
+  <script>
+    // 1. Slide-over Logic
+    const slideContainer = document.getElementById('slide-container');
+    const panelSubtitle = document.getElementById('panel-subtitle');
+    const tariffInput = document.getElementById('form-tariff');
+
+    function togglePanel(title = '') {
+      const isOpen = slideContainer.classList.contains('panel-open');
+      
+      if (!isOpen) {
+        slideContainer.classList.add('panel-open');
+        document.body.style.overflow = 'hidden';
+        if (title) {
+          panelSubtitle.innerText = `${title}. Заполните форму для фиксации.`;
+          tariffInput.value = title;
+        } else {
+          panelSubtitle.innerText = `Консультация. Оставьте контакты для связи.`;
+        }
+      } else {
+        slideContainer.classList.remove('panel-open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btnText = document.getElementById('btn-text');
+      const originalText = btnText.innerText;
+      btnText.innerText = "ОБРАБОТКА...";
+      
+      setTimeout(() => {
+        btnText.innerText = "УСПЕШНО";
+        setTimeout(() => {
+          togglePanel();
+          btnText.innerText = originalText;
+          e.target.reset();
+        }, 1000);
+      }, 1200);
+    }
+
+    // 2. Smooth Navigation fix for external JS overriding native anchoring if needed (native HTML works because scroll-smooth class)
+    document.querySelectorAll('.magnetic-btn').forEach(anchor => {
+       anchor.addEventListener('click', function(e){
+           const targetId = this.getAttribute('href');
+           if(targetId.startsWith('#')) {
+              e.preventDefault();
+              const targetElement = document.querySelector(targetId);
+              if(targetElement) {
+                 targetElement.scrollIntoView({ behavior: 'smooth' });
+                 // update URL gently
+                 history.pushState(null, null, targetId);
+              }
+           }
+       });
+    });
+
+    // 3. GSAP Motion Orchestration (Elegant, strict reveals)
+    window.addEventListener('load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero Elements Staggered Fade & Slide up
+      gsap.fromTo('.gsap-hero', 
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out", stagger: 0.1 }
+      );
+
+      // Lines reveal using clip path
+      const elements = gsap.utils.toArray('.gs-reveal');
+      elements.forEach((elem, i) => {
+        gsap.fromTo(elem, 
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 1.2, delay: i * 0.1, ease: "power3.out" }
+        );
+      });
+
+      // Scroll reveals
+      gsap.utils.toArray('.gs-reveal-up').forEach((elem) => {
+        gsap.to(elem, {
+          scrollTrigger: {
+            trigger: elem,
+            start: "top 85%",
+            once: true
+          },
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out"
+        });
+      });
+      // Initial state for scroll elements
+      gsap.set('.gs-reveal-up', { opacity: 0, y: 40 });
+    });
+  </script>
+</body>
+</html>

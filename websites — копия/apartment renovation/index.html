@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompleksowe remonty mieszkań | ARCHLINE</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключаем стильные шрифты -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">ARCHLINE</div>
+        <nav class="nav-links">
+            <a href="#benefits" data-scroll="#benefits">Zalety</a>
+            <a href="#tariffs" data-scroll="#tariffs">Cennik</a>
+            <a href="#portfolio" data-scroll="#portfolio">Przed / Po</a>
+            <a href="#faq" data-scroll="#faq">FAQ</a>
+        </nav>
+        <div class="nav-right">
+            <a href="tel:+48123456789" class="phone">+48 123 456 789</a>
+            <button class="btn btn-outline" data-scroll="#form">Skontaktuj się</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Главный экран -->
+        <section class="hero p-section fade-up">
+            <div class="hero-content">
+                <h1 class="hero-title">Remont, który<br>przerasta oczekiwania</h1>
+                <p class="hero-subtitle">Kompleksowe wykończenia wnętrz pod klucz. Eliminujemy główne obawy: ustalamy budżet tak żeby cena nie wzrosła ani o grosz, oddajemy w terminie i bierzemy na siebie wszystkie najcięższe prace.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" data-scroll="#calc">Oblicz koszt kosztorysu</button>
+                    <button class="btn btn-outline" data-scroll="#portfolio">Portfolio</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="image-wrapper">
+                    <img src="images/hero.png" alt="Zaprojektowane wnętrze">
+                    <div class="overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Почему мы (Преимущества и боли) -->
+        <section class="benefits p-section fade-up" id="benefits">
+            <div class="container">
+                <h2 class="section-title">Remont bez stresu</h2>
+                <div class="benefits-grid">
+                    <div class="card stagger-up">
+                        <div class="card-num">01</div>
+                        <h3>Kosztorys bez zmian</h3>
+                        <p>Przeprowadzamy pomiary laserowe i szczegółowo obliczamy koszty prac. Cena z umowy nie zmienia się pod żadnym pozorem.</p>
+                    </div>
+                    <div class="card stagger-up">
+                        <div class="card-num">02</div>
+                        <h3>Bez brudu i wyjazdów</h3>
+                        <p>Kupujemy materiały budowlane po cenach hurtowych i nadzorujemy dostawę. Nie musisz tracić weekendów na wizyty w marketach.</p>
+                    </div>
+                    <div class="card stagger-up">
+                        <div class="card-num">03</div>
+                        <h3>Mocne terminy</h3>
+                        <p>Boisz się, że remont potrwa latami? Jeśli opóźnimy termin chociaż o dzień – pokrywamy karę umowną z własnej kieszeni.</p>
+                    </div>
+                    <div class="card stagger-up">
+                        <div class="card-num">04</div>
+                        <h3>Absolutna gwarancja</h3>
+                        <p>Jesteśmy pewni jakości instalacji ukrytych (elektryka, hydraulika). Udzielamy 5-letniej rękojmi i gwarancji prawnej na cały remont.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Тарифы (НОВЫЙ БЛОК) -->
+        <section class="tariffs p-section fade-up" id="tariffs">
+            <div class="container">
+                <h2 class="section-title text-center">Przejrzysty cennik</h2>
+                <p class="text-center subtitle-desc">Bez ukrytych kosztów. Działamy według jasnych zasad.</p>
+                <div class="tariffs-grid">
+                    <div class="tariff-card stagger-up">
+                        <h3>Kosmetyczny</h3>
+                        <div class="t-price">od 1000 zł / m²</div>
+                        <ul class="t-features">
+                            <li>Demontaż starych powierzchni</li>
+                            <li>Szpachlowanie ścian i sufitów</li>
+                            <li>Tapetowanie / malowanie</li>
+                            <li>Układanie paneli i listew</li>
+                            <li>Wymiana gniazdek i włączników</li>
+                        </ul>
+                        <button class="btn btn-outline w-100 mt-auto" data-scroll="#form">Wybieram</button>
+                    </div>
+                    <div class="tariff-card popular stagger-up">
+                        <div class="badge">Bestseller</div>
+                        <h3>Kapitalny</h3>
+                        <div class="t-price">od 1800 zł / m²</div>
+                        <ul class="t-features">
+                            <li>Pełny demontaż do betonu</li>
+                            <li>Budowa nowych ścian działowych</li>
+                            <li>Nowa elektryka pod klucz</li>
+                            <li>Rozprowadzenie rur (Rehau/Far)</li>
+                            <li>Wyrównywanie ścian</li>
+                            <li>Skomplikowane układanie gresu</li>
+                        </ul>
+                        <button class="btn btn-primary w-100 mt-auto" data-scroll="#form">Wybieram</button>
+                    </div>
+                    <div class="tariff-card stagger-up">
+                        <h3>Projektancki</h3>
+                        <div class="t-price">od 3000 zł / m²</div>
+                        <ul class="t-features">
+                            <li>Tworzenie projektu wnętrz</li>
+                            <li>Złożone formy architektoniczne</li>
+                            <li>Ukryte profile i oświetlenie premium</li>
+                            <li>Instalacja systemów "Smart Home"</li>
+                            <li>Wyizolowanie akustyczne wszystkich powierzchni</li>
+                            <li>Nadzór autorski</li>
+                        </ul>
+                        <button class="btn btn-outline w-100 mt-auto" data-scroll="#form">Wybieram</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Интерактивный Before/After Slider (с твоими фото из images) -->
+        <section class="before-after-sec p-section fade-up" id="portfolio">
+            <div class="container container-sm">
+                <h2 class="section-title text-center">Oceń różnicę</h2>
+                <p class="text-center subtitle-desc">Przeciągnij suwak, aby zobaczyć transformację od surowego betonu do wymarzonego wnętrza.</p>
+                <div class="ba-container mt-grid">
+                    <!-- Картинка После (premium.png) -->
+                    <div class="ba-image ba-after">
+                        <img src="images/premium.png" alt="Po modernizacji">
+                    </div>
+                    <!-- Картинка До (broken.png) -->
+                    <div class="ba-image ba-before">
+                        <img src="images/broken.png" alt="Stan deweloperski / Przed">
+                    </div>
+                    <!-- Столбик-ползунок -->
+                    <div class="ba-slider">
+                        <div class="ba-slider-handle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Калькулятор -->
+        <section class="calculator p-section" id="calc">
+            <div class="container calc-container fade-up">
+                <div class="calc-info">
+                    <h2 class="section-title">Kalkulator<br>kosztów</h2>
+                    <p class="calc-desc">Poznaj szacunkowy koszt wykończenia mieszkania w ciągu 1 minuty. Dokładny kosztorys po darmowym wyjeździe inżyniera.</p>
+                </div>
+                <div class="calc-panel">
+                    <div class="form-group">
+                        <label for="area">Powierzchnia mieszkania: <span id="area-val">60</span> m²</label>
+                        <input type="range" id="area" min="30" max="200" value="60" step="1">
+                    </div>
+                    <div class="form-group type-group">
+                        <label>Rodzaj remontu:</label>
+                        <div class="radio-group">
+                            <label class="radio-btn">
+                                <input type="radio" name="type" value="1000" checked>
+                                <span>Kosmetyczny</span>
+                            </label>
+                            <label class="radio-btn">
+                                <input type="radio" name="type" value="1800">
+                                <span>Kapitalny</span>
+                            </label>
+                            <label class="radio-btn">
+                                <input type="radio" name="type" value="3000">
+                                <span>Projektancki</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="calc-result">
+                        <div class="price-label">Szacowany koszt:</div>
+                        <div class="price-value" id="total-price">60 000 zł</div>
+                    </div>
+                    <button class="btn btn-primary w-100" data-scroll="#form">Zdobądź precyzyjny kosztorys</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Блок с Отзывами -->
+        <section class="reviews p-section fade-up">
+            <div class="container">
+                <h2 class="section-title">Co mówią klienci</h2>
+                <div class="reviews-grid">
+                    <div class="review-card stagger-up">
+                        <div class="review-header">
+                            <div class="client-avatar">W</div>
+                            <div>
+                                <h4>Wiktor Kowalski</h4>
+                                <span>Osiedle „Złota” • 78 m²</span>
+                            </div>
+                        </div>
+                        <p class="review-text">"Najbardziej bałem się oszustwa przy wycenach — znajomym remont podrożał bez ostrzeżenia. Z ARCHLINE wycena wpisana do umowy nie zmieniła się o ani grosz! Odwiedziłem mieszkanie tylko 3 razy przez osiem miesięcy."</p>
+                    </div>
+                    <div class="review-card stagger-up">
+                        <div class="review-header">
+                            <div class="client-avatar">E</div>
+                            <div>
+                                <h4>Elena Nowak</h4>
+                                <span>Osiedle „Mennica Residence” • 110 m²</span>
+                            </div>
+                        </div>
+                        <p class="review-text">"Dziękuję za cierpliwość do moich poprawek! Wspaniale, że cała brudna robota i logistyka nie spoczywała na moich barkach. Kierownik budowy co tydzień wysyłał wideo-raporty. Jakość położonego gresu to dla mnie po prostu kosmos."</p>
+                    </div>
+                    <div class="review-card stagger-up">
+                        <div class="review-header">
+                            <div class="client-avatar">M</div>
+                            <div>
+                                <h4>Maciej Wiśniewski</h4>
+                                <span>Osiedle „Browary Warszawskie” • 55 m²</span>
+                            </div>
+                        </div>
+                        <p class="review-text">"Zakończono 2 tygodnie przed terminem. Ogromny szacunek i brawa za czystość, gdy zjawiłem się odebrać mieszkanie od razu byłem pod wielkim wrażeniem zapachu i braku grama pyłu."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. FAQ (Частые вопросы - НОВЫЙ БЛОК) -->
+        <section class="faq-section p-section fade-up" id="faq">
+            <div class="container container-sm">
+                <h2 class="section-title text-center">Najczęściej zadawane pytania</h2>
+                <div class="faq-list">
+                    <div class="faq-item stagger-up">
+                        <div class="faq-question">
+                            <h4>Czy pracujecie na podstawie oficjalnej umowy?</h4>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Tak, przed realizacją każdego projektu tworzymy umowę na remont uwzględniającą ostateczny kosztorys.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item stagger-up">
+                        <div class="faq-question">
+                            <h4>Czy sam muszę dbać o zakup i transport materiałów budowlanych?</h4>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nie, organizacją i dowożeniem wszystkiego zajmują się nasi pracownicy - Ty po prostu wybierz finalne produkty na wykończenie m.in kolory mebli czy tapet przy naszej asyście.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item stagger-up">
+                        <div class="faq-question">
+                            <h4>Przez kogo jest w pełni koordynowany proces instalacji elementów i postęp całego wykończenia?</h4>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nad każdym obiektywie i nad każdą decyzją merytoryczną stoi menedżer budowy oraz nasi inżynierzy ds. zapewnienia odpowiedniej jakości.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item stagger-up">
+                        <div class="faq-question">
+                            <h4>Czy mam opcję kontynuowania mojego pobytu w mieszkaniu gdy proces remontu ma miejsce?</h4>
+                            <span class="faq-icon"></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Osoby z naszą asystą wykończeniową ze względu na warunki (szkody zdrowotne wywołane brudem itp.) na dany okres muszą się wymeldować pod adresem przeprowadzanych wykończeń. Operujemy wyłącznie w całkowicie pustym lokalu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Лид-форма (Вернули классическую форму с Именем и Телефоном) -->
+        <section class="form-section p-section fade-up" id="form">
+            <div class="container container-sm">
+                <div class="form-card">
+                    <h2 class="section-title">Gotowi żeby zmienić<br>styl wnętrza dla waszego domu?</h2>
+                    <p>Zostaw swoje dane a my zorganizujemy w 100% obustronny i bezpłatny kontakt by porozmawiać o waszym mieszkaniu.</p>
+                    <form id="lead-form" class="lead-form">
+                        <div class="input-wrap">
+                            <input type="text" id="name" placeholder="Twoje imię" required>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="tel" id="phone" placeholder="Telefon lub E-Mail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Umów wizytę z inżynierem</button>
+                        <p class="terms">Aplikując i wprowadzając detale zgadzasz się z naszą polityką dla ochrony prywatności.</p>
+                    </form>
+                    <div class="success-message" id="success-msg">
+                        <h3>Dzięki bardzo za zostawienie swoich kontaktów!</h3>
+                        <p>Zwykle odpowiemy najwcześniej jak możemy czyli około w 10 minut żebyśmy ustalili wolny termin odpowiedni na spotkanie po odbiór wytycznych w celu analizy parametrów Twojego mieszkania.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="logo">ARCHLINE</div>
+                <div class="f-links">
+                    <a href="#">Polityka prywatności</a>
+                </div>
+                <p>&copy; 2026 Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="#form" class="btn btn-primary w-100" data-scroll="#form">
+            Oszacuj Koszt
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth bg-[#0A0A0A] text-[#EDEDED] antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bezpieczna Rejestracja Firmy w Polsce | Prawnik.Tech</title>
+    <meta name="description" content="Otwieramy firmy bez błędów urzędowych. Kompleksowa rejestracja Spółek z o.o. i JDG w Polsce z doradztwem podatkowym.">
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (V3 for stable CDN execution) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        onyx: '#0A0A0A',
+                        graphite: '#161922',
+                        platinum: '#EDEDED',
+                        steel: '#8C91A0',
+                        gold: '#C4A47C'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Typography adjustments */
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        
+        /* The Doppelrand (Double-Bezel) Architecture for Premium Cards */
+        .doppelrand-outer {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px;
+            border-radius: 2.25rem;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .doppelrand-outer:hover {
+            transform: translateY(-4px);
+            box-shadow: inset 0 1px 0 rgba(196, 164, 124, 0.1), 0 20px 40px -15px rgba(0,0,0,0.5);
+        }
+        .doppelrand-inner {
+            background: #12141A;
+            border-radius: calc(2.25rem - 8px);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+            height: 100%;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Disable Y Transform for Nav so it doesn't jump */
+        .doppelrand-nav:hover {
+            transform: none;
+        }
+
+        /* Emil Design Eng: Haptic Interactions */
+        .btn-press {
+            transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 200ms ease;
+            transform-origin: center;
+        }
+        .btn-press:active {
+            transform: scale(0.97);
+        }
+        
+        /* Initial state for staggered GSAP scroll reveals */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+        }
+        
+        /* Background Ambient Glow */
+        .bg-glow {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(196, 164, 124, 0.04) 0%, rgba(10,10,10,0) 70%);
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Marquee Animation for Social Proof */
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden selection:bg-gold selection:text-onyx min-h-[100dvh]">
+
+    <!-- Ambient Grid Texture -->
+    <div class="fixed inset-0 z-[-2] opacity-[0.02]" style="background-image: radial-gradient(#EDEDED 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+    <!-- Navigation -->
+    <div class="fixed top-6 w-full flex justify-center z-50 pointer-events-none px-4">
+        <nav class="w-full max-w-5xl pointer-events-auto doppelrand-outer doppelrand-nav !rounded-[2rem] !p-1.5 backdrop-blur-xl">
+            <div class="flex items-center justify-between bg-onyx/80 rounded-[calc(2rem-6px)] px-6 py-3 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+                <div class="font-display font-bold text-xl tracking-tight text-platinum">
+                    Prawnik<span class="text-gold">.Tech</span>
+                </div>
+                <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-steel">
+                    <a href="#dlaczego-my" class="hover:text-platinum transition-colors">Dlaczego my</a>
+                    <a href="#pakiety" class="hover:text-platinum transition-colors">Pakiety</a>
+                    <a href="#proces" class="hover:text-platinum transition-colors">Proces</a>
+                    <a href="#ekspert" class="hover:text-platinum transition-colors">Ekspert</a>
+                    <a href="#faq" class="hover:text-platinum transition-colors">FAQ</a>
+                </div>
+                <a href="#kontakt" class="btn-press bg-platinum text-onyx font-medium text-sm px-6 py-2 rounded-full hidden md:block">
+                    Konsultacja
+                </a>
+                <div class="lg:hidden text-platinum">
+                    <i class="ph ph-list text-2xl"></i>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="w-full">
+        <!-- Attention: Cinematic Hero -->
+        <section class="relative min-h-[100dvh] w-full flex flex-col justify-center items-center text-center px-4 pt-32 pb-24">
+            <div class="bg-glow"></div>
+            
+            <div class="inline-flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-4 py-1.5 mb-8 reveal-element">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs uppercase tracking-[0.2em] font-medium text-steel">Eksperci Rejestracji Biznesu</span>
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight max-w-5xl mb-8 reveal-element">
+                Twoja firma gotowa do startu. <br class="hidden md:block">
+                <span class="text-steel">Bez ryzyka i biurokracji.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-steel max-w-[65ch] leading-relaxed mb-10 reveal-element">
+                Rejestrujemy JDG i Spółki z o.o. Omijamy pułapki prawno-podatkowe. 
+                Łączymy cyfrową szybkość banku z precyzją doświadczonego doradcy. 
+                Ty skupiasz się na biznesie — my na formalnościach.
+            </p>
+
+            <!-- Inline Feature Cards replacing the absolute floating elements -->
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-12 reveal-element">
+                <div class="bg-white/[0.03] border border-white/5 rounded-2xl px-5 py-3 flex items-center gap-3">
+                    <i class="ph ph-shield-check text-gold text-2xl"></i>
+                    <div class="text-left">
+                        <p class="text-platinum text-sm font-medium">Rejestr KRS S24</p>
+                        <p class="text-steel text-xs">Szybki proces</p>
+                    </div>
+                </div>
+                <div class="bg-white/[0.03] border border-white/5 rounded-2xl px-5 py-3 flex items-center gap-3">
+                    <i class="ph ph-file-text text-platinum text-2xl"></i>
+                    <div class="text-left">
+                        <p class="text-platinum text-sm font-medium">NIP & REGON</p>
+                        <p class="text-steel text-xs">Nadanie automatyczne</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#kontakt" class="btn-press group flex items-center bg-gold text-onyx p-1.5 pl-8 rounded-full font-display font-medium text-lg reveal-element">
+                <span class="mr-6">Zostaw kontakt</span>
+                <div class="w-12 h-12 rounded-full bg-onyx/10 flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:-translate-y-[1px] group-hover:bg-onyx/20">
+                    <i class="ph ph-arrow-up-right text-2xl"></i>
+                </div>
+            </a>
+        </section>
+
+        <!-- Social Proof (Marquee) - Adjusted height and removed gradients -->
+        <section class="w-full border-y border-white/5 py-5 overflow-hidden relative reveal-element bg-white/[0.01]">
+            <div class="flex items-center gap-16 md:gap-24 w-max animate-marquee font-display text-lg text-steel/30 font-medium whitespace-nowrap">
+                <!-- Massively duplicated to cover ultrawide monitors -->
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+                <span>mBank</span><span>Santander</span><span>inFakt</span><span>Pekao SA</span><span>Alior Bank</span><span>ING Bank Śląski</span>
+            </div>
+        </section>
+
+        <!-- Interest: The UVP (GSAP Scrub) -->
+        <section id="dlaczego-my" class="py-32 md:py-48 px-4 w-full border-b border-white/5">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-display text-3xl md:text-5xl leading-tight tracking-tight scrub-container">
+                    Darmowa rejestracja w banku często kosztuje tysiące złotych przez błędny wybór formy opodatkowania. My nie tylko wypełniamy formularze. Doradzamy, chronimy Twój majątek i dobieramy strategię, która pozwala rosnąć zdecydowanie szybciej.
+                </p>
+            </div>
+        </section>
+
+        <!-- Desire: Bento Grid Spacing & Architecture -->
+        <section id="pakiety" class="py-32 px-4 w-full">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-20 text-center md:text-left reveal-element">
+                    <h2 class="font-display text-4xl md:text-5xl tracking-tight mb-4">Wybierz strukturę.</h2>
+                    <p class="text-steel flex-1 max-w-[60ch]">Oferta dostosowana do Twoich ambicji. Od elastycznego startu po pełen pancerz prawny.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 grid-flow-dense">
+                    
+                    <!-- Item 1: JDG -->
+                    <div class="doppelrand-outer md:col-span-1 md:row-span-2 reveal-element">
+                        <div class="doppelrand-inner">
+                            <span class="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs tracking-wider text-platinum mb-6 w-max">ŁATWY START</span>
+                            <h3 class="font-display text-2xl mb-8">Działalność Gospodarcza (JDG)</h3>
+                            <ul class="flex-1 space-y-4 text-steel text-sm mb-12">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                    <span>Szybka rejestracja w bazie CEIDG</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                    <span>Analiza: ryczałt vs. skala podatkowa</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                    <span>Obowiązkowe zgłoszenie do ZUS i VAT</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                    <span>Aktywacja rachunku firmowego</span>
+                                </li>
+                            </ul>
+                            <div class="border-t border-white/5 pt-6">
+                                <p class="text-xs text-steel">Czas realizacji: <strong class="text-platinum font-medium">1-2 dni robocze</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Sp. z o.o. -->
+                    <div class="doppelrand-outer md:col-span-2 md:row-span-1 reveal-element">
+                        <div class="doppelrand-inner !p-8 md:!p-12 pb-8 flex flex-col md:flex-row gap-8 justify-between">
+                            <div class="flex-1">
+                                <span class="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs tracking-wider text-platinum mb-6 w-max">DLA SKALUJĄCYCH</span>
+                                <h3 class="font-display text-2xl md:text-3xl mb-4">Spółka z o.o. (S24)</h3>
+                                <p class="text-steel text-sm max-w-sm">Dla biznesu ceniącego ograniczenie ryzyka i rozdzielenie majątku prywatnego od firmowego.</p>
+                            </div>
+                            <div class="flex-1 md:border-l border-white/5 md:pl-8">
+                                <ul class="space-y-4 text-steel text-sm">
+                                    <li class="flex items-start gap-3">
+                                        <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                        <span>Procesowanie przez e-KRS S24</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                        <span>Indywidualnie sformatowana Umowa Spółki</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: VIP -->
+                    <div class="doppelrand-outer md:col-span-2 md:row-span-1 reveal-element">
+                        <div class="doppelrand-inner !p-8 md:!p-12 pb-8 flex flex-col md:flex-row gap-8 justify-between relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-gold/5 to-transparent pointer-events-none"></div>
+                            <div class="flex-1 z-10">
+                                <span class="inline-block px-3 py-1 bg-gold/10 border border-gold/20 rounded-full text-xs tracking-wider text-gold mb-6 w-max">PEŁEN KOMPLEKS</span>
+                                <h3 class="font-display text-2xl md:text-3xl mb-4">Pakiet Powierniczy</h3>
+                                <p class="text-steel text-sm max-w-sm">Gotowa od 'A' do 'Z' operacyjna struktura dla zaawansowanych przedsięwzięć.</p>
+                            </div>
+                            <div class="flex-1 md:border-l border-white/5 md:pl-8 z-10">
+                                <ul class="space-y-4 text-steel text-sm">
+                                    <li class="flex items-start gap-3">
+                                        <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                        <span>KRS, Zgłoszenie VAT-R, Wpis do CRBR</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <i class="ph ph-check-circle text-gold text-lg mt-0.5"></i>
+                                        <span>Wirtualny adres z obsługą korespondencji</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Process -->
+        <section id="proces" class="py-32 px-4 w-full bg-graphite/30 border-y border-white/5 relative">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
+                <div class="md:w-1/3 reveal-element">
+                    <h2 class="font-display text-4xl tracking-tight top-32 sticky">Jak przebiega współpraca?</h2>
+                </div>
+                <div class="md:w-2/3 flex flex-col gap-12">
+                    
+                    <div class="border-l border-white/10 pl-8 pb-12 relative reveal-element">
+                        <div class="absolute top-0 -left-[8.5px] w-4 h-4 rounded-full bg-onyx border-2 border-gold outline outline-4 outline-graphite"></div>
+                        <span class="text-gold font-mono text-sm mb-2 block">01</span>
+                        <h3 class="font-display text-xl mb-3">Analiza Prawno-Podatkowa</h3>
+                        <p class="text-steel leading-relaxed">Poznajemy Twój model operacyjny. Wybieramy optymalną strukturę oraz precyzyjnie dopasowane kody PKD pod przyszłe zyski.</p>
+                    </div>
+
+                    <div class="border-l border-white/10 pl-8 pb-12 relative reveal-element">
+                        <div class="absolute top-0 -left-[8.5px] w-4 h-4 rounded-full bg-onyx border-2 border-gold outline outline-4 outline-graphite"></div>
+                        <span class="text-gold font-mono text-sm mb-2 block">02</span>
+                        <h3 class="font-display text-xl mb-3">Kompletowanie Wniosków</h3>
+                        <p class="text-steel leading-relaxed">Przygotowujemy i wnikliwie sprawdzamy całą dokumentację rejestracyjną. Nic nie trafia do urzędu bez autoryzacji eksperta.</p>
+                    </div>
+
+                    <div class="border-l border-white/10 pl-8 pb-12 relative reveal-element">
+                        <div class="absolute top-0 -left-[8.5px] w-4 h-4 rounded-full bg-onyx border-2 border-gold outline outline-4 outline-graphite"></div>
+                        <span class="text-gold font-mono text-sm mb-2 block">03</span>
+                        <h3 class="font-display text-xl mb-3">Rejestracja Online</h3>
+                        <p class="text-steel leading-relaxed">Procesujemy zgłoszenie w odpowiednich e-systemach państwowych (CEIDG / KRS S24). Brak konieczności osobistych wizyt.</p>
+                    </div>
+
+                    <div class="border-l border-transparent pl-8 relative reveal-element">
+                        <div class="absolute top-0 -left-[8.5px] w-4 h-4 rounded-full bg-gold outline outline-4 outline-graphite shadow-[0_0_20px_rgba(196,164,124,0.6)] animate-pulse"></div>
+                        <span class="text-gold font-mono text-sm mb-2 block">04</span>
+                        <h3 class="font-display text-xl mb-3 text-platinum">Gotowy Biznes</h3>
+                        <p class="text-steel leading-relaxed">Spółka wpisana do rejestru. Otrzymujesz poprawny numer NIP, REGON i jesteś gotowy do zawarcia pierwszej umowy.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Authority / Expert Section -->
+        <section id="ekspert" class="py-32 px-4 w-full">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+                <div class="w-full md:w-5/12 reveal-element">
+                    <div class="doppelrand-outer relative group">
+                        <!-- Expert Image Fix: Absolute bottom text block so it doesn't float to the top -->
+                        <div class="doppelrand-inner !p-0 aspect-[4/5] relative bg-graphite overflow-hidden rounded-[calc(2.25rem-8px)]">
+                            <img src="img/b_Professional_portrai.jpeg" alt="Ekspert" class="absolute inset-0 w-full h-full object-cover grayscale mix-blend-luminosity opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-1000 ease-out">
+                            
+                            <!-- Gradient background coming exactly from the bottom to make text legible -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+                            
+                            <!-- Absolute positioned text container mapped to the bottom -->
+                            <div class="absolute bottom-0 left-0 w-full p-8 md:p-10 z-10 text-left">
+                                <div class="flex items-center gap-4 mb-3">
+                                    <span class="w-8 h-[1px] bg-gold"></span>
+                                    <span class="text-gold text-xs tracking-[0.2em] uppercase font-bold">Główny Doradca</span>
+                                </div>
+                                <h3 class="font-display text-3xl text-platinum mb-1">Marek Klonowski</h3>
+                                <p class="text-steel text-sm">Prawnik, Ekspert ds. Prawa Spółek</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-7/12 flex flex-col gap-8 reveal-element md:pl-8">
+                    <h2 class="font-display text-4xl md:text-5xl tracking-tight leading-[1.1]">
+                        Ludzie, nie automaty.<br>
+                        <span class="text-steel">Twój biznes w bezpiecznych rękach.</span>
+                    </h2>
+                    <p class="text-lg text-steel/80 max-w-[45ch] leading-relaxed">
+                        Każdy wniosek do KRS czy CEIDG to nie tylko zbiór danych — to fundament Twojej przyszłej firmy. Nie korzystamy z masowych szablonów. Każda umowa analizowana jest pod kątem Twoich prywatnych celów i bezpieczeństwa majątkowego.
+                    </p>
+                    <div class="flex flex-col gap-5 mt-4">
+                        <div class="flex items-center gap-4">
+                            <i class="ph ph-shield-check text-2xl text-gold"></i>
+                            <span class="text-platinum font-medium">Brak odrzutów z KRS (gwarancja poprawności)</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="ph ph-briefcase text-2xl text-gold"></i>
+                            <span class="text-platinum font-medium">Ponad 250 zarejestrowanych podmiotów</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section with Smooth CSS Grid Animation -->
+        <section id="faq" class="py-32 px-4 w-full border-t border-white/5 relative">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-display text-4xl md:text-5xl tracking-tight text-center mb-16 reveal-element">Częste pytania</h2>
+                
+                <div class="space-y-4 reveal-element">
+                    
+                    <div class="faq-item group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden cursor-pointer">
+                        <div class="faq-header flex justify-between items-center p-6 md:p-8 font-display text-lg font-medium transition-colors hover:bg-white/[0.04]">
+                            <span class="select-none">Czy muszę być w Polsce, aby założyć spółkę z o.o.?</span>
+                            <span class="faq-icon transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                                <i class="ph ph-caret-down text-steel"></i>
+                            </span>
+                        </div>
+                        <div class="faq-content grid transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style="grid-template-rows: 0fr;">
+                            <div class="overflow-hidden">
+                                <div class="p-6 md:p-8 pt-0 text-steel text-base border-t border-white/5 leading-relaxed mt-2">
+                                    Nie, cała procedura odbywa się w 100% zdalnie poprzez system s24 z wykorzystaniem profilu zaufanego lub podpisu kwalifikowanego ePUAP. Przeprowadzimy Cię przez konfigurację krok po kroku.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden cursor-pointer">
+                        <div class="faq-header flex justify-between items-center p-6 md:p-8 font-display text-lg font-medium transition-colors hover:bg-white/[0.04]">
+                            <span class="select-none">Co z wirtualnym biurem i adresem?</span>
+                            <span class="faq-icon transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                                <i class="ph ph-caret-down text-steel"></i>
+                            </span>
+                        </div>
+                        <div class="faq-content grid transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style="grid-template-rows: 0fr;">
+                            <div class="overflow-hidden">
+                                <div class="p-6 md:p-8 pt-0 text-steel text-base border-t border-white/5 leading-relaxed mt-2">
+                                    Współpracujemy ze sprawdzonymi biurami wirtualnymi. Adres jest niezbędny do procesu rejestracji. Pomagamy załatwić go w pakiecie, łącznie z obsługą poczty i skanowaniem pism z Urzędu Skarbowego.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item group bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden cursor-pointer">
+                        <div class="faq-header flex justify-between items-center p-6 md:p-8 font-display text-lg font-medium transition-colors hover:bg-white/[0.04]">
+                            <span class="select-none">Kiedy otrzymam NIP i REGON?</span>
+                            <span class="faq-icon transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                                <i class="ph ph-caret-down text-steel"></i>
+                            </span>
+                        </div>
+                        <div class="faq-content grid transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" style="grid-template-rows: 0fr;">
+                            <div class="overflow-hidden">
+                                <div class="p-6 md:p-8 pt-0 text-steel text-base border-t border-white/5 leading-relaxed mt-2">
+                                    Dla JDG NIP i REGON są nadawane niemal od razu lub następnego dnia. Dla Spółek z o.o. (przez tryb S24) proces zajmuje zazwyczaj od 24 do 48 godzin roboczych od momentu poprawnego złożenia i opłacenia wniosku w systemie.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Action: Premium Contact Form -->
+        <section id="kontakt" class="py-40 px-4 w-full relative border-t border-white/5">
+            <div class="max-w-3xl mx-auto doppelrand-outer reveal-element">
+                <div class="doppelrand-inner !p-8 md:!p-16 text-center">
+                    <h2 class="font-display text-3xl md:text-5xl tracking-tight mb-4">Zacznij od właściwej decyzji.</h2>
+                    <p class="text-steel mb-12 max-w-[50ch] mx-auto">
+                        Zostaw swój numer. Nasz ekspert oddzwoni maksymalnie w 15 minut i bezpłatnie przeanalizuje Twoją sytuację przed formalną rejestracją.
+                    </p>
+
+                    <form class="flex flex-col gap-4 max-w-sm mx-auto p-1 text-left" onsubmit="event.preventDefault(); alert('Wersja demonstracyjna - formularz przesłany!');">
+                        <div class="relative w-full">
+                            <input type="text" placeholder="Imię i Nazwisko" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-platinum placeholder:text-steel/50 focus:border-gold focus:outline-none transition-colors" required>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="tel" placeholder="Numer telefonu" class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-platinum placeholder:text-steel/50 focus:border-gold focus:outline-none transition-colors" required>
+                        </div>
+                        
+                        <!-- Trust signal: RODO Consent -->
+                        <div class="flex items-start gap-3 mt-4 mb-2">
+                            <input type="checkbox" id="rodo" class="mt-1 w-[18px] h-[18px] shrink-0 accent-gold cursor-pointer" required>
+                            <label for="rodo" class="text-xs text-steel/80 leading-relaxed cursor-pointer select-none">
+                                Wyrażam zgodę na przetwarzanie danych w celu obsługi zapytania. Akceptuję <a href="#" class="text-platinum underline hover:text-gold transition">Politykę Prywatności</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-press flex items-center justify-between bg-platinum text-onyx w-full py-2 pl-6 pr-2 rounded-xl font-display font-medium text-lg mt-2 group">
+                            <span>Poproś o kontakt</span>
+                            <div class="w-10 h-10 rounded-lg bg-onyx/10 flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:bg-onyx/20">
+                                <i class="ph ph-phone text-xl"></i>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="bg-[#050505] py-16 px-6 border-t border-white/5 relative z-10 w-full">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+            <div class="flex flex-col gap-3">
+                <div class="font-display font-bold text-2xl tracking-tight text-platinum mb-2">
+                    Prawnik<span class="text-gold">.Tech</span>
+                </div>
+                <p class="text-sm text-steel font-medium tracking-wide">WARSZAWA, POLSKA</p>
+                <p class="text-sm text-steel">NIP: 525-000-00-00 | REGON: 140000000</p>
+                <p class="text-sm text-steel">Złota 44, 00-120 Warszawa</p>
+            </div>
+            
+            <div class="flex flex-col md:items-end gap-3 text-sm">
+                <a href="mailto:kontakt@prawnik.tech" class="text-platinum hover:text-gold transition-colors text-xl font-medium tracking-tight">kontakt@prawnik.tech</a>
+                <a href="tel:+48111222333" class="text-platinum hover:text-gold transition-colors text-xl font-medium tracking-tight">+48 111 222 333</a>
+                <div class="mt-6 flex gap-6 text-steel">
+                    <a href="#" class="hover:text-platinum transition-colors">Polityka Prywatności</a>
+                    <a href="#" class="hover:text-platinum transition-colors">Regulamin</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-steel/40">
+            <p>&copy; 2026 Prawnik.Tech / Wszelkie prawa zastrzeżone.</p>
+            <p>High-end Legal Design.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP Configuration & Interactions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Text Scrubbing Effect
+            const scrubContainer = document.querySelector('.scrub-container');
+            if (scrubContainer) {
+                const text = scrubContainer.innerText;
+                scrubContainer.innerHTML = '';
+                // Split words manually instead of using SplitText premium plugin
+                text.split(' ').forEach(word => {
+                    const span = document.createElement('span');
+                    span.className = 'inline-block transition-opacity duration-300 mr-[0.3em]';
+                    span.style.opacity = '0.2'; // Force inline opacity
+                    span.innerText = word;
+                    scrubContainer.appendChild(span);
+                });
+
+                gsap.to('.scrub-container span', {
+                    opacity: 1,
+                    color: '#EDEDED',
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: '.scrub-container',
+                        start: 'top 80%',
+                        end: 'bottom 40%',
+                        scrub: 1.5 // Smooth scrubbing
+                    }
+                });
+            }
+
+            // 2. High-End Reveal Entry Animations
+            gsap.utils.toArray('.reveal-element').forEach((elem) => {
+                gsap.to(elem, {
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    y: 0,
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: "cubic-bezier(0.32, 0.72, 0, 1)" // Fluid physics
+                });
+            });
+
+            // 3. Smooth FAQ Accordion Logic
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const header = item.querySelector('.faq-header');
+                const content = item.querySelector('.faq-content');
+                const icon = item.querySelector('.faq-icon');
+                let isOpen = false;
+
+                header.addEventListener('click', () => {
+                    isOpen = !isOpen;
+                    if(isOpen) {
+                        content.style.gridTemplateRows = '1fr';
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.style.gridTemplateRows = '0fr';
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

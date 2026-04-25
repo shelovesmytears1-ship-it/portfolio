@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth antialiased">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Mobile SPA | Relaks Wszędzie</title>
+    <meta name="description" content="Ekskluzywne usługi mobilnego SPA. Zarezerwuj relaks z dojazdem.">
+
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#FAF9F8',
+                            100: '#F5F4F1',
+                            200: '#EAE6E1',
+                            300: '#D5CFC7',
+                            800: '#3D3833',
+                            900: '#2A2622'
+                        },
+                        sage: {
+                            100: '#E4E6E1',
+                            600: '#6C7265'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        body {
+            background-color: #FAF9F8;
+            color: #2A2622;
+        }
+
+        /* Fluid Typography & Padding using clamp */
+        :root {
+            --pad-x: clamp(1rem, 5vw, 4rem);
+            --pad-y: clamp(4rem, 10vw, 8rem);
+        }
+
+        /* Marquee Animation */
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            display: flex;
+            width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+        }
+
+        /* Ensure smooth continuous loop */
+        .marquee-content img {
+            width: clamp(200px, 30vw, 400px);
+            height: clamp(250px, 40vw, 500px);
+            object-fit: cover;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+
+            /* Moves halfway since we duplicate the content to loop perfectly */
+        }
+
+        .marquee-wrapper:hover .marquee-content {
+            animation-play-state: paused;
+        }
+
+        /* Image Frame Aesthetics */
+        .img-frame {
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .img-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .btn-luxury {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2A2622;
+            color: #FAF9F8;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            transition: background-color 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-luxury:hover {
+            background-color: #6C7265;
+            transform: translateY(-2px);
+        }
+
+        /* Reveal Animation Classes defined by GSAP later */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-stone-300 selection:text-stone-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 px-[var(--pad-x)] py-6 bg-stone-50/80 backdrop-blur-md border-b border-stone-200/50"
+        id="navbar">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="font-serif text-2xl lg:text-3xl italic tracking-wide">Touchè Spa</a>
+            <div class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest font-medium">
+                <a href="#philosophy" class="hover:text-sage-600 transition-colors duration-300">Filozofia</a>
+                <a href="#experience" class="hover:text-sage-600 transition-colors duration-300">Doświadczenie</a>
+                <a href="#booking" class="hover:text-sage-600 transition-colors duration-300">Usługi</a>
+            </div>
+            <a href="#booking" class="btn-luxury !py-3 !px-6 text-xs hidden md:inline-flex">Rezerwuj Pomiary</a>
+            <button class="md:hidden text-2xl"><i class="ph ph-list"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center justify-center pt-24 px-[var(--pad-x)] overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
+
+            <!-- Text Content -->
+            <div class="z-10 flex flex-col items-start gap-8 reveal-up">
+                <div
+                    class="inline-flex items-center gap-3 px-4 py-2 border border-stone-300 rounded-full text-xs uppercase tracking-widest bg-white/50 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-sage-600"></span> Mobilne SPA w Twoim Domu
+                </div>
+
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-[5rem] leading-[1.05] text-stone-900">
+                    Odkryj <i>sztukę</i> <br> głębokiego relaksu.
+                </h1>
+
+                <p class="text-stone-600 max-w-md leading-relaxed text-lg font-light">
+                    Zamień swoją przestrzeń w prywatne sanktuarium spokoju. Przyjeżdżamy z pełnym wyposażeniem VIP — od
+                    luksusowych łóżek po wyselekcjonowane olejki eteryczne.
+                </p>
+
+                <a href="#booking" class="btn-luxury mt-4 group">
+                    Rozpocznij Podróż
+                    <i class="ph ph-arrow-right ml-3 transition-transform group-hover:translate-x-1"></i>
+                </a>
+            </div>
+
+            <!-- Image Composition -->
+            <div class="relative w-full aspect-[4/5] md:aspect-auto md:h-[75vh] img-frame reveal-up"
+                style="transition-delay: 0.2s;">
+                <img src=".img/Hero Section.jpeg" alt="Hero SPA Experience" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Atmosphere / Marquee -->
+    <section id="experience" class="py-[var(--pad-y)] overflow-hidden bg-stone-100">
+        <div class="max-w-7xl mx-auto px-[var(--pad-x)] mb-16 text-center reveal-up">
+            <h2 class="font-serif text-4xl lg:text-5xl mb-6">Atmosfera harmonii</h2>
+            <p class="text-stone-600 max-w-2xl mx-auto font-light leading-relaxed">
+                Każdy detal ma znaczenie. Dbamy o perfumację powietrza, odpowiednią akustykę i temperaturę tkanin.
+            </p>
+        </div>
+
+        <!-- Infinite Marquee -->
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <!-- Original Set -->
+                <img src=".img/Atmosphere.jpeg" alt="Atmosphere">
+                <img src=".img/Softness of fabrics.jpeg" alt="Softness of fabrics">
+                <img src=".img/Marquee Gallery.jpeg" alt="Gallery">
+                <img src=".img/RelaxFace.jpeg" alt="Relax">
+                <img src=".img/Hero Section.jpeg" alt="Hero">
+                <img src=".img/Booking Visual.jpeg" alt="Booking">
+                <!-- Duplicated Set for Infinite Loop -->
+                <img src=".img/Atmosphere.jpeg" alt="Atmosphere">
+                <img src=".img/Softness of fabrics.jpeg" alt="Softness of fabrics">
+                <img src=".img/Marquee Gallery.jpeg" alt="Gallery">
+                <img src=".img/RelaxFace.jpeg" alt="Relax">
+                <img src=".img/Hero Section.jpeg" alt="Hero">
+                <img src=".img/Booking Visual.jpeg" alt="Booking">
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy & Details Grid -->
+    <section id="philosophy" class="py-[var(--pad-y)] px-[var(--pad-x)]">
+        <div class="max-w-7xl mx-auto">
+
+            <div class="grid md:grid-cols-2 gap-16 lg:gap-24 items-center mb-32">
+                <div class="img-frame aspect-square reveal-up">
+                    <img src=".img/Softness of fabrics.jpeg" alt="Premium Fabrics">
+                </div>
+                <div class="reveal-up">
+                    <h3 class="font-serif text-3xl lg:text-4xl mb-6">Miękkość tkanin, <br><i class="text-sage-600">która
+                            otula.</i></h3>
+                    <p class="text-stone-600 leading-relaxed font-light mb-8">
+                        Stosujemy wyłącznie egipską bawełnę i naturalny len. Zanim dotkniemy Twojej skóry, dbamy o to,
+                        by materiały były podgrzane do idealnej temperatury 38°C, zapewniając komfort termiczny już od
+                        pierwszej minuty zabiegu.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-sm tracking-wide"><i
+                                class="ph-fill ph-check-circle text-sage-600 text-lg"></i> Podgrzewane stoły do masażu
+                        </li>
+                        <li class="flex items-center gap-3 text-sm tracking-wide"><i
+                                class="ph-fill ph-check-circle text-sage-600 text-lg"></i> Wełniane koce z merynosa</li>
+                        <li class="flex items-center gap-3 text-sm tracking-wide"><i
+                                class="ph-fill ph-check-circle text-sage-600 text-lg"></i> Olejki w 100% organiczne</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 lg:gap-24 items-center flex-col-reverse md:flex-row">
+                <div class="reveal-up md:order-1 order-2">
+                    <h3 class="font-serif text-3xl lg:text-4xl mb-6">Pełne wyciszenie i <br><i
+                            class="text-sage-600">skupienie.</i></h3>
+                    <p class="text-stone-600 leading-relaxed font-light mb-8">
+                        Naszym celem jest obniżenie poziomu kortyzolu i wprowadzenie Twojego ciała w stan głębokiej
+                        regeneracji. Opracowujemy indywidualne ścieżki dźwiękowe pod każdy masaż, łącząc fale alfa z
+                        dźwiękami natury.
+                    </p>
+                </div>
+                <div class="img-frame aspect-[4/3] reveal-up md:order-2 order-1">
+                    <img src=".img/RelaxFace.jpeg" alt="Total Relaxation">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Booking CTA Section -->
+    <section id="booking"
+        class="py-[var(--pad-y)] px-[var(--pad-x)] bg-stone-900 text-stone-50 relative overflow-hidden">
+        <!-- Delicate BG effect -->
+        <div class="absolute inset-0 opacity-20"
+            style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10 grid md:grid-cols-2 gap-16 items-center">
+
+            <div class="reveal-up">
+                <span class="text-sage-100/60 uppercase tracking-widest text-xs mb-4 block">Zarezerwuj Wizytę</span>
+                <h2 class="font-serif text-4xl lg:text-6xl mb-6">
+                    Twój czas na <i>regenerację.</i>
+                </h2>
+                <p class="text-stone-300 font-light mb-10 max-w-sm">
+                    Wybierz dogodny termin, a my zajmiemy się całą resztą układając w Twoim salonie prawdziwe SPA.
+                </p>
+
+                <form class="space-y-4"
+                    onsubmit="event.preventDefault(); alert('Rezerwacja przyjęta - to jest wersja demonstracyjna!');">
+                    <input type="text" placeholder="Imię i Nazwisko"
+                        class="w-full bg-white/5 border border-white/10 p-4 rounded-lg focus:outline-none focus:border-sage-100 transition-colors"
+                        required>
+                    <input type="tel" placeholder="Numer telefonu"
+                        class="w-full bg-white/5 border border-white/10 p-4 rounded-lg focus:outline-none focus:border-sage-100 transition-colors"
+                        required>
+                    <select
+                        class="w-full bg-white/5 border border-white/10 p-4 rounded-lg focus:outline-none focus:border-sage-100 transition-colors text-stone-300 appearance-none">
+                        <option class="text-stone-900" value="relax">Masaż Relaksacyjny (90 min)</option>
+                        <option class="text-stone-900" value="deep">Masaż Deep Tissue (60 min)</option>
+                        <option class="text-stone-900" value="aromatherapy">Aromaterapia i Ciepłe Kamienie (120 min)
+                        </option>
+                    </select>
+                    <button type="submit"
+                        class="w-full bg-stone-50 text-stone-900 py-4 rounded-lg font-medium uppercase tracking-widest text-sm hover:bg-stone-200 transition-colors pt-4 mt-4">
+                        Złóż Rezerwację
+                    </button>
+                </form>
+            </div>
+
+            <div class="h-full w-full rounded-2xl overflow-hidden reveal-up hidden md:block border border-white/10">
+                <img src=".img/Booking Visual.jpeg" class="w-full h-full object-cover object-center grayscale-[20%]"
+                    alt="Booking aesthetic">
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm border-t border-white/5">
+        <p>&copy; 2026 Touchè Mobile SPA. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <!-- GSAP Triggers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const reveals = document.querySelectorAll(".reveal-up");
+
+            reveals.forEach((element) => {
+                gsap.to(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out"
+                });
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.paddingTop = '1rem';
+                    navbar.style.paddingBottom = '1rem';
+                    navbar.classList.add('shadow-sm');
+                } else {
+                    navbar.style.paddingTop = '1.5rem';
+                    navbar.style.paddingBottom = '1.5rem';
+                    navbar.classList.remove('shadow-sm');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
