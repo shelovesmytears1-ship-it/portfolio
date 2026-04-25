@@ -1361,10 +1361,11 @@ h1, h2, h3, h4 {
 }
 .cta-title {
   font-size: clamp(3rem, 6vw, 5rem);
-  line-height: 1.1;
+  line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.04em;
   margin-bottom: 1.5rem;
+  padding-bottom: 0.1em;
   background: linear-gradient(135deg, #fff 0%, #8b9cb6 50%, #fff 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
