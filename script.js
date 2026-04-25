@@ -956,7 +956,7 @@ function initAnatomyObserver() {
     itemEl.classList.add('active');
 
     // Draw connector (only on desktop where SVG is visible)
-    if (window.innerWidth > 900) {
+    if (window.innerWidth > 1024) {
       drawConnector(zoneIndex, itemEl);
     }
 
@@ -1000,7 +1000,7 @@ function initAnatomyObserver() {
   // Redraw connectors on resize (layout shift)
   window.addEventListener('resize', () => {
     const activeItem = document.querySelector('.anatomy-item.active');
-    if (activeItem && window.innerWidth > 900) {
+    if (activeItem && window.innerWidth > 1024) {
       const zoneIndex = parseInt(activeItem.dataset.zone, 10);
       drawConnector(zoneIndex, activeItem);
     } else if (svgEl) {
@@ -1013,7 +1013,7 @@ function initAnatomyObserver() {
 let mobileSwipeCleanup = null;
 
 function initMobileAnatomySwipe() {
-  if (window.innerWidth > 900) return;
+  if (window.innerWidth > 1024) return;
 
   const right = document.getElementById('anatomy-right');
   if (!right) return;
