@@ -977,7 +977,7 @@ h1, h2, h3, h4 {
 .wf-zone[data-zone="7"].wf-active::after { color: var(--z7h); }
 
 /* ── MOBILE: Split-screen swipe carousel (Variant B) ────────── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
 
   /* Section itself: let content flow, no padding-bottom on right */
   #landing-anatomy {
@@ -1018,7 +1018,6 @@ h1, h2, h3, h4 {
   .anatomy-right {
     position: relative;
     overflow: hidden;
-    /* Height: viewport minus sticky header minus wireframe ~42vh */
     min-height: 200px;
   }
 
