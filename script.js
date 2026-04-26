@@ -953,8 +953,6 @@ function initAnatomyObserver() {
     const zoneEl = wfEl ? wfEl.querySelector(`.wf-zone[data-zone="${zoneIndex}"]`) : null;
     if (zoneEl) {
       zoneEl.classList.add('wf-active');
-      // Scroll wireframe zone into view within the sticky panel (mobile fallback)
-      zoneEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
     itemEl.classList.add('active');
 
@@ -986,6 +984,7 @@ function initAnatomyObserver() {
 
   // ── Active zone observer (continuous, center of viewport) ─────
   const activeObserver = new IntersectionObserver((entries) => {
+    if (window.innerWidth <= 1024) return; // Disable scroll-based activation on mobile
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const zoneIndex = parseInt(entry.target.dataset.zone, 10);
@@ -1090,8 +1089,10 @@ function initMobileAnatomySwipe() {
     const activeZone = wfEl ? wfEl.querySelector(`.wf-zone[data-zone="${zoneIndex}"]`) : null;
     if (activeZone) {
       activeZone.classList.add('wf-active');
-      // Scroll the wireframe so the active zone is visible
-      activeZone.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      // Scroll the wireframe container manually to avoid page scroll jump
+      if (wfEl) {
+        wfEl.scrollTo({ top: activeZone.offsetTop - 10, behavior: 'smooth' });
+      }
     }
     items[current].classList.add('active');
 
