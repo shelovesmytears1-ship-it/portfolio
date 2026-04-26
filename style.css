@@ -1218,6 +1218,10 @@ h1, h2, h3, h4 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
+.review-card {
+  display: flex;
+  flex-direction: column;
+}
 .review-text {
   font-size: 1rem;
   color: var(--text-muted);
@@ -1228,6 +1232,7 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: auto;
 }
 .avatar {
   width: 40px;
