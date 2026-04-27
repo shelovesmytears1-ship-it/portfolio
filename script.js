@@ -671,16 +671,338 @@ function initProcessObserver() {
   steps.forEach(step => processObserver.observe(step));
 }
 
+// ── Tech Stack: full data (shared across all languages) ──────────────────
+const TECH_DATA = [
+  {
+    name: "HTML / CSS",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="10 13 8 15 10 17"/><polyline points="14 13 16 15 14 17"/></svg>`,
+    color: "#E44D26",
+    tag: "Foundation",
+    short: {
+      ru: "Семантика, доступность и адаптивный дизайн",
+      en: "Semantics, a11y & responsive design",
+      pl: "Semantyka, a11y i responsywny design"
+    },
+    desc: {
+      ru: "Фундамент любого проекта. Пишу семантичный, доступный HTML и чистый CSS с анимациями и адаптивной вёрсткой без лишних фреймворков.",
+      en: "The foundation of every project. I write semantic, accessible HTML and clean CSS with animations and responsive layouts — no bloat.",
+      pl: "Fundament każdego projektu. Piszę semantyczny HTML i czysty CSS z animacjami i responsywnym layoutem."
+    },
+    uses: {
+      ru: ["Семантическая разметка", "CSS Grid & Flexbox", "Анимации & переходы", "Адаптивная вёрстка"],
+      en: ["Semantic markup", "CSS Grid & Flexbox", "Animations & transitions", "Responsive design"],
+      pl: ["Semantyczny markup", "CSS Grid & Flexbox", "Animacje i przejścia", "Responsywny design"]
+    }
+  },
+  {
+    name: "JavaScript",
+    svg: `<svg viewBox="0 0 448 512" fill="currentColor"><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM243.8 381.4c0 43.6-25.6 63.5-62.9 63.5-33.7 0-53.2-17.4-63.2-38.5l34.3-20.7c6.6 11.7 12.6 21.6 27.1 21.6 13.8 0 22.6-5.4 22.6-26.5V237.7h42.1v143.7zm99.6 63.5c-39.1 0-64.4-18.6-76.7-43l34.3-19.8c9 14.7 20.8 25.6 41.5 25.6 17.4 0 28.6-8.7 28.6-20.8 0-14.4-11.4-19.5-30.7-28l-10.5-4.5c-30.4-12.9-50.5-29.2-50.5-63.5 0-31.4 24.1-55.6 61.6-55.6 26.8 0 46 9.3 59.8 33.7L368 290c-7.2-12.9-15-18-27.1-18-12.3 0-20.1 7.8-20.1 18 0 12.6 7.8 17.7 25.9 25.6l10.5 4.5c35.8 15.3 55.9 31 55.9 66.2 0 37.8-29.8 58.6-69.7 58.6z"/></svg>`,
+    color: "#F7DF1E",
+    tag: "Core Logic",
+    short: {
+      ru: "Ядро интерактива и сложной логики UI",
+      en: "Core interactivity & complex logic",
+      pl: "Rdzeń interakcji i złożonej logiki"
+    },
+    desc: {
+      ru: "Ядро интерактивности. Строю сложные UI-логики, анимации, работу с API и всё что делает сайт живым — без фреймворков, если они не нужны.",
+      en: "The core of interactivity. I build complex UI logic, animations, API integrations — vanilla when possible, frameworks when needed.",
+      pl: "Rdzeń interaktywności. Buduję złożoną logikę UI, animacje i integracje API — vanilla, gdy to możliwe."
+    },
+    uses: {
+      ru: ["DOM-манипуляции", "Fetch API & формы", "Мультимедиа & Canvas", "Intersection Observer"],
+      en: ["DOM manipulation", "Fetch API & forms", "Multimedia & Canvas", "Intersection Observer"],
+      pl: ["Manipulacja DOM", "Fetch API i formularze", "Multimedia i Canvas", "Intersection Observer"]
+    }
+  },
+  {
+    name: "React",
+    svg: `<svg viewBox="-11.5 -10.23174 23 20.46348" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="0" cy="0" r="2.05"/><g id="j"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>`,
+    color: "#61DAFB",
+    tag: "UI Framework",
+    short: {
+      ru: "Современные SPA и архитектура",
+      en: "Modern SPAs and architecture",
+      pl: "Nowoczesne SPA i architektura"
+    },
+    desc: {
+      ru: "Использую для более сложных SPA и компонентных систем. Хуки, контекст, оптимизация — знаю как и когда применять.",
+      en: "Used for complex SPAs and component-driven systems. Hooks, context, performance optimization — I know when and how to apply them.",
+      pl: "Używam do złożonych SPA i systemów komponentowych. Hooki, context i optymalizacja wydajności."
+    },
+    uses: {
+      ru: ["Компонентная архитектура", "React Hooks", "Context API", "Vite + React"],
+      en: ["Component architecture", "React Hooks", "Context API", "Vite + React"],
+      pl: ["Architektura komponentowa", "React Hooks", "Context API", "Vite + React"]
+    }
+  },
+  {
+    name: "GSAP",
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    color: "#8AC640",
+    tag: "Animation",
+    short: {
+      ru: "Premium 3D и scroll-анимации",
+      en: "Premium 3D & scroll animations",
+      pl: "Premium 3D i animacje scroll"
+    },
+    desc: {
+      ru: "Главный инструмент для premium-анимаций. ScrollTrigger, timeline, stagger — именно GSAP делает сайты с эффектом вау.",
+      en: "My go-to for premium animations. ScrollTrigger, timelines, staggers — GSAP is what gives sites that wow factor.",
+      pl: "Moje główne narzędzie do premium animacji. ScrollTrigger, timeline, stagger — to GSAP daje efekt WOW."
+    },
+    uses: {
+      ru: ["ScrollTrigger", "Timeline последовательности", "Stagger эффекты", "Сложный Parallax"],
+      en: ["ScrollTrigger", "Timeline sequences", "Stagger effects", "Complex Parallax"],
+      pl: ["ScrollTrigger", "Sekwencje timeline", "Efekty stagger", "Złożony Parallax"]
+    }
+  },
+  {
+    name: "Tailwind",
+    svg: `<svg viewBox="0 0 54 33" fill="currentColor"><path d="M26.6 0C21.6 0 18.3 2.5 16.6 7.5C18.6 4.5 21.1 3.3 24.1 3.8C25.8 4.1 27.1 5.3 28.5 6.8C31 9.4 34 12.5 40 12.5C45 12.5 48.3 10 50 5C48 8 45.5 9.2 42.5 8.7C40.8 8.4 39.5 7.2 38.1 5.7C35.6 3.1 32.6 0 26.6 0ZM13.3 16.7C8.3 16.7 5 19.2 3.3 24.2C5.3 21.2 7.8 20 10.8 20.5C12.5 20.8 13.8 22 15.2 23.5C17.7 26.1 20.7 29.2 26.7 29.2C31.7 29.2 35 26.7 36.7 21.7C34.7 24.7 32.2 25.9 29.2 25.4C27.5 25.1 26.2 23.9 24.8 22.4C22.3 19.8 19.3 16.7 13.3 16.7Z"/></svg>`,
+    color: "#38BDF8",
+    tag: "CSS Utility",
+    short: {
+      ru: "Сверхбыстрая разработка интерфейсов",
+      en: "Lightning fast UI development",
+      pl: "Błyskawiczny rozwój UI"
+    },
+    desc: {
+      ru: "Utility-first CSS для быстрой прототипации и масштабируемых проектов. Ускоряет разработку не теряя контроля над дизайном.",
+      en: "Utility-first CSS for fast prototyping and scalable projects. Speeds up development without sacrificing design control.",
+      pl: "Utility-first CSS do szybkiego prototypowania. Przyspiesza development bez utraty kontroli nad designem."
+    },
+    uses: {
+      ru: ["Быстрый UI прототипинг", "JIT-компиляция", "Кастомный конфиг", "Адаптивные утилиты"],
+      en: ["Rapid UI prototyping", "JIT compilation", "Custom config", "Responsive utilities"],
+      pl: ["Szybkie prototypowanie UI", "Kompilacja JIT", "Własna konfiguracja", "Responsywne narzędzia"]
+    }
+  },
+  {
+    name: "Node.js",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>',
+    color: "#68A063",
+    tag: "Backend",
+    short: {
+      ru: "Серверная логика, API и деплой",
+      en: "Server logic, APIs and deployment",
+      pl: "Logika serwera, API i deployment"
+    },
+    desc: {
+      ru: "Backend для телеграм-ботов, API, обработки форм и деплоя. Всё что нужно чтобы сайт не только красиво выглядел, но и работал.",
+      en: "Backend for Telegram bots, APIs, form handling, and deployment. Everything to make the site not just pretty but functional.",
+      pl: "Backend do bot\u00f3w Telegram, API, obs\u0142ugi formularzy i deploymentu. Wszystko, co sprawia, \u017ce strona dzia\u0142a."
+    },
+    uses: {
+      ru: ["Express.js API", "Telegram Bot API", "Webhook обработчики", "Netlify / Vercel"],
+      en: ["Express.js API", "Telegram Bot API", "Webhook handlers", "Netlify / Vercel"],
+      pl: ["Express.js API", "Telegram Bot API", "Obs\u0142uga webhook\u00f3w", "Netlify / Vercel"]
+    }
+  }
+];
+
+const TECH_ITEMS = TECH_DATA.map(d => ({ name: d.name, badge: d.badge, color: d.color }));
+
 function renderTech(items) {
-  const container = document.getElementById('tech-container');
-  if(!container) return;
-  container.innerHTML = items.map((item, i) => {
-    const name = typeof item === 'string' ? item : item.name;
-    const badge = typeof item === 'object' && item.badge
-      ? `<span class="tech-badge" style="--badge-color: ${item.color}">${item.badge}</span>`
-      : '';
-    return `<div class="tech-item" style="animation: fadeUp 0.5s ease forwards ${i * 0.05}s; opacity:0; transform:translateY(20px);">${badge}${name}</div>`;
+  var track1 = document.getElementById('tech-carousel-track');
+  var track2 = document.getElementById('tech-carousel-track-2');
+  if (!track1 || !track2) return;
+
+  function hexToRgb(hex) {
+    var r = parseInt(hex.slice(1,3), 16);
+    var g = parseInt(hex.slice(3,5), 16);
+    var b = parseInt(hex.slice(5,7), 16);
+    return r + ',' + g + ',' + b;
+  }
+
+  // Create the HTML for the pills
+  var pillsHtml = '';
+  // Duplicate enough times to fill the screen twice over
+  var extendedData = TECH_DATA.concat(TECH_DATA).concat(TECH_DATA).concat(TECH_DATA);
+
+  for (var i = 0; i < extendedData.length; i++) {
+    var tech = extendedData[i];
+    var originalIdx = i % TECH_DATA.length;
+    var rgb = hexToRgb(tech.color);
+
+    pillsHtml += '<div class="tech-pill"'
+      + ' data-tech-index="' + originalIdx + '"'
+      + ' style="'
+      + '--tc-base:' + tech.color + ';'
+      + '--tc-glow:rgba(' + rgb + ',0.25);'
+      + '">'
+      + '<div class="tech-pill-icon">' + (tech.svg || '') + '</div>'
+      + '<div class="tech-pill-name">' + tech.name + '</div>'
+      + '<div class="tech-pill-tag">' + tech.tag + '</div>'
+      + '</div>';
+  }
+
+  // Remove CSS animation classes for JS control
+  track1.className = 'tech-carousel-track';
+  track2.className = 'tech-carousel-track';
+  
+  track1.innerHTML = pillsHtml;
+  track2.innerHTML = pillsHtml;
+
+  // Attach all interactivity after render
+  setTimeout(initTechCards, 50);
+}
+
+function initTechCards() {
+  var pills = document.querySelectorAll('.tech-pill');
+  pills.forEach(function(pill) {
+    var idx = parseInt(pill.dataset.techIndex, 10);
+    pill.addEventListener('click', function() { openTechModal(idx); });
+  });
+
+  // JS Infinite Marquee with Wheel support
+  var track1 = document.getElementById('tech-carousel-track');
+  var track2 = document.getElementById('tech-carousel-track-2');
+  var wrapper = document.getElementById('tech-carousel-wrapper');
+  
+  if (!track1 || !track2 || !wrapper) return;
+
+  var pos1 = 0;
+  var pos2 = 0;
+  var speed = 0.5; // Base speed
+  var hoverMultiplier = 1;
+  var targetMultiplier = 1;
+  var loopWidth = 0;
+
+  function updateLoopWidth() {
+    // Since we concat 4 times, 1/4th of the scroll width is the loop point
+    loopWidth = track1.scrollWidth / 4;
+  }
+  updateLoopWidth();
+  window.addEventListener('resize', updateLoopWidth);
+
+  wrapper.addEventListener('mouseenter', function() { targetMultiplier = 0.2; });
+  wrapper.addEventListener('mouseleave', function() { targetMultiplier = 1; });
+
+  wrapper.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    pos1 -= e.deltaY * 0.5;
+    pos2 += e.deltaY * 0.5; 
+  }, { passive: false });
+
+  function renderLoop() {
+    if (loopWidth === 0) updateLoopWidth(); // Safety check
+
+    hoverMultiplier += (targetMultiplier - hoverMultiplier) * 0.1;
+    pos1 -= speed * hoverMultiplier;
+    pos2 += speed * hoverMultiplier;
+
+    if (pos1 <= -loopWidth) pos1 += loopWidth;
+    if (pos1 > 0) pos1 -= loopWidth;
+
+    if (pos2 >= loopWidth) pos2 -= loopWidth;
+    if (pos2 < 0) pos2 += loopWidth;
+
+    track1.style.transform = 'translate3d(' + pos1 + 'px, 0, 0)';
+    track2.style.transform = 'translate3d(' + (pos2 - loopWidth) + 'px, 0, 0)';
+
+    requestAnimationFrame(renderLoop);
+  }
+  
+  requestAnimationFrame(renderLoop);
+}
+
+// ── Tech Modal ────────────────────────────────────────────────
+function ensureTechModal() {
+  if (document.getElementById('tech-modal-overlay')) return;
+  var overlay = document.createElement('div');
+  overlay.className = 'tech-modal-overlay';
+  overlay.id = 'tech-modal-overlay';
+  overlay.innerHTML =
+    '<div class="tech-modal" id="tech-modal" role="dialog" aria-modal="true">'
+    + '<div class="tech-modal-header-bg" id="tm-header-bg"></div>'
+    + '<button class="tech-modal-close" id="tm-close" aria-label="Close">&times;</button>'
+    + '<div class="tech-modal-head">'
+    + '<div class="tech-modal-badge" id="tm-badge"></div>'
+    + '<div class="tech-modal-head-text">'
+    + '<div class="tech-modal-name" id="tm-name"></div>'
+    + '<span class="tech-modal-tag" id="tm-tag"></span>'
+    + '</div></div>'
+    + '<div class="tech-modal-body">'
+    + '<p class="tech-modal-desc" id="tm-desc"></p>'
+    + '<div>'
+    + '<div class="tech-modal-use-title" id="tm-uses-title">Применяю для</div>'
+    + '<div class="tech-modal-uses" id="tm-uses"></div>'
+    + '</div>'
+    + '<button class="tech-modal-back" id="tm-back">Назад</button>'
+    + '</div>'
+    + '</div>';
+  document.body.appendChild(overlay);
+
+  // Close on overlay click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeTechModal();
+  });
+  document.getElementById('tm-close').addEventListener('click', closeTechModal);
+  document.getElementById('tm-back').addEventListener('click', closeTechModal);
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeTechModal();
+  });
+}
+
+function openTechModal(idx) {
+  ensureTechModal();
+  var tech = TECH_DATA[idx];
+  var lang = currentLang || 'ru';
+
+  function hexToRgb(hex) {
+    var r = parseInt(hex.slice(1,3), 16);
+    var g = parseInt(hex.slice(3,5), 16);
+    var b = parseInt(hex.slice(5,7), 16);
+    return r + ',' + g + ',' + b;
+  }
+  var rgb = hexToRgb(tech.color);
+
+  var modal = document.getElementById('tech-modal');
+  modal.style.setProperty('--tm-color', tech.color);
+  modal.style.setProperty('--tm-color-shadow', 'rgba(' + rgb + ',0.4)');
+
+  // Coloured gradient header
+  document.getElementById('tm-header-bg').style.background =
+    'linear-gradient(135deg, rgba(' + rgb + ',0.15) 0%, transparent 70%)';
+
+  // SVG icon in modal
+  var badgeEl = document.getElementById('tm-badge');
+  badgeEl.innerHTML = tech.svg;
+  badgeEl.style.color = tech.color;
+  badgeEl.style.filter = 'drop-shadow(0 4px 14px rgba(' + rgb + ',0.5))';
+
+  document.getElementById('tm-name').textContent = tech.name;
+  document.getElementById('tm-tag').textContent = tech.tag;
+  document.getElementById('tm-tag').style.color = tech.color;
+  document.getElementById('tm-tag').style.borderColor = 'rgba(' + rgb + ',0.35)';
+  document.getElementById('tm-desc').textContent = (tech.desc && (tech.desc[lang] || tech.desc.en)) || '';
+
+  // Localize labels
+  var labels = {
+    ru: { uses: 'Применяю для', back: 'Назад' },
+    en: { uses: 'Used for', back: 'Back' },
+    pl: { uses: 'Używam do', back: 'Wróć' }
+  };
+  var lbl = labels[lang] || labels.ru;
+  document.getElementById('tm-uses-title').textContent = lbl.uses;
+  document.getElementById('tm-back').textContent = lbl.back;
+
+  var uses = (tech.uses && (tech.uses[lang] || tech.uses.en)) || [];
+  document.getElementById('tm-uses').innerHTML = uses.map(function(u) {
+    return '<div class="tech-modal-use-item">' + u + '</div>';
   }).join('');
+
+  document.getElementById('tech-modal-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTechModal() {
+  const overlay = document.getElementById('tech-modal-overlay');
+  if (overlay) overlay.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 function renderFeatures(items) {
@@ -1197,15 +1519,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Inject translations
-const TECH_ITEMS = [
-  { name: "HTML / CSS", badge: "HT", color: "#E44D26" },
-  { name: "JavaScript", badge: "JS", color: "#F7DF1E" },
-  { name: "React", badge: "Re", color: "#61DAFB" },
-  { name: "GSAP", badge: "GS", color: "#8AC640" },
-  { name: "Tailwind", badge: "TW", color: "#38BDF8" },
-  { name: "Node.js", badge: "No", color: "#68A063" }
-];
+// Inject translations — TECH_ITEMS already defined above via TECH_DATA
 translations.ru.tech = { title: "Стек технологий", items: TECH_ITEMS };
 translations.pl.tech = { title: "Technologie", items: TECH_ITEMS };
 translations.en.tech = { title: "Tech Stack", items: TECH_ITEMS };

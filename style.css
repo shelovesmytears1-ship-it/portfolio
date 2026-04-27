@@ -494,27 +494,107 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Tech Stack */
-.tech-grid {
+/* ── Tech Stack Infinite Marquee ─────────────────────────────────────────── */
+.tech-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* Fade edges for smooth entrance/exit */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
-.tech-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 1rem 2rem;
+
+.tech-carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Base animation classes */
+.scroll-left {
+  animation: scroll-left var(--duration, 40s) linear infinite;
+}
+.scroll-right {
+  animation: scroll-right var(--duration, 40s) linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Scrolls exactly half its width, then loops */
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Pause on hover */
+.tech-carousel-wrapper:hover .tech-carousel-track {
+  animation-play-state: paused;
+}
+
+/* Tech Pill Cards */
+.tech-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 100px;
-  font-size: 1.1rem;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, background 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tech-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--tc-base, rgba(255,255,255,0.2));
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 30px var(--tc-glow, rgba(0,0,0,0.2));
+}
+
+.tech-pill-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tc-base);
+  filter: drop-shadow(0 2px 8px var(--tc-glow));
+}
+.tech-pill-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tech-pill-name {
+  font-size: 1rem;
   font-weight: 500;
   color: var(--text-main);
-  transition: all 0.3s ease;
-  cursor: default;
+  letter-spacing: -0.01em;
 }
-.tech-item:hover {
-  border-color: var(--accent);
-  background: var(--surface-hover);
-  transform: translateY(-2px);
+
+.tech-pill-tag {
+  font-size: 0.7rem;
+  color: var(--tc-base);
+  background: rgba(255,255,255,0.05);
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 /* ── Anatomy Split Layout ──────────────────────────────────── */
@@ -1475,7 +1555,10 @@ h1, h2, h3, h4 {
   .form-row { flex-direction: column; gap: 1.5rem; }
 
   /* Tech grid */
-  .tech-grid { gap: 0.6rem; }
+  .tech-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1709,25 +1792,212 @@ body::after {
   .header-inner { flex-direction: row; }
 }
 
-/* Tech Badges */
-.tech-badge {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  background-color: var(--badge-color, var(--accent));
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8px;
-  font-weight: 800;
-  color: #000;
-  flex-shrink: 0;
-  letter-spacing: -0.03em;
-}
-.tech-item {
+/* ── Tech Modal ──────────────────────────────────────────────── */
+.tech-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  z-index: 10001;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: opacity;
+}
+.tech-modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.tech-modal {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(24px) scale(0.97);
+  -webkit-transform: translateY(24px) scale(0.97);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              -webkit-transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.tech-modal-overlay.active .tech-modal {
+  transform: translateY(0) scale(1);
+  -webkit-transform: translateY(0) scale(1);
+}
+
+/* Colored gradient background */
+.tech-modal-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  border-radius: 24px 24px 0 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tech-modal-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-modal-badge {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tech-modal-badge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tech-modal-head-text {
+  flex: 1;
+}
+
+.tech-modal-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.tech-modal-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--tm-color, var(--accent));
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--tm-color, rgba(139,156,182,0.3));
+  border-radius: 20px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tech-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+  line-height: 1;
+}
+.tech-modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+}
+
+.tech-modal-body {
+  padding: 0 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tech-modal-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.tech-modal-use-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.tech-modal-uses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tech-modal-use-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.tech-modal-use-item::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tm-color, var(--accent));
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.tech-modal-back {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+.tech-modal-back:hover {
+  border-color: var(--border-hover);
+  color: var(--text-main);
+  background: var(--surface-hover);
+}
+
+@media (max-width: 480px) {
+  .tech-modal-head { padding: 1.5rem 1.5rem 1.25rem; gap: 1rem; }
+  .tech-modal-body { padding: 0 1.5rem 1.5rem; }
+  .tech-modal-name { font-size: 1.35rem; }
+}
+
+
+/* ── Hide anatomy nav buttons on desktop ─────────────────────── */
+@media (min-width: 1025px) {
+  .anatomy-mobile-nav { display: none; }
 }
 
 /* Footer */
