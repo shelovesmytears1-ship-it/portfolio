@@ -30,7 +30,7 @@ const alternates = getAllLocales(lang, pathname);
 const canonical = new URL(pathname, Astro.site).toString();
 ---
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={lang === 'ua' ? 'uk' : lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,7 +76,7 @@ const canonical = new URL(pathname, Astro.site).toString();
   <link rel="canonical" href={canonical} />
 
   {alternates.map(alt => (
-    <link rel="alternate" hreflang={alt.lang} href={new URL(alt.href, Astro.site).toString()} />
+    <link rel="alternate" hreflang={alt.lang === 'ua' ? 'uk' : alt.lang} href={new URL(alt.href, Astro.site).toString()} />
   ))}
   <link rel="alternate" hreflang="x-default" href={new URL(localePath('/', defaultLang), Astro.site).toString()} />
 
