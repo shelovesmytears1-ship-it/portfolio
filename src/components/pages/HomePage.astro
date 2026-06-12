@@ -27,7 +27,7 @@ const cases = allCases.sort((a, b) => a.data.order - b.data.order);
       </h1>
       <p class="h-hero__sub reveal">{t('hero.sub')}</p>
     </div>
-    <a href="#works" class="h-hero__hook mono reveal" aria-label="Scroll to works">
+    <a href="#works" class="h-hero__hook mono reveal">
       <span>{t('hero.hook')}</span>
     </a>
   </div>
@@ -39,6 +39,7 @@ const cases = allCases.sort((a, b) => a.data.order - b.data.order);
 <section class="h-gallery section" id="works">
   <div class="container">
     <header class="h-gallery__head reveal">
+      <h2 class="sr-only">{t('gallery.eyebrow')}</h2>
       <span class="eyebrow">{t('gallery.eyebrow')}</span>
       <p class="h-gallery__intro">{t('gallery.intro.p1')}</p>
       <p class="h-gallery__intro h-gallery__intro--muted">{t('gallery.intro.p2')}</p>

@@ -98,7 +98,7 @@ const locales = getAllLocales(lang, pathname);
 <!-- Mobile drawer — moved OUT of <header> so it's not affected by the
      header's backdrop-filter (which creates a containing block for
      position:fixed descendants and breaks the slide-in transition). -->
-<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true" inert>
   <nav class="mobile-drawer__nav" aria-label="Mobile navigation">
     {navLinks.map(link => (
       <a
@@ -148,6 +148,9 @@ const locales = getAllLocales(lang, pathname);
     if (!burger || !drawer) return;
     burger.setAttribute('aria-expanded', String(open));
     drawer.setAttribute('aria-hidden', String(!open));
+    /* inert removes the closed drawer's links from tab order + a11y tree
+       (fixes "aria-hidden element contains focusable descendants"). */
+    (drawer as HTMLElement).inert = !open;
     drawer.classList.toggle('mobile-drawer--open', open);
     burger.classList.toggle('site-header__burger--open', open);
     html.style.overflow = open ? 'hidden' : '';

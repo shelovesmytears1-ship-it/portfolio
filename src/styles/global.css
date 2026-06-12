@@ -5,7 +5,8 @@
    Source of truth: portfolio-v2/decisions/008-design-system.md
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Fonts are loaded via <link> in BaseLayout <head> (faster than @import,
+   which is render-blocking and discovered late). */
 
 /* ── Tokens ─────────────────────────────────────────────── */
 :root {
@@ -873,7 +874,9 @@ html.js-ready .reveal:not(.visible), html.js-ready .stagger:not(.visible) > * {
   margin-bottom: 0.9rem;
 }
 .site-footer__brand-desc {
-  color: var(--muted);
+  /* fg + opacity instead of var(--muted) — meets WCAG AA contrast on footer bg */
+  color: var(--fg);
+  opacity: 0.72;
   font-size: 0.9375rem;
   max-width: 34ch;
   line-height: 1.55;
@@ -884,7 +887,8 @@ html.js-ready .reveal:not(.visible), html.js-ready .stagger:not(.visible) > * {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--fg);
+  opacity: 0.72;
   margin-bottom: 1rem;
 }
 .site-footer__col-links {
@@ -913,10 +917,21 @@ html.js-ready .reveal:not(.visible), html.js-ready .stagger:not(.visible) > * {
 }
 .site-footer__copy {
   font-size: 0.8125rem;
-  color: var(--muted);
+  color: var(--fg);
+  opacity: 0.7;
 }
 
 /* ── Utility ─────────────────────────────────────────────── */
+/* Screen-reader-only: keeps a heading in the a11y tree without visual change. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 .text-muted  { color: var(--muted); }
 .text-accent { color: var(--accent); }
 .text-fg     { color: var(--fg); }
