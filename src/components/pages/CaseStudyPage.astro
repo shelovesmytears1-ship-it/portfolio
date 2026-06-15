@@ -109,15 +109,18 @@ const statAfterIndex = sections.length > 1 ? 0 : -1;
           class="cs__visual-frame reveal"
           style={`--cs-bg: ${d.bg || '#1A1410'}; --cs-acc: ${d.accent || '#B25814'};`}
         >
-          <img
-            src={withBase(d.cover)}
-            alt={`${d.title} — preview`}
-            class="cs__visual-img"
-            loading="eager"
-            fetchpriority="high"
-            width="1600"
-            height="1000"
-          />
+          <picture>
+            <source type="image/webp" srcset={withBase(d.cover.replace(/\.jpe?g$/i, '.webp'))} />
+            <img
+              src={withBase(d.cover)}
+              alt={`${d.title} — preview`}
+              class="cs__visual-img"
+              loading="eager"
+              fetchpriority="high"
+              width="1600"
+              height="1000"
+            />
+          </picture>
         </div>
       </div>
     </section>

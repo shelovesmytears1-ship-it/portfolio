@@ -39,6 +39,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # CSP: allow self + Google Fonts; 'unsafe-inline' kept for the inline
+    # theme pre-paint script and inline style attributes (Astro). Restricts
+    # all external script/frame/object sources.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
 
 # Cache static assets aggressively
 [[headers]]

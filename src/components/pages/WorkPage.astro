@@ -67,14 +67,17 @@ const filters = [
             style={`--g-bg: ${c.data.bg || '#1A1410'}; --g-acc: ${c.data.accent || '#B25814'};`}
           >
             {c.data.cover ? (
-              <img
-                src={withBase(c.data.cover)}
-                alt={`${c.data.title} hero preview`}
-                class="g-card__cover"
-                loading="lazy"
-                width="640"
-                height="480"
-              />
+              <picture>
+                <source type="image/webp" srcset={withBase(c.data.cover.replace(/\.jpe?g$/i, '.webp'))} />
+                <img
+                  src={withBase(c.data.cover)}
+                  alt={`${c.data.title} hero preview`}
+                  class="g-card__cover"
+                  loading="lazy"
+                  width="640"
+                  height="480"
+                />
+              </picture>
             ) : (
               <div class="g-card__visual-inner">
                 <div class="g-card__brand mono">{c.data.title.toLowerCase()}</div>
